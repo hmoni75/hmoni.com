@@ -2,7 +2,13 @@ import { NavLink } from "react-router-dom";
 import { MainMenuRootList } from "@/shared/mobile-menu/MobileMenuCloneContext";
 
 const MEGA_ARROW = (
-  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="13"
+    height="13"
+    viewBox="0 0 13 13"
+    fill="none"
+  >
     <path
       d="M10.0208 3.41421L1.41421 12.0208L0 10.6066L8.60659 2H1.02082V0H12.0208V11H10.0208V3.41421Z"
       fill="currentColor"
@@ -137,7 +143,10 @@ const CONTACT_LINKS: Item[] = [
 
 function MenuLink({ to, children }: { to: string; children: React.ReactNode }) {
   return (
-    <NavLink to={to} className={({ isActive }) => (isActive ? "active" : undefined)}>
+    <NavLink
+      to={to}
+      className={({ isActive }) => (isActive ? "active" : undefined)}
+    >
       {children}
     </NavLink>
   );
@@ -173,7 +182,7 @@ function LinkSwap({ label }: { label: string }) {
 export default function MainMenu() {
   return (
     <MainMenuRootList>
-      <li className="has-dropdown">
+      {/* <li className="has-dropdown">
         <a href="#" onClick={(e) => e.preventDefault()}>
           <LinkSwap label="Home" />
         </a>
@@ -187,7 +196,7 @@ export default function MainMenu() {
             </div>
           </div>
         </div>
-      </li>
+      </li> */}
 
       <li className="has-dropdown">
         <a href="#" onClick={(e) => e.preventDefault()}>
@@ -228,7 +237,7 @@ export default function MainMenu() {
         </div>
       </li>
 
-      <li className="has-dropdown">
+      {/* <li className="has-dropdown">
         <a href="#" onClick={(e) => e.preventDefault()}>
           <LinkSwap label="Shop" />
         </a>
@@ -239,7 +248,7 @@ export default function MainMenu() {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
 
       <li className="has-dropdown">
         <a href="#" onClick={(e) => e.preventDefault()}>

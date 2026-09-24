@@ -76,7 +76,7 @@ import NotFoundPage from "@/pages/NotFoundPage";
 export default function App() {
   return (
     <Routes>
-      <Route element={<MainLayout headerStyle={1} footerStyle={1} />}>
+      <Route element={<MainLayout headerStyle={1} footerStyle={7} />}>
         <Route path="/" element={<Home12Page />} />
         <Route path="/index-dark" element={<Home1Page />} />
       </Route>
