@@ -68,6 +68,7 @@ import ServicesDetails2Page from "@/pages/ServicesDetails2Page";
 import ServicesDetails3Page from "@/pages/ServicesDetails3Page";
 import ServicesDetails4Page from "@/pages/ServicesDetails4Page";
 import ServicesDetails5Page from "@/pages/ServicesDetails5Page";
+import ManagePage from "@/pages/ManagePage";
 import TeamDetailsPage from "@/pages/TeamDetailsPage";
 import TeamPage from "@/pages/TeamPage";
 import Team2Page from "@/pages/Team2Page";
@@ -286,6 +287,9 @@ export default function App() {
         <Route path="/index-15" element={<Home15Page />} />
         <Route path="/index-15-dark" element={<Home15Page />} />
       </Route>
+      {/* Standalone Admin Dashboard Route with Fixed Header/Sidebar and Scrollable Body */}
+      <Route path="/manage" element={<ManagePage />} />
+
       <Route element={<MainLayout headerStyle={2} footerStyle={2} />}>
         <Route path="*" element={<NotFoundPage />} />
       </Route>

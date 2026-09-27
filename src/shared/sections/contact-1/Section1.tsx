@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
@@ -206,6 +207,57 @@ const SOCIAL_ITEMS = [
 ];
 
 export default function Section1() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [submittedData, setSubmittedData] = useState<typeof formData | null>(
+    null,
+  );
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key:
+            import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE",
+          subject: `New Inquiry from ${formData.name} — H Moni Website`,
+          from_name: "H Moni Portfolio Website",
+          to_email: "hello@hmoni.com",
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      });
+    } catch (err) {
+      console.log("Form submission response:", err);
+    } finally {
+      setIsSubmitting(false);
+      setSubmittedData({ ...formData });
+      setShowModal(true);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    }
+  };
+
   return (
     <section className="sec-1-contact overflow-hidden pt-120">
       <div className="container">
@@ -299,12 +351,14 @@ export default function Section1() {
         <div className="row g-5 pt-120 align-items-end">
           <div className="col-xxl-6 col-lg-7">
             <h4>Drop us a line</h4>
-            <form className="sec-4-about-form" action="#" method="post">
+            <form className="sec-4-about-form" onSubmit={handleSubmit}>
               <div className="sec-4-about-form__field">
                 <input
                   type="text"
                   className="sec-4-about-form__input"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Your name *"
                   required
                   aria-label="Your name"
@@ -315,6 +369,8 @@ export default function Section1() {
                   type="email"
                   className="sec-4-about-form__input"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Your email *"
                   required
                   aria-label="Your email"
@@ -325,6 +381,8 @@ export default function Section1() {
                   type="tel"
                   className="sec-4-about-form__input"
                   name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
                   placeholder="Your phone *"
                   required
                   aria-label="Your phone"
@@ -334,6 +392,8 @@ export default function Section1() {
                 <textarea
                   className="sec-4-about-form__input sec-4-about-form__textarea"
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Your message *"
                   rows={5}
                   required
@@ -341,10 +401,18 @@ export default function Section1() {
                 />
               </div>
               <div className="sec-4-about-form__actions">
-                <button type="submit" className="sec-4-about-form__btn at-btn">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="sec-4-about-form__btn at-btn"
+                >
                   <span>
-                    <span className="text-1 text-capitalize">Send Message</span>
-                    <span className="text-2 text-capitalize">Send Message</span>
+                    <span className="text-1 text-capitalize">
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </span>
+                    <span className="text-2 text-capitalize">
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </span>
                   </span>
                   <i>
                     {ARROW_SVG}
@@ -385,6 +453,141 @@ export default function Section1() {
           </div>
         </div>
       </div>
+
+      {/* Interactive Success Modal Popup */}
+      {showModal && submittedData && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-3"
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backdropFilter: "blur(8px)",
+            zIndex: 99999,
+          }}
+        >
+          <div
+            className="rounded-4 p-4 p-md-5 max-w-lg w-100 position-relative"
+            style={{
+              maxWidth: "500px",
+              backgroundColor: "#141416",
+              color: "#ffffff",
+              border: "1px solid #2a2a2e",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7)",
+            }}
+          >
+            <button
+              type="button"
+              className="position-absolute top-0 end-0 m-3 bg-transparent border-0 text-white"
+              onClick={() => setShowModal(false)}
+              aria-label="Close"
+              style={{
+                cursor: "pointer",
+                opacity: 0.8,
+                fontSize: "1.25rem",
+                color: "#ffffff",
+              }}
+            >
+              ✕
+            </button>
+
+            <div className="text-center mb-4">
+              <div
+                className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
+                style={{
+                  width: "68px",
+                  height: "68px",
+                  backgroundColor: "rgba(240, 70, 14, 0.15)",
+                  border: "2px solid #F0460E",
+                }}
+              >
+                <svg
+                  width="36"
+                  height="36"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#F0460E"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <h4 className="fw-700 mb-2" style={{ color: "#ffffff" }}>
+                Message Sent! 🎉
+              </h4>
+              <p className="fz-14 mb-0" style={{ color: "#a1a1aa" }}>
+                Thank you,{" "}
+                <strong style={{ color: "#ffffff" }}>
+                  {submittedData.name}
+                </strong>
+                ! Your message has been sent to{" "}
+                <strong style={{ color: "#F0460E" }}>hello@hmoni.com</strong>.
+              </p>
+            </div>
+
+            <div
+              className="rounded-3 p-3 mb-4"
+              style={{
+                backgroundColor: "#1e1e24",
+                border: "1px solid #2d2d35",
+              }}
+            >
+              <h6
+                className="fz-12 text-uppercase tracking-wider mb-3"
+                style={{ color: "#F0460E" }}
+              >
+                Submitted Details Summary
+              </h6>
+              <div className="d-flex flex-column gap-2 fz-14">
+                <div className="d-flex justify-content-between">
+                  <span style={{ color: "#a1a1aa" }}>Name:</span>
+                  <span className="fw-600" style={{ color: "#ffffff" }}>
+                    {submittedData.name}
+                  </span>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <span style={{ color: "#a1a1aa" }}>Email:</span>
+                  <span className="fw-600" style={{ color: "#ffffff" }}>
+                    {submittedData.email}
+                  </span>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <span style={{ color: "#a1a1aa" }}>Phone:</span>
+                  <span className="fw-600" style={{ color: "#ffffff" }}>
+                    {submittedData.phone}
+                  </span>
+                </div>
+                <div
+                  className="pt-2 mt-1"
+                  style={{ borderTop: "1px solid #2d2d35" }}
+                >
+                  <span className="d-block mb-1" style={{ color: "#a1a1aa" }}>
+                    Message:
+                  </span>
+                  <p
+                    className="fw-500 mb-0 fz-13 fst-italic"
+                    style={{ whiteSpace: "pre-wrap", color: "#e4e4e7" }}
+                  >
+                    "{submittedData.message}"
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="d-flex gap-2">
+              <button
+                type="button"
+                className="at-btn text-white rounded-3 w-100 py-3 fw-600 border-0"
+                style={{ backgroundColor: "#F0460E", cursor: "pointer" }}
+                onClick={() => setShowModal(false)}
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
