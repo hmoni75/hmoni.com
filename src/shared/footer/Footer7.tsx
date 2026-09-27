@@ -261,25 +261,24 @@ export default function Footer7() {
             {/* Contact */}
             <div className="col-xxl-3 col-lg-4 col-md-6">
               <div className="footer-7__contact">
-                <p
+                {/* <p
                   className="footer-7__contact-line mb-1 at_fade_anim"
                   data-delay="0.1"
                 >
                   <Link to="tel:+12125557398">+212 - 555-7398</Link>
-                </p>
+                </p> */}
                 <p
                   className="footer-7__contact-line mb-3 at_fade_anim"
                   data-delay="0.2"
                 >
-                  <Link to="mailto:hello@orisa.com">hello@orisa.com</Link>
+                  <Link to="mailto:hello@hmoni.com">hello@hmoni.com</Link>
                 </p>
                 <p
                   className="footer-7__address mb-0 at_fade_anim"
                   data-delay="0.3"
                 >
-                  245 Fifth Avenue, Suite 1800
-                  <br />
-                  New York, NY 10016, USA
+                  IT Incubation & Training Center KUET, <br />
+                  Khulna - 9203
                 </p>
 
                 <div
@@ -360,10 +359,10 @@ export default function Footer7() {
           {/* Big word */}
           <div className="at_fade_anim text-center" data-delay="0.1">
             <h2
-              className="footer-7__word fw-900 mb-0 text-scale-anim"
+              className="footer-7__word  fw-900 mb-0 text-scale-anim"
               aria-hidden="true"
             >
-              ELEVATE STARTUPS
+              A WORLD OF H MONI
             </h2>
           </div>
         </div>
@@ -371,7 +370,7 @@ export default function Footer7() {
         {/* Bottom */}
         <div className="footer-7__bottom" data-delay="0.1" data-start="100%">
           <div className="footer-7__bottom-inner d-flex flex-wrap gap-3 align-items-center justify-content-between">
-            <span className="footer-7__copy">Orisa &copy; 2026</span>
+            <span className="footer-7__copy">H Moni &copy; 2026</span>
             <ul className="footer-7__policies list-unstyled d-flex flex-wrap gap-3 mb-0">
               <li>
                 <Link to="#">Privacy Policy</Link>
