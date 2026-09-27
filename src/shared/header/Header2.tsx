@@ -4,9 +4,9 @@ import MainMenu from "@/shared/MainMenu";
 import ThemeSwitcher from "@/shared/ThemeSwitcher";
 
 interface Header2Props {
-  onOpenSearch: () => void;
-  onToggleSidebar: () => void;
-  onOpenHamburgerMenu: () => void;
+  onOpenSearch?: () => void;
+  onToggleSidebar?: () => void;
+  onOpenHamburgerMenu?: () => void;
 }
 
 export default function Header2({

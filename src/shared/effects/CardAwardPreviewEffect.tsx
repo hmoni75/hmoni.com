@@ -1,4 +1,4 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 
 const PREVIEW_SELECTOR = ".card-award-preview.card-award-hover-preview";
 const CARD_SELECTOR = ".card-award";
@@ -86,7 +86,7 @@ export default function CardAwardPreviewEffect() {
           hideTimeout = null;
         }
         const src = card.getAttribute("data-img-award");
-        if (!src) return;
+        if (!src || !img) return;
         curCard = card;
         img.src = src;
         const titleEl = card.querySelector(".card-award-title");

@@ -1,6 +1,8 @@
-﻿export type TestimonialCard1Props = {
+export type TestimonialCard1Props = {
   img: string;
   logo: string;
+  logoWidth?: number;
+  logoHeight?: number;
   name: string;
   position: string;
   company: string;
