@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SOCIAL_ARROW = (
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
@@ -101,7 +101,7 @@ export default function Footer3() {
                   <a href="tel:+2125557398" className="text-white text-decoration-none">+212-555-7398</a>
                 </h6>
                 <h6 className="text-white mb-2">
-                  <a href="mailto:hello@H Moni.com" className="text-white text-decoration-none">hello@H Moni.com</a>
+                  <a href="mailto:hello@hmoni.com" className="text-white text-decoration-none">hello@hmoni.com</a>
                 </h6>
               </div>
               <div className="d-flex flex-column gap-3 mt-60">

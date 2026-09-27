@@ -35,8 +35,8 @@ export default function Section4() {
                                 {ARROW_SVG}
                             </i>
                         </Link>
-                        <a className="team2-cta__mail" href="mailto:hello@H Moni.com">
-                            hello@H Moni.com
+                        <a className="team2-cta__mail" href="mailto:hello@hmoni.com">
+                            hello@hmoni.com
                         </a>
                     </div>
                 </div>

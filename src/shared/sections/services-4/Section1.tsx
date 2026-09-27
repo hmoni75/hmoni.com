@@ -63,8 +63,8 @@ export default function Section1() {
                                 ))}
                                 <div className="svc4-meta">
                                     <span className="svc4-meta__label">Contact</span>
-                                    <a className="svc4-meta__value" href="mailto:hello@H Moni.com">
-                                        hello@H Moni.com
+                                    <a className="svc4-meta__value" href="mailto:hello@hmoni.com">
+                                        hello@hmoni.com
                                     </a>
                                 </div>
                             </div>

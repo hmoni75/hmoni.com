@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // Footer 5 - H Moni Nova (light style with grid background)
 
 const QUICK_LINKS_1 = [
@@ -111,7 +111,7 @@ export default function Footer5() {
             </div>
             <div className="col-xxl-3 col-md-6">
               <h4 className="mb-0 fw-medium text-decoration-underline">
-                <a href="mailto:hello@H Moni.com">hello@H Moni.com</a>
+                <a href="mailto:hello@hmoni.com">hello@hmoni.com</a>
               </h4>
             </div>
             <div className="col-xxl-3 col-lg-5 col-md-6">

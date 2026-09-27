@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // Footer 11 (Home 11) - Motion & Video Creative Studio, decorative lines bg, multi-location, socials with home-8 icons
 
 const NAV_LINKS_1 = [
@@ -163,7 +163,7 @@ export default function Footer11() {
                                         <Link to="tel:+12125557398">+212 - 555-7398</Link>
                                     </p>
                                     <p className="footer-11__contact-line mb-3">
-                                        <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
+                                        <Link to="mailto:hello@hmoni.com">hello@hmoni.com</Link>
                                     </p>
                                 </div>
                                 <div className="footer-11__locations">

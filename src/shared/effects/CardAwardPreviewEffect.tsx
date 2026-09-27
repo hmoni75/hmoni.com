@@ -9,10 +9,14 @@ const MOBILE_BREAKPOINT = 768;
 
 type GsapQuickTo = (value: number) => void;
 
-function getRotateOptions(card: Element): { isReversed: boolean; rotation: number } {
+function getRotateOptions(card: Element): {
+  isReversed: boolean;
+  rotation: number;
+} {
   const rotateAttr = card.getAttribute("data-rotate");
   if (!rotateAttr) return { isReversed: false, rotation: -15 };
-  const match = rotateAttr.match(/positive-(\d+)deg/i) || rotateAttr.match(/(\d+)deg/i);
+  const match =
+    rotateAttr.match(/positive-(\d+)deg/i) || rotateAttr.match(/(\d+)deg/i);
   const deg = match ? parseInt(match[1], 10) : 15;
   const isPositive = /positive/i.test(rotateAttr);
   return { isReversed: isPositive, rotation: isPositive ? deg : -deg };
@@ -52,7 +56,10 @@ export default function CardAwardPreviewEffect() {
       let yTo: GsapQuickTo | null = null;
       let curCard: Element | null = null;
       let hideTimeout: ReturnType<typeof setTimeout> | null = null;
-      const listeners: Array<{ card: HTMLElement; events: Array<[string, EventListener]> }> = [];
+      const listeners: Array<{
+        card: HTMLElement;
+        events: Array<[string, EventListener]>;
+      }> = [];
 
       function updatePosition(e: MouseEvent) {
         if (!xTo || !yTo || !curCard) return;
@@ -66,7 +73,9 @@ export default function CardAwardPreviewEffect() {
         if (hideTimeout) clearTimeout(hideTimeout);
         hideTimeout = setTimeout(() => {
           hideTimeout = null;
-          const opts = curCard ? getRotateOptions(curCard) : { isReversed: false };
+          const opts = curCard
+            ? getRotateOptions(curCard)
+            : { isReversed: false };
           curCard = null;
           gsap.to(preview, {
             opacity: 0,
@@ -105,8 +114,16 @@ export default function CardAwardPreviewEffect() {
             scale: 0,
             opacity: 0,
           });
-          if (!xTo) xTo = gsap.quickTo(preview, "x", { duration: 0.35, ease: "power2.out" });
-          if (!yTo) yTo = gsap.quickTo(preview, "y", { duration: 0.35, ease: "power2.out" });
+          if (!xTo)
+            xTo = gsap.quickTo(preview, "x", {
+              duration: 0.35,
+              ease: "power2.out",
+            });
+          if (!yTo)
+            yTo = gsap.quickTo(preview, "y", {
+              duration: 0.35,
+              ease: "power2.out",
+            });
           gsap.to(preview, {
             opacity: 1,
             scale: 1,
@@ -125,8 +142,16 @@ export default function CardAwardPreviewEffect() {
             scale: 0,
             opacity: 0,
           });
-          if (!xTo) xTo = gsap.quickTo(preview, "x", { duration: 0.35, ease: "power2.out" });
-          if (!yTo) yTo = gsap.quickTo(preview, "y", { duration: 0.35, ease: "power2.out" });
+          if (!xTo)
+            xTo = gsap.quickTo(preview, "x", {
+              duration: 0.35,
+              ease: "power2.out",
+            });
+          if (!yTo)
+            yTo = gsap.quickTo(preview, "y", {
+              duration: 0.35,
+              ease: "power2.out",
+            });
           gsap.to(preview, {
             opacity: 1,
             scale: 1,
@@ -141,7 +166,11 @@ export default function CardAwardPreviewEffect() {
         if (!src) return;
 
         const onEnter = (e: Event) => {
-          if (typeof window !== "undefined" && window.innerWidth < MOBILE_BREAKPOINT) return;
+          if (
+            typeof window !== "undefined" &&
+            window.innerWidth < MOBILE_BREAKPOINT
+          )
+            return;
           showPreview(card, e as MouseEvent);
           card.addEventListener("mousemove", updatePosition);
         };
@@ -149,7 +178,8 @@ export default function CardAwardPreviewEffect() {
         const onLeave = (e: Event) => {
           card.removeEventListener("mousemove", updatePosition);
           const related = (e as MouseEvent).relatedTarget;
-          const isEnteringCard = related instanceof Element && related.closest(CARD_SELECTOR);
+          const isEnteringCard =
+            related instanceof Element && related.closest(CARD_SELECTOR);
           if (isEnteringCard) return;
           scheduleHide();
         };
@@ -188,4 +218,3 @@ export default function CardAwardPreviewEffect() {
 
   return null;
 }
-

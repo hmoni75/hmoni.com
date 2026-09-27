@@ -1,4 +1,4 @@
-﻿// FAQs section 4 - CTA contact (Still have a question?)
+// FAQs section 4 - CTA contact (Still have a question?)
 
 export default function Section4() {
     return (
@@ -56,8 +56,8 @@ export default function Section4() {
                             We wil answer to you shortly! Meet our Support team
                         </p>
                         <h5 className="mt-40">
-                            <a href="mailto:hello@H Moni.com">
-                                hello@H Moni.com
+                            <a href="mailto:hello@hmoni.com">
+                                hello@hmoni.com
                             </a>
                         </h5>
                         <h6>

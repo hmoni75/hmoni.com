@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MainMenu from "@/shared/MainMenu";
 import ThemeSwitcher from "@/shared/ThemeSwitcher";
 export default function Header9() {
@@ -70,7 +70,7 @@ export default function Header9() {
                         />
                       </svg>
                     </button>
-                    <div className="dark-light-mode text-white">
+                    <div className="dark-light-mode">
                       <ThemeSwitcher />
                     </div>
                     <button
@@ -129,4 +129,3 @@ export default function Header9() {
     </>
   );
 }
-

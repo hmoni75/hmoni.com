@@ -118,7 +118,7 @@ export default function Section1() {
                             ))}
                         </div>
                         <h6 className="fw-500 fz-font-lg text-lg-end mt-3 mb-0">
-                            hello@H Moni.com / (212) 555-7398
+                            hello@hmoni.com / (212) 555-7398
                         </h6>
                     </div>
                     <div className="col-12">

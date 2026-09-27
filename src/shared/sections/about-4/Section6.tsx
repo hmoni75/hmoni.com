@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // About 4 Section 6 - Dark CTA (fixed inks for dark mode safety)
 
 export default function Section6() {
@@ -18,8 +18,8 @@ export default function Section6() {
                         <Link className="about-4-cta__btn" to="/contact-1">
                             Start a conversation
                         </Link>
-                        <a className="about-4-cta__mail" href="mailto:hello@H Moni.com">
-                            hello@H Moni.com
+                        <a className="about-4-cta__mail" href="mailto:hello@hmoni.com">
+                            hello@hmoni.com
                         </a>
                     </div>
                 </div>

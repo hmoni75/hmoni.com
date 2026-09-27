@@ -83,8 +83,8 @@ export default function Section4() {
                         <Link className="svc5-cta__btn" to="/contact-1">
                             Book a call
                         </Link>
-                        <a className="svc5-cta__mail" href="mailto:hello@H Moni.com">
-                            hello@H Moni.com
+                        <a className="svc5-cta__mail" href="mailto:hello@hmoni.com">
+                            hello@hmoni.com
                         </a>
                     </div>
                 </div>

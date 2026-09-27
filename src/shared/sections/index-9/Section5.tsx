@@ -60,7 +60,7 @@ export default function Section5() {
                             <div className="sec-5-home-9__block">
                                 <p className="sec-5-home-9__label text-white">Message</p>
                                 <p className="sec-5-home-9__value mb-0 text-white">
-                                    <a className="sec-5-home-9__mailto text-white" href="mailto:hello@H Moni.com">hello@H Moni.com</a>
+                                    <a className="sec-5-home-9__mailto text-white" href="mailto:hello@hmoni.com">hello@hmoni.com</a>
                                 </p>
                             </div>
                         </div>

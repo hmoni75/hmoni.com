@@ -124,8 +124,8 @@ export default function Section3() {
                         </a>
                     </div>
                     <div className="col-md-4">
-                        <a className="svc4-engage__mail" href="mailto:hello@H Moni.com">
-                            hello@H Moni.com
+                        <a className="svc4-engage__mail" href="mailto:hello@hmoni.com">
+                            hello@hmoni.com
                         </a>
                     </div>
                     <div className="col-md-4">

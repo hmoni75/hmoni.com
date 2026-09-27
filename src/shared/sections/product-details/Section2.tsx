@@ -48,7 +48,7 @@ export default function Section2() {
                                         </Link>
                                     </h6>
                                     <h4 className="mb-0 fw-medium text-decoration-underline">
-                                        <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
+                                        <Link to="mailto:hello@hmoni.com">hello@hmoni.com</Link>
                                     </h4>
                                 </div>
                             </div>

@@ -35,10 +35,18 @@ export default function TestimonialCard1({
         </div>
         <div className="testimonial-bottom-wrap">
           <div className="testimonial-content">
-            <p className="testimonial-content-text neutral-0 fz-font-3xl fw-400 text-truncate-4">&quot;{comment}&quot;</p>
+            <p className="testimonial-content-text neutral-0 fz-font-3xl fw-400 text-truncate-4">
+              &quot;{comment}&quot;
+            </p>
             <div className="testimonial-content-rating mt-3">
               <div className="testimonial-content-rating-stars">
-                <svg xmlns="http://www.w3.org/2000/svg" width="101" height="16" viewBox="0 0 101 16" fill="none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="101"
+                  height="16"
+                  viewBox="0 0 101 16"
+                  fill="none"
+                >
                   <path
                     d="M14.9062 6.87488L11.8019 9.91088L12.535 14.1989C12.5507 14.2908 12.5405 14.3853 12.5054 14.4717C12.4704 14.5581 12.4119 14.633 12.3367 14.6879C12.2615 14.7427 12.1725 14.7753 12.0797 14.782C11.987 14.7887 11.8942 14.7693 11.8119 14.7259L7.97358 12.7013L4.13575 14.7253C4.05345 14.7688 3.96068 14.7882 3.86794 14.7815C3.7752 14.7748 3.68618 14.7421 3.61095 14.6873C3.53572 14.6325 3.47728 14.5577 3.44223 14.4713C3.40718 14.3849 3.39693 14.2903 3.41264 14.1983L4.14572 9.91035L1.04096 6.87488C0.974323 6.80974 0.927186 6.72714 0.904899 6.63654C0.882606 6.54591 0.886041 6.45083 0.914826 6.36206C0.943611 6.27329 0.99659 6.19438 1.06776 6.13426C1.13893 6.07414 1.22546 6.0352 1.31755 6.02187L5.60789 5.39687L7.52653 1.49587C7.6945 1.15437 8.25266 1.15437 8.42058 1.49587L10.3392 5.39687L14.6296 6.02187C14.7215 6.03556 14.8078 6.07468 14.8787 6.13484C14.9496 6.19501 15.0024 6.27383 15.0312 6.36245C15.0599 6.45107 15.0634 6.54598 15.0413 6.6365C15.0193 6.72701 14.9725 6.80954 14.9062 6.87488Z"
                     fill="#FFB618"
@@ -63,9 +71,15 @@ export default function TestimonialCard1({
               </div>
             </div>
             <div className="testimonial-content-author">
-              <h6 className="testimonial-content-author-name common-white fw-600">{name}</h6>
-              <p className="testimonial-content-author-position m-0">{position}</p>
-              <p className="testimonial-content-author-company m-0">{company}</p>
+              <h6 className="testimonial-content-author-name common-white fw-600">
+                {name}
+              </h6>
+              <p className="testimonial-content-author-position m-0">
+                {position}
+              </p>
+              <p className="testimonial-content-author-company m-0">
+                {company}
+              </p>
             </div>
           </div>
         </div>
@@ -73,5 +87,3 @@ export default function TestimonialCard1({
     </div>
   );
 }
-
-

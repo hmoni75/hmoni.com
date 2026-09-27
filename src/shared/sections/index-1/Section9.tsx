@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 import TeamCard1 from "@/shared/cards/TeamCard1";
 
@@ -86,7 +86,7 @@ export default function Section9() {
                                                     <br className="d-block" />
                                                     Email:{" "}
                                                     <span className="neutral-900">
-                                                        <a href="mailto:hello@H Moni.com">hello@H Moni.com</a>
+                                                        <a href="mailto:hello@hmoni.com">hello@hmoni.com</a>
                                                     </span>
                                                 </span>
                                                 <span className="fz-font-md neutral-500 ps-md-5">
@@ -101,7 +101,7 @@ export default function Section9() {
                                                     <br className="d-block" />
                                                     Email:{" "}
                                                     <span className="neutral-900">
-                                                        <a href="mailto:sale@H Moni.com">sale@H Moni.com</a>
+                                                        <a href="mailto:hello@hmoni.com">hello@hmoni.com</a>
                                                     </span>
                                                 </span>
                                             </div>

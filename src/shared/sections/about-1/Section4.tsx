@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 // About 1 Section 4 - Contact Us / Get in touch
@@ -118,8 +118,8 @@ const OFFICES = [
         city: "Chicago, 60601, USA",
         phone: "+1234567890",
         phoneHref: "tel:+1234567890",
-        email: "hello@H Moni.com",
-        emailHref: "mailto:hello@H Moni.com",
+        email: "hello@hmoni.com",
+        emailHref: "mailto:hello@hmoni.com",
     },
     {
         icon: OFFICE_ICON_2,
@@ -128,8 +128,8 @@ const OFFICES = [
         city: "New York, NY 10016, USA",
         phone: "+2125557398",
         phoneHref: "tel:+2125557398",
-        email: "sale@H Moni.com",
-        emailHref: "mailto:sale@H Moni.com",
+        email: "hello@hmoni.com",
+        emailHref: "mailto:hello@hmoni.com",
     },
 ];
 

@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // Footer 8 (Home 8) - Background image, nav with image arrows, contact, image-based socials, newsletter
 
 const NAV_LINKS = [
@@ -98,7 +98,7 @@ export default function Footer8() {
                                     <Link to="tel:+12125557398">+212 - 555-7398</Link>
                                 </p>
                                 <p className="footer-8__contact-line mb-3">
-                                    <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
+                                    <Link to="mailto:hello@hmoni.com">hello@hmoni.com</Link>
                                 </p>
                                 <p className="footer-8__address mb-0">
                                     245 Fifth Avenue, Suite 1800<br />New York, NY 10016, USA

@@ -114,8 +114,8 @@ export default function Section2() {
                             ))}
                         </div>
                         <div className="pricing-5-more__row">
-                            <a className="pricing-5-more__email" href="mailto:hello@H Moni.com">
-                                hello@H Moni.com
+                            <a className="pricing-5-more__email" href="mailto:hello@hmoni.com">
+                                hello@hmoni.com
                             </a>
                             <Link
                                 className="pricing-5-more__arrow"

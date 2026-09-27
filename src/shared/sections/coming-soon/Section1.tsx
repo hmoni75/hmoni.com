@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import RevealText from "@/shared/effects/RevealText";
 
 // Coming soon Section 1 - Hero (Coming Soon + countdown + banner)
@@ -101,8 +101,8 @@ export default function Section1() {
                             <a href="tel:+2125557398" className="fz-font-lg neutral-500 fw-500">
                                 [ (+01) 555-7398 ]
                             </a>
-                            <a href="mailto:hello@H Moni.com" className="fz-font-lg neutral-500 fw-500">
-                                [ hello@H Moni.com ]
+                            <a href="mailto:hello@hmoni.com" className="fz-font-lg neutral-500 fw-500">
+                                [ hello@hmoni.com ]
                             </a>
                         </div>
                     </div>

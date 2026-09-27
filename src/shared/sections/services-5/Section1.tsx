@@ -7,7 +7,7 @@ type HeroMeta = { label: string; value: string; href?: string };
 const HERO_META: HeroMeta[] = [
     { label: "Start", value: "2–4 weeks" },
     { label: "Models", value: "Project · monthly" },
-    { label: "Talk", value: "hello@H Moni.com", href: "mailto:hello@H Moni.com" },
+    { label: "Talk", value: "hello@hmoni.com", href: "mailto:hello@hmoni.com" },
 ];
 
 export default function Section1() {

@@ -70,7 +70,7 @@ export default function Header7() {
                         />
                       </svg>
                     </button>
-                    <div className="dark-light-mode text-white">
+                    <div className="dark-light-mode">
                       <ThemeSwitcher />
                     </div>
                     <button

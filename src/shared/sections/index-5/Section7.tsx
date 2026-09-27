@@ -179,7 +179,7 @@ export default function Section7() {
                                     <Link to="tel:+2125557398">+212-555-7398</Link>
                                 </h6>
                                 <h6 className="fw-600">
-                                    <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
+                                    <Link to="mailto:hello@hmoni.com">hello@hmoni.com</Link>
                                 </h6>
                             </div>
                         </div>

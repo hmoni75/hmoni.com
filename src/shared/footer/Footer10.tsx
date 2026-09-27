@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // Footer 10 (Home 10) - Hero CTA with decorations, two-column nav with image arrows, contact, newsletter, bottom bar
 
 const NAV_LINKS_1 = [
@@ -184,7 +184,7 @@ export default function Footer10() {
                                         <Link to="tel:+12125557398">+212 - 555-7398</Link>
                                     </p>
                                     <p className="footer-10__contact-line mb-3">
-                                        <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
+                                        <Link to="mailto:hello@hmoni.com">hello@hmoni.com</Link>
                                     </p>
                                     <p className="footer-10__address mb-0">
                                         245 Fifth Avenue, Suite 1800<br />New York, NY 10016, USA

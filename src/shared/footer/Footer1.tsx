@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 const ARROW_SVG = (
@@ -94,8 +94,8 @@ export default function Footer1() {
               <div className="at-footer-title-wrap">
                 <h6 className="text-white">(212) 555-7398</h6>
                 <h4 className="text-white text-decoration-underline text-wrap">
-                  <a href="mailto:hello@H Moni.com" className="text-white text-decoration-underline">
-                    hello@H Moni.com
+                  <a href="mailto:hello@hmoni.com" className="text-white text-decoration-underline">
+                    hello@hmoni.com
                   </a>
                 </h4>
                 <div className="at-footer-widget at-footer-link pt-50">

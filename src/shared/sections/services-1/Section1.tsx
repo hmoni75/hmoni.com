@@ -12,8 +12,8 @@ export default function Section1() {
                     </div>
                     <div className="col-lg-3 ms-auto text-lg-end">
                         <h5>
-                            <a href="mailto:hello@H Moni.com" className="text-decoration-none">
-                                hello@H Moni.com
+                            <a href="mailto:hello@hmoni.com" className="text-decoration-none">
+                                hello@hmoni.com
                             </a>
                         </h5>
                         <h6 className="fw-600">

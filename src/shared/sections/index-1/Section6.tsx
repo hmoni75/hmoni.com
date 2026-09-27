@@ -1,4 +1,4 @@
-﻿import RevealText from "@/shared/effects/RevealText";
+import RevealText from "@/shared/effects/RevealText";
 import SwiperDynamic from "@/shared/components/SwiperDynamic";
 import TestimonialCard1 from "@/shared/cards/TestimonialCard1";
 import { Link } from "react-router-dom";
@@ -129,7 +129,7 @@ export default function Section6() {
                             </SwiperDynamic>
                         </div>
                         <div className="col-12 text-center pt-50 z-index-1">
-                            <Link to="mailto:hello@H Moni.com" className="at-btn bg-transparent p-relative">
+                            <Link to="mailto:hello@hmoni.com" className="at-btn bg-transparent p-relative">
                                 <img
                                     className="badge-zoon-in"
                                     src="/assets/imgs/icons/badge-2.svg"

@@ -57,7 +57,7 @@ export default function Header1({
             </div>
             <div className="col-xl-2 col-6">
               <div className="at-header-right gap-3 d-flex justify-content-end align-items-center">
-                <div className="dark-light-mode text-white">
+                <div className="dark-light-mode">
                   <ThemeSwitcher />
                 </div>
                 <a
