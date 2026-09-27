@@ -10,15 +10,14 @@ import Section7 from "@/shared/sections/about-3/Section7";
 export default function About3Page() {
   return (
     <>
-      <PageMeta title="Orisa - About3" />
-                <Section1 />
-                <Section2 />
-                <Section3 />
-                <Section4 />
-                <Section5 />
-                <Section6 />
-                <Section7 />
-            
+      <PageMeta title="H Moni - About3" />
+      <Section1 />
+      <Section2 />
+      <Section3 />
+      <Section4 />
+      <Section5 />
+      <Section6 />
+      <Section7 />
     </>
   );
 }

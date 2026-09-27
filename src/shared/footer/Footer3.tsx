@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 
 const SOCIAL_ARROW = (
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
@@ -64,7 +64,7 @@ export default function Footer3() {
               <div className="footer-3-logo">
                 <h1 className="fz-120 mb-0 text-scale-anim text-white fw-500">
                   <Link to="/" className="text-white text-decoration-none">
-                    Orisa<sup className="fz-80 fw-400">®</sup>
+                    H Moni<sup className="fz-80 fw-400">®</sup>
                   </Link>
                 </h1>
               </div>
@@ -101,7 +101,7 @@ export default function Footer3() {
                   <a href="tel:+2125557398" className="text-white text-decoration-none">+212-555-7398</a>
                 </h6>
                 <h6 className="text-white mb-2">
-                  <a href="mailto:hello@orisa.com" className="text-white text-decoration-none">hello@orisa.com</a>
+                  <a href="mailto:hello@H Moni.com" className="text-white text-decoration-none">hello@H Moni.com</a>
                 </h6>
               </div>
               <div className="d-flex flex-column gap-3 mt-60">
@@ -159,7 +159,7 @@ export default function Footer3() {
                 <div className="at-footer-widget alt-footer-link-item-wrap border-top-opacity pt-4">
                   <div className="alt-footer-link-item">
                     <ul className="d-flex flex-wrap align-items-center justify-content-between text-center gap-1">
-                      <li><span className="fz-font-md neutral-0 opacity-50">Orisa © 2026</span></li>
+                      <li><span className="fz-font-md neutral-0 opacity-50">H Moni © 2026</span></li>
                       <li><a href="#" className="fz-font-md neutral-0 opacity-50">Privacy Policy</a></li>
                       <li><a href="#" className="fz-font-md neutral-0 opacity-50">Terms of Use</a></li>
                       <li><a href="#" className="fz-font-md neutral-0 opacity-50">Refund Policy</a></li>
@@ -175,3 +175,4 @@ export default function Footer3() {
     </footer>
   );
 }
+

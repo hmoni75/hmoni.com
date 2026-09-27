@@ -29,9 +29,9 @@ const COL3: Tile[] = [
 function Tile({ tile }: { tile: Tile }) {
     return (
         <a className={`sec-9-home-14__tile sec-9-home-14__tile--${tile.size} anim-zoomin-wrap`} href="https://instagram.com" target="_blank" rel="noopener">
-            <img className="sec-9-home-14__tile-img anim-zoomin" src={`/assets/imgs/pages/home-14/${tile.img}`} alt="Orisa" loading="lazy" />
+            <img className="sec-9-home-14__tile-img anim-zoomin" src={`/assets/imgs/pages/home-14/${tile.img}`} alt="H Moni" loading="lazy" />
             <span className="sec-9-home-14__tile-top">
-                <span className="sec-9-home-14__tile-handle text-white">@orisa.studio</span>
+                <span className="sec-9-home-14__tile-handle text-white">@H Moni.studio</span>
                 <span className="sec-9-home-14__tile-tag text-white">speed {tile.speed}</span>
             </span>
             <span className="sec-9-home-14__tile-meta">
@@ -51,7 +51,7 @@ export default function Section9() {
                         <div className="sec-9-home-14__eyebrow at_fade_anim" data-fade-from="bottom" data-delay=".1">
                             <span className="sec-9-home-14__eyebrow-dot" aria-hidden="true"></span>
                             <span className="sec-9-home-14__eyebrow-key">LATEST FRAMES</span>
-                            <span className="sec-9-home-14__eyebrow-meta">&mdash; @ORISA.STUDIO &middot; 18.4K FOLLOWERS</span>
+                            <span className="sec-9-home-14__eyebrow-meta">&mdash; @H Moni.STUDIO &middot; 18.4K FOLLOWERS</span>
                         </div>
                         <h2 className="sec-9-home-14__title reveal-text mb-0"><RevealText>From the<br />feed.</RevealText></h2>
                     </div>

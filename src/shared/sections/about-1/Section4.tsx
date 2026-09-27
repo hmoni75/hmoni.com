@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 // About 1 Section 4 - Contact Us / Get in touch
@@ -118,8 +118,8 @@ const OFFICES = [
         city: "Chicago, 60601, USA",
         phone: "+1234567890",
         phoneHref: "tel:+1234567890",
-        email: "hello@orisa.com",
-        emailHref: "mailto:hello@orisa.com",
+        email: "hello@H Moni.com",
+        emailHref: "mailto:hello@H Moni.com",
     },
     {
         icon: OFFICE_ICON_2,
@@ -128,8 +128,8 @@ const OFFICES = [
         city: "New York, NY 10016, USA",
         phone: "+2125557398",
         phoneHref: "tel:+2125557398",
-        email: "sale@orisa.com",
-        emailHref: "mailto:sale@orisa.com",
+        email: "sale@H Moni.com",
+        emailHref: "mailto:sale@H Moni.com",
     },
 ];
 
@@ -285,3 +285,4 @@ export default function Section4({ classList = "" }: { classList?: string }) {
         </section>
     );
 }
+

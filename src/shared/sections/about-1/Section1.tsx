@@ -1,4 +1,4 @@
-import RevealText from "@/shared/effects/RevealText";
+﻿import RevealText from "@/shared/effects/RevealText";
 import SwiperDynamic from "@/shared/components/SwiperDynamic";
 
 // About 1 Section 1 - Hero / About Us
@@ -13,18 +13,18 @@ const ARROW_SVG = (
 );
 
 const AVATARS = [
-    { src: "/assets/imgs/template/avatar/avatar-10.webp", alt: "orisa", hiddenOnMobile: false },
-    { src: "/assets/imgs/template/avatar/avatar-11.webp", alt: "orisa", hiddenOnMobile: false },
-    { src: "/assets/imgs/template/avatar/avatar-12.webp", alt: "orisa", hiddenOnMobile: false },
-    { src: "/assets/imgs/template/avatar/avatar-13.webp", alt: "orisa", hiddenOnMobile: false },
-    { src: "/assets/imgs/template/avatar/avatar-14.webp", alt: "orisa", hiddenOnMobile: true },
+    { src: "/assets/imgs/template/avatar/avatar-10.webp", alt: "H Moni", hiddenOnMobile: false },
+    { src: "/assets/imgs/template/avatar/avatar-11.webp", alt: "H Moni", hiddenOnMobile: false },
+    { src: "/assets/imgs/template/avatar/avatar-12.webp", alt: "H Moni", hiddenOnMobile: false },
+    { src: "/assets/imgs/template/avatar/avatar-13.webp", alt: "H Moni", hiddenOnMobile: false },
+    { src: "/assets/imgs/template/avatar/avatar-14.webp", alt: "H Moni", hiddenOnMobile: true },
 ];
 
 const SLIDES = [
-    { src: "/assets/imgs/pages/img-117.webp", alt: "orisa" },
-    { src: "/assets/imgs/pages/img-118.webp", alt: "orisa" },
-    { src: "/assets/imgs/pages/img-119.webp", alt: "orisa" },
-    { src: "/assets/imgs/pages/img-120.webp", alt: "orisa" },
+    { src: "/assets/imgs/pages/img-117.webp", alt: "H Moni" },
+    { src: "/assets/imgs/pages/img-118.webp", alt: "H Moni" },
+    { src: "/assets/imgs/pages/img-119.webp", alt: "H Moni" },
+    { src: "/assets/imgs/pages/img-120.webp", alt: "H Moni" },
 ];
 
 export default function Section1() {
@@ -101,3 +101,4 @@ export default function Section1() {
         </section>
     );
 }
+

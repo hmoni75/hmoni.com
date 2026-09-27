@@ -1,4 +1,4 @@
-export default function Section8() {
+﻿export default function Section8() {
     return (
         <section className="sec-8-home-11 pb-110" aria-label="Call to action">
             <div className="sec-8-home-11__bg" aria-hidden="true">
@@ -6,7 +6,7 @@ export default function Section8() {
                     <img
                         className="anim-zoomin sec-8-home-11__bg-img"
                         src="/assets/imgs/pages/home-11/bg.webp"
-                        alt="orisa"
+                        alt="H Moni"
                         loading="lazy"
                         decoding="async"
                         style={{ objectFit: "cover" }}
@@ -102,3 +102,4 @@ export default function Section8() {
         </section>
     );
 }
+

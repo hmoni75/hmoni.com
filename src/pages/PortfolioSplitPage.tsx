@@ -1,13 +1,14 @@
-import PageMeta from "@/seo/PageMeta";
+﻿import PageMeta from "@/seo/PageMeta";
 import Slideshow from "@/shared/slideshow/Slideshow";
 import { SLIDESHOW_PROJECTS } from "@/shared/slideshow/projects";
 
 export default function PortfolioSplitPage() {
   return (
     <>
-      <PageMeta title="Orisa - PortfolioSplit" />
+      <PageMeta title="H Moni - PortfolioSplit" />
             <Slideshow variant="split" projects={SLIDESHOW_PROJECTS} />
         
     </>
   );
 }
+

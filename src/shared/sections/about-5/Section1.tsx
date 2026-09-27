@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 // About 5 Section 1 - Split-screen origin hero
@@ -20,14 +20,14 @@ const FACTS = [
 
 export default function Section1() {
     return (
-        <section className="about-5-hero" aria-label="About Orisa">
+        <section className="about-5-hero" aria-label="About H Moni">
             <div className="about-5-hero__panel about-5-hero__panel--ink">
                 <p className="about-5-hero__kicker">
                     <span>(01)</span> Origin
                 </p>
                 <p className="about-5-hero__year">2016</p>
                 <p className="about-5-hero__tag">
-                    Where Orisa started counting projects in months—not pitches.
+                    Where H Moni started counting projects in months—not pitches.
                 </p>
                 <ul className="about-5-hero__facts">
                     {FACTS.map((fact) => (
@@ -40,7 +40,7 @@ export default function Section1() {
             <div className="about-5-hero__panel about-5-hero__panel--media">
                 <img
                     src="/assets/imgs/pages/home-13/sec-1-hero-1.webp"
-                    alt="Orisa studio atmosphere"
+                    alt="H Moni studio atmosphere"
                     style={{ objectFit: "cover" }} loading="lazy" />
                 <div className="about-5-hero__overlay">
                     <h1 className="about-5-hero__title reveal-text">
@@ -73,3 +73,4 @@ export default function Section1() {
         </section>
     );
 }
+

@@ -232,7 +232,7 @@ export default function Section4() {
                                 <div className="content">
                                     <h5 className="revert-text mb-0 reveal-text">
                                         <RevealText>
-                                            Orisa is a digital agency creating impactful digital experiences. We
+                                            H Moni is a digital agency creating impactful digital experiences. We
                                             think like strategists and execute with clarity, creativity, and
                                             performance.
                                         </RevealText>

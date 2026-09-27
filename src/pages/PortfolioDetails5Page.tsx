@@ -10,15 +10,14 @@ import S8 from "@/shared/sections/portfolio-details-3/Section8";
 export default function PortfolioDetails5Page() {
   return (
     <>
-      <PageMeta title="Orisa - PortfolioDetails5" />
-            <Section1 />
-            <S2 />
-            <S3 />
-            <S4 />
-            <S5 />
-            <S6 />
-            <S8 />
-        
+      <PageMeta title="H Moni - PortfolioDetails5" />
+      <Section1 />
+      <S2 />
+      <S3 />
+      <S4 />
+      <S5 />
+      <S6 />
+      <S8 />
     </>
   );
 }

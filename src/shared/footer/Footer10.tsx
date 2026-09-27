@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 // Footer 10 (Home 10) - Hero CTA with decorations, two-column nav with image arrows, contact, newsletter, bottom bar
 
 const NAV_LINKS_1 = [
@@ -37,28 +37,28 @@ const SUBSCRIBE_ARROW_SVG = (
 
 const DECO_IMAGE_1 = {
     src: "/assets/imgs/pages/home-10/footer-10-deco-1.webp",
-    alt: "orisa",
+    alt: "H Moni",
     width: 420,
     height: 559,
 };
 
 const DECO_IMAGE_2 = {
     src: "/assets/imgs/pages/home-10/footer-10-deco-2.webp",
-    alt: "orisa",
+    alt: "H Moni",
     width: 420,
     height: 503,
 };
 
 const BG_IMAGE = {
     src: "/assets/imgs/pages/home-10/footer-10-bg-lines.webp",
-    alt: "orisa",
+    alt: "H Moni",
     width: 2096,
     height: 1180,
 };
 
 const NAV_ARROW_IMAGE = {
     src: "/assets/imgs/pages/home-8/footer-8-nav-arrow.svg",
-    alt: "orisa",
+    alt: "H Moni",
     width: 14,
     height: 13,
 };
@@ -184,7 +184,7 @@ export default function Footer10() {
                                         <Link to="tel:+12125557398">+212 - 555-7398</Link>
                                     </p>
                                     <p className="footer-10__contact-line mb-3">
-                                        <Link to="mailto:hello@orisa.com">hello@orisa.com</Link>
+                                        <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
                                     </p>
                                     <p className="footer-10__address mb-0">
                                         245 Fifth Avenue, Suite 1800<br />New York, NY 10016, USA
@@ -237,7 +237,7 @@ export default function Footer10() {
 
                 <div className="footer-10__bottom">
                     <div className="footer-10__bottom-inner d-flex flex-wrap align-items-center justify-content-between gap-3">
-                        <span className="footer-10__copy">Orisa &copy; 2026</span>
+                        <span className="footer-10__copy">H Moni &copy; 2026</span>
                         <span className="footer-10__since">[ Since 2012 ]</span>
                     </div>
                 </div>
@@ -245,3 +245,4 @@ export default function Footer10() {
         </footer>
     );
 }
+

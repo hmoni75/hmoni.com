@@ -1,4 +1,4 @@
-import RevealText from "@/shared/effects/RevealText";
+﻿import RevealText from "@/shared/effects/RevealText";
 
 const PROCESS = [
   {
@@ -50,7 +50,7 @@ export default function Section4() {
                 <img
                   className="card-home-12-process__img anim-zoomin"
                   src={`/assets/imgs/pages/home-12/${p.img}`}
-                  alt="Orisa"
+                  alt="H Moni"
                   loading="lazy"
                 />
               </div>
@@ -65,3 +65,4 @@ export default function Section4() {
     </section>
   );
 }
+

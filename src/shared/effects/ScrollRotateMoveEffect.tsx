@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 
 type Killable = { kill?: () => void };
 
@@ -8,7 +8,7 @@ type Killable = { kill?: () => void };
  * - `.scroll-move-right`  : x 500px, start top 30%, scrub 2
  * - `.scroll-move-left`   : x -500px, start bottom 100%, scrub 2
  *
- * Direct port of `3.Orisa-Nextjs/components/effects/ScrollRotateMoveEffect.tsx`.
+ * Direct port of `3.H Moni-Nextjs/components/effects/ScrollRotateMoveEffect.tsx`.
  */
 export default function ScrollRotateMoveEffect() {
   const initialized = useRef(false);
@@ -89,3 +89,4 @@ export default function ScrollRotateMoveEffect() {
 
   return null;
 }
+

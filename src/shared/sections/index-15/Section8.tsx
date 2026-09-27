@@ -9,11 +9,11 @@ const FAB_ARROW = (
 );
 
 const QUOTES = [
-    "Orisa didn't just build us a website; they engineered a digital experience that mirrors our ambition. The integration of GSAP motion and high-performance code has set a new benchmark in our industry. Truly the modern standard.",
-    "Working with Orisa changed how our brand shows up online. Every interaction feels intentional, every page tells our story, and the result is a site that converts as beautifully as it looks.",
+    "H Moni didn't just build us a website; they engineered a digital experience that mirrors our ambition. The integration of GSAP motion and high-performance code has set a new benchmark in our industry. Truly the modern standard.",
+    "Working with H Moni changed how our brand shows up online. Every interaction feels intentional, every page tells our story, and the result is a site that converts as beautifully as it looks.",
     "From discovery to launch, the team treated our brand like their own. The level of craft in motion design, typography, and front-end performance is genuinely unmatched in the industry today.",
-    "We arrived with a vague vision and left with a digital platform that outperforms our wildest projections. Orisa is the rare studio that thinks like strategists and builds like senior engineers.",
-    "Three months after launch, our traffic is up eighty percent, time on site has tripled, and the press has not stopped reaching out. Hiring Orisa was the highest-leverage decision we made this year.",
+    "We arrived with a vague vision and left with a digital platform that outperforms our wildest projections. H Moni is the rare studio that thinks like strategists and builds like senior engineers.",
+    "Three months after launch, our traffic is up eighty percent, time on site has tripled, and the press has not stopped reaching out. Hiring H Moni was the highest-leverage decision we made this year.",
 ];
 
 export default function Section8() {

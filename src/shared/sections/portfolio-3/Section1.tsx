@@ -111,14 +111,14 @@ export default function Section1() {
                                     <img
                                         className="img-cover"
                                         src={src}
-                                        alt="orisa"
+                                        alt="H Moni"
                                         width={48}
                                         height={48} loading="lazy" />
                                 </div>
                             ))}
                         </div>
                         <h6 className="fw-500 fz-font-lg text-lg-end mt-3 mb-0">
-                            hello@orisa.com / (212) 555-7398
+                            hello@H Moni.com / (212) 555-7398
                         </h6>
                     </div>
                     <div className="col-12">

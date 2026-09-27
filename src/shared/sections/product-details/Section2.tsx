@@ -21,7 +21,7 @@ export default function Section2() {
                                 <img
                                     className="img-cover"
                                     src={img.src}
-                                    alt="orisa"
+                                    alt="H Moni"
                                     width={img.width}
                                     height={img.height} loading="lazy" />
                             </div>
@@ -48,7 +48,7 @@ export default function Section2() {
                                         </Link>
                                     </h6>
                                     <h4 className="mb-0 fw-medium text-decoration-underline">
-                                        <Link to="mailto:hello@orisa.com">hello@orisa.com</Link>
+                                        <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
                                     </h4>
                                 </div>
                             </div>

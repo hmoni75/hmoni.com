@@ -8,11 +8,24 @@ interface SideBarProps {
   onClose: () => void;
 }
 
-const AVATARS = ["avatar-10", "avatar-11", "avatar-12", "avatar-13", "avatar-14"] as const;
+const AVATARS = [
+  "avatar-10",
+  "avatar-11",
+  "avatar-12",
+  "avatar-13",
+  "avatar-14",
+] as const;
 
 function CloseIconSvg() {
   return (
-    <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg
+      width="37"
+      height="38"
+      viewBox="0 0 37 38"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
       <path
         d="M9.19141 9.80762L27.5762 28.1924"
         stroke="currentColor"
@@ -85,7 +98,12 @@ function SocialGrid() {
               fill="none"
               aria-hidden="true"
             >
-              <path fillRule="evenodd" clipRule="evenodd" d={item.path} fill="currentColor" />
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d={item.path}
+                fill="currentColor"
+              />
             </svg>
             <span>{item.label}</span>
           </a>
@@ -95,7 +113,11 @@ function SocialGrid() {
   );
 }
 
-export default function SideBar({ open, hamburgerOpen, onClose }: SideBarProps) {
+export default function SideBar({
+  open,
+  hamburgerOpen,
+  onClose,
+}: SideBarProps) {
   const isAnyOpen = open || hamburgerOpen;
 
   return (
@@ -117,13 +139,27 @@ export default function SideBar({ open, hamburgerOpen, onClose }: SideBarProps) 
         <div className={`at-offcanvas ${open ? "opened" : ""}`}>
           <div className="at-offcanvas-top d-flex align-items-center justify-content-between">
             <div className="at-offcanvas-logo">
-              <Link to="/" className="text-decoration-none d-inline-flex align-items-center gap-2">
-                <img data-width="30" src="/assets/imgs/template/logo/favicon.svg" alt="Orisa" width={30} height={30} />
-                <h6 className="fw-700 fz-24 mb-0">Orisa</h6>
+              <Link
+                to="/"
+                className="text-decoration-none d-inline-flex align-items-center gap-2"
+              >
+                <img
+                  data-width="30"
+                  src="/assets/imgs/template/logo/favicon.svg"
+                  alt="H Moni"
+                  width={30}
+                  height={30}
+                />
+                <h6 className="fw-700 fz-24 mb-0">H Moni</h6>
               </Link>
             </div>
             <div className="at-offcanvas-close-btn">
-              <button type="button" className="close-btn close-sidebar" aria-label="Close" onClick={onClose}>
+              <button
+                type="button"
+                className="close-btn close-sidebar"
+                aria-label="Close"
+                onClick={onClose}
+              >
                 <CloseIconSvg />
               </button>
             </div>
@@ -132,7 +168,8 @@ export default function SideBar({ open, hamburgerOpen, onClose }: SideBarProps) 
           <div className="at-offcanvas-content d-none d-xl-block">
             <h3 className="at-offcanvas-title">Howdy!</h3>
             <p className="fz-font-lg">
-              We blend strategy, creativity, and technology to help brands grow, connect, and stand out in an ever-evolving digital world.
+              We blend strategy, creativity, and technology to help brands grow,
+              connect, and stand out in an ever-evolving digital world.
             </p>
           </div>
 
@@ -143,8 +180,17 @@ export default function SideBar({ open, hamburgerOpen, onClose }: SideBarProps) 
           <div className="at-offcanvas-gallery d-none d-xl-block">
             <div className="sec-2-home-5__avatars-row d-flex gap-2">
               {AVATARS.map((name) => (
-                <div key={name} className="sec-2-home-5__avatar-sm at-offcanvas-gallery-img">
-                  <img className="img-cover" src={`/assets/imgs/template/avatar/${name}.webp`} alt="" width={80} height={80} />
+                <div
+                  key={name}
+                  className="sec-2-home-5__avatar-sm at-offcanvas-gallery-img"
+                >
+                  <img
+                    className="img-cover"
+                    src={`/assets/imgs/template/avatar/${name}.webp`}
+                    alt=""
+                    width={80}
+                    height={80}
+                  />
                 </div>
               ))}
             </div>
@@ -153,20 +199,24 @@ export default function SideBar({ open, hamburgerOpen, onClose }: SideBarProps) 
           <div className="at-offcanvas-contact">
             <h5 className="at-offcanvas-title sm">Get in touch</h5>
             <ul>
-              <li>
+              {/* <li>
                 <a className="fz-font-lg" href="tel:(212) 555-7398">
                   (212) 555-7398
                 </a>
-              </li>
+              </li> */}
               <li>
-                <a className="fz-font-lg" href="mailto:hello@orisa.com">
-                  hello@orisa.com
+                <a className="fz-font-lg" href="mailto:hello@hmoni.com">
+                  hello@hmoni.com
                 </a>
               </li>
               <li>
-                <a className="fz-font-lg" href="#" onClick={(e) => e.preventDefault()}>
-                  245 Fifth Avenue, Suite 1800 <br />
-                  New York, NY 10016, USA
+                <a
+                  className="fz-font-lg"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  IT Incubation & Training Center KUET, <br />
+                  Khulna - 9203
                 </a>
               </li>
             </ul>
@@ -180,23 +230,35 @@ export default function SideBar({ open, hamburgerOpen, onClose }: SideBarProps) 
       </div>
 
       {/* at-offcanvas-2-area */}
-      <div className={`at-offcanvas-2-area ${hamburgerOpen ? "menu-open" : ""}`} aria-hidden={!hamburgerOpen}>
+      <div
+        className={`at-offcanvas-2-area ${hamburgerOpen ? "menu-open" : ""}`}
+        aria-hidden={!hamburgerOpen}
+      >
         <div className="offcanvas-bg" />
         <div className="at-offcanvas-2-wrapper offcanvas-menu sidebar-left">
           <div className="at-offcanvas-2-left">
             <div className="at-header-logo d-flex justify-content-between align-items-center mb-50">
-              <Link to="/" className="text-decoration-none d-inline-flex align-items-center gap-2">
+              <Link
+                to="/"
+                className="text-decoration-none d-inline-flex align-items-center gap-2"
+              >
                 <img
                   className="dark-mode-invert"
                   data-width="30"
                   src="/assets/imgs/template/logo/favicon.svg"
-                  alt="Orisa"
+                  alt="H Moni"
                   width={30}
                   height={30}
                 />
-                <h6 className="fw-700 fz-24 mb-0">Orisa</h6>
+                <h6 className="fw-700 fz-24 mb-0">H Moni</h6>
               </Link>
-              <span className="hamburger-close-btn close-sidebar" role="button" tabIndex={0} aria-label="Close" onClick={onClose}>
+              <span
+                className="hamburger-close-btn close-sidebar"
+                role="button"
+                tabIndex={0}
+                aria-label="Close"
+                onClick={onClose}
+              >
                 <CloseIconSvg />
               </span>
             </div>
@@ -224,4 +286,3 @@ export default function SideBar({ open, hamburgerOpen, onClose }: SideBarProps) 
     </OffcanvasMenuMount>
   );
 }
-

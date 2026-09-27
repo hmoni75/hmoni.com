@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 const ARROW_SVG = (
@@ -72,7 +72,7 @@ export default function Footer1() {
                   className="mt-5"
                   data-width="50"
                   src="/assets/imgs/template/logo/favicon-dark.svg"
-                  alt="Orisa"
+                  alt="H Moni"
                   width={50}
                   height={50}
                 />
@@ -94,8 +94,8 @@ export default function Footer1() {
               <div className="at-footer-title-wrap">
                 <h6 className="text-white">(212) 555-7398</h6>
                 <h4 className="text-white text-decoration-underline text-wrap">
-                  <a href="mailto:hello@orisa.com" className="text-white text-decoration-underline">
-                    hello@orisa.com
+                  <a href="mailto:hello@H Moni.com" className="text-white text-decoration-underline">
+                    hello@H Moni.com
                   </a>
                 </h4>
                 <div className="at-footer-widget at-footer-link pt-50">
@@ -139,7 +139,7 @@ export default function Footer1() {
               </div>
               <div className="col-xxl-9 col-lg-8 col-12 text-lg-end">
                 <h1 className="fz-160 common-white mb-0 text-scale-anim">
-                  Orisa Studio<sup className="fz-80 fw-400">®</sup>
+                  H Moni Studio<sup className="fz-80 fw-400">®</sup>
                 </h1>
               </div>
             </div>
@@ -149,7 +149,7 @@ export default function Footer1() {
             <div className="row align-items-center g-3">
               <div className="col-lg-2">
                 <div className="at-footer-copyright-wrap text">
-                  <span className="at-footer-copyright">Orisa © 2026 </span>
+                  <span className="at-footer-copyright">H Moni © 2026 </span>
                 </div>
               </div>
               <div className="col-lg-8">
@@ -174,4 +174,5 @@ export default function Footer1() {
     </footer>
   );
 }
+
 

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import RevealText from "@/shared/effects/RevealText";
 
@@ -37,7 +37,7 @@ export default function Section5() {
                             </span>
                         </Link>
                         <h2 className="sec-5-home-10__title mt-3 mb-0 at_fade_anim reveal-text" data-delay="0.1">
-                            <RevealText>At Orisa, we merge the heritage of Italian craftsmanship with the raw power of real-time rendering engines. We don&apos;t just follow digital trends; we sculpt the digital future.</RevealText>
+                            <RevealText>At H Moni, we merge the heritage of Italian craftsmanship with the raw power of real-time rendering engines. We don&apos;t just follow digital trends; we sculpt the digital future.</RevealText>
                         </h2>
                     </div>
                     <div className="col-xl-auto col-lg-10">
@@ -54,7 +54,7 @@ export default function Section5() {
                     <img
                         className="sec-5-home-10__figure-img"
                         src="/assets/imgs/pages/home-10/sec-5-wireframe-head.webp"
-                        alt="orisa"
+                        alt="H Moni"
                         width={800}
                         height={500} loading="lazy" />
                 </figure>
@@ -75,7 +75,7 @@ export default function Section5() {
                     <div className="col-md-4">
                         <div className="sec-5-home-10__stat sec-5-home-10__stat--3 at_fade_anim" data-delay="0.18">
                             <p className="sec-5-home-10__stat-value mb-0">190+</p>
-                            <p className="sec-5-home-10__stat-label mb-0">Brands scaled <span className="d-block">with Orisa</span></p>
+                            <p className="sec-5-home-10__stat-label mb-0">Brands scaled <span className="d-block">with H Moni</span></p>
                         </div>
                     </div>
                 </div>
@@ -110,3 +110,4 @@ export default function Section5() {
         </section>
     );
 }
+

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 const STEPS = [
@@ -119,7 +119,7 @@ export default function Section6() {
                                             <div className="sec-6-home-11__step-media">
                                                 <img
                                                     src={step.img}
-                                                    alt="orisa"
+                                                    alt="H Moni"
                                                     width={640}
                                                     height={400}
                                                     loading="lazy"
@@ -137,3 +137,4 @@ export default function Section6() {
         </section>
     );
 }
+

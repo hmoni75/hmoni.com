@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 const ARROW_SVG = (
     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +61,7 @@ export default function Section12() {
                     data-speed=".4"
                     className="img-cover"
                     src="/assets/imgs/pages/img-22.webp"
-                    alt="orisa" loading="lazy" />
+                    alt="H Moni" loading="lazy" />
             </div>
             <div className="position-absolute top-0 bottom-0 start-0 end-0">
                 <div className="container">
@@ -73,11 +73,11 @@ export default function Section12() {
                                         <img
                                             data-width="30"
                                             src="/assets/imgs/template/logo/favicon-dark.svg"
-                                            alt="Orisa"
+                                            alt="H Moni"
                                             width={30}
                                             height={30}
                                             style={{ width: "auto", height: "auto" }} loading="lazy" />
-                                        <h6 className="fw-700 fz-24 text-white mb-0">Orisa</h6>
+                                        <h6 className="fw-700 fz-24 text-white mb-0">H Moni</h6>
                                     </Link>
                                 </div>
                                 <Link
@@ -113,7 +113,7 @@ export default function Section12() {
                         </div>
                         <div className="col-lg-4 col-md-6 ms-auto text-end">
                             <span className="common-white fz-font-lg">
-                                [ A creative studio crafting bold, user-focused digital experiences. At Orisa, we blend
+                                [ A creative studio crafting bold, user-focused digital experiences. At H Moni, we blend
                                 strategy, design, and innovation to help brands stand out and grow. ]
                             </span>
                         </div>
@@ -123,3 +123,4 @@ export default function Section12() {
         </div>
     );
 }
+

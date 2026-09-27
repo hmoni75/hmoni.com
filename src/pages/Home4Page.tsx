@@ -1,4 +1,4 @@
-import PageMeta from "@/seo/PageMeta";
+﻿import PageMeta from "@/seo/PageMeta";
 import Section1 from "@/shared/sections/index-4/Section1";
 import Section2 from "@/shared/sections/index-4/Section2";
 import Section3 from "@/shared/sections/index-4/Section3";
@@ -11,7 +11,7 @@ import Section8 from "@/shared/sections/index-4/Section8";
 export default function Home4Page() {
   return (
     <>
-      <PageMeta title="Orisa - Home4" />
+      <PageMeta title="H Moni - Home4" />
                 <Section1 />
                 <Section2 />
                 <Section3 />
@@ -24,3 +24,4 @@ export default function Home4Page() {
     </>
   );
 }
+

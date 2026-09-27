@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 // About 3 Section 2 - My Process (step by step) + contact
@@ -168,7 +168,7 @@ export default function Section2() {
                                     </Link>
                                 </h6>
                                 <h4 className="mb-0 fw-medium text-decoration-underline">
-                                    <Link to="mailto:hello@orisa.com">hello@orisa.com</Link>
+                                    <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
                                 </h4>
                             </div>
                             <h6 className="fw-600">
@@ -184,3 +184,4 @@ export default function Section2() {
         </section>
     );
 }
+

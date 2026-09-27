@@ -108,7 +108,7 @@ export default function Section1() {
                                         <div key={i} className="sec-1-home-4__card rounded-3 overflow-hidden">
                                             <img
                                                 src={src}
-                                                alt="orisa"
+                                                alt="H Moni"
                                                 width={280}
                                                 height={200}
                                                 className="img-cover w-100 h-100" loading="lazy" />
@@ -128,7 +128,7 @@ export default function Section1() {
 
                         <div className="sec-1-home-4__footer pt-60 pt-lg-8 mt-5 mt-lg-8">
                             <h2 className="sec-1-home-4__brand fz-200 text-white mb-4 text-scale-anim">
-                                Orisa AI Solutions
+                                H Moni AI Solutions
                                 <span className="sec-1-home-4__brand-suffix">
                                     <sup>®</sup>
                                 </span>

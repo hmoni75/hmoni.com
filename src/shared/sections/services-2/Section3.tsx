@@ -107,7 +107,7 @@ export default function Section3() {
                                         </a>
                                     </h6>
                                     <h4 className="mb-0 fw-medium text-decoration-underline">
-                                        <a href="mailto:hello@orisa.com">hello@orisa.com</a>
+                                        <a href="mailto:hello@H Moni.com">hello@H Moni.com</a>
                                     </h4>
                                 </div>
                             </div>

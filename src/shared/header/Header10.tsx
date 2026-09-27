@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import MainMenu from "@/shared/MainMenu";
 import ThemeSwitcher from "@/shared/ThemeSwitcher";
 export default function Header10() {
@@ -18,7 +18,7 @@ export default function Header10() {
                     height={30}
                     className="header-10__mark invert-0"
                     src="/assets/imgs/template/logo/header-10-mark.webp"
-                    alt="Orisa"
+                    alt="H Moni"
                     loading="eager"
                     decoding="async"
                   />
@@ -129,3 +129,4 @@ export default function Header10() {
     </>
   );
 }
+

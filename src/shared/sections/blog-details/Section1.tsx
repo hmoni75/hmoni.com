@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 // blog-details section 1
 
 const CHEVRON_SVG = (
@@ -199,7 +199,7 @@ export default function Section1() {
                             <figure className="mt-60 mb-60">
                                 <img
                                     src="/assets/imgs/pages/img-215.webp"
-                                    alt="orisa"
+                                    alt="H Moni"
                                     width={1200}
                                     height={600} loading="lazy" />
                                 <figcaption className="text-center neutral-700 fst-italic mt-2">
@@ -277,3 +277,4 @@ export default function Section1() {
         </section>
     );
 }
+

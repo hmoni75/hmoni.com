@@ -81,7 +81,7 @@ export default function Section1() {
                             <span className="pricing-5-brand__mark" aria-hidden="true">
                                 {STAR_SVG}
                             </span>
-                            <span className="pricing-5-brand__name">ORISA</span>
+                            <span className="pricing-5-brand__name">H Moni</span>
                         </div>
 
                         <div className="pricing-5-toggle" role="tablist" aria-label="Billing model">

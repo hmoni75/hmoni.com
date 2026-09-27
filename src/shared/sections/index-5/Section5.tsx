@@ -48,7 +48,7 @@ export default function Section5() {
                                         <br className="d-block" />
                                         Email:{" "}
                                         <span className="neutral-900">
-                                            <Link to="mailto:hello@orisa.com">hello@orisa.com</Link>
+                                            <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
                                         </span>
                                     </span>
                                 </div>

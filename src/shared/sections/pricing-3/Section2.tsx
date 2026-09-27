@@ -50,7 +50,7 @@ interface Slide {
 const SLIDES: Slide[] = [
     {
         image: "/assets/imgs/pages/home-7/sec-5-founder.webp",
-        quote: "“Strategy first, then craft. Orisa shaped a clear story for our relaunch and kept every milestone on time—exactly the partner we needed for a high-stakes brand reset.”",
+        quote: "“Strategy first, then craft. H Moni shaped a clear story for our relaunch and kept every milestone on time—exactly the partner we needed for a high-stakes brand reset.”",
         avatar: "/assets/imgs/pages/home-7/avatar-2.webp",
         name: "Elena Morin",
         role: "Helio Craft / Head of Brand",

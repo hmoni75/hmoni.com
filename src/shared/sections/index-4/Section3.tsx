@@ -155,7 +155,7 @@ export default function Section3() {
                             >
                                 <img
                                     src="/assets/imgs/pages/img-85.webp"
-                                    alt="orisa"
+                                    alt="H Moni"
                                     width={400}
                                     height={400}
                                     className="w-100" loading="lazy" />

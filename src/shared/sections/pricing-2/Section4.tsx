@@ -69,9 +69,9 @@ export default function Section4() {
                                 </Link>
                                 <a
                                     className="pricing-2-cta__mail text-white text-decoration-underline"
-                                    href="mailto:hello@orisa.com"
+                                    href="mailto:hello@H Moni.com"
                                 >
-                                    hello@orisa.com
+                                    hello@H Moni.com
                                 </a>
                             </div>
                         </div>

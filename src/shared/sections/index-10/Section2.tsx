@@ -1,4 +1,4 @@
-export default function Section2() {
+﻿export default function Section2() {
     return (
         <section className="sec-2-home-10" aria-label="Studio showcase">
             <div className="fix anim-zoomin">
@@ -6,7 +6,7 @@ export default function Section2() {
                     data-speed=".8"
                     className="sec-2-home-10__img"
                     src="/assets/imgs/pages/home-10/sec-2-scene.webp"
-                    alt="orisa"
+                    alt="H Moni"
                     width={1920}
                     height={771}
                     style={{ width: "auto", height: "auto" }} loading="lazy" />
@@ -14,3 +14,4 @@ export default function Section2() {
         </section>
     );
 }
+

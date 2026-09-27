@@ -44,7 +44,7 @@ export default function PopupSearch({ open, onClose }: PopupSearchProps) {
                     <img
                       data-width="30"
                       src="/assets/imgs/template/logo/favicon.svg"
-                      alt="Orisa"
+                      alt="H Moni"
                     />
                     <h6 className="fw-700 fz-24 mb-0">H Moni</h6>
                   </Link>

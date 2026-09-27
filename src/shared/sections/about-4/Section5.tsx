@@ -1,4 +1,4 @@
-import RevealText from "@/shared/effects/RevealText";
+﻿import RevealText from "@/shared/effects/RevealText";
 
 // About 4 Section 5 - Space collage
 
@@ -23,7 +23,7 @@ const BENTO_ITEMS: BentoItem[] = [
         kind: "image",
         modifier: "about-4-bento--a",
         src: "/assets/imgs/pages/home-8/sec7-img-3.webp",
-        alt: "Orisa workroom",
+        alt: "H Moni workroom",
         width: 1400,
         height: 933,
     },
@@ -98,3 +98,4 @@ export default function Section5() {
         </section>
     );
 }
+

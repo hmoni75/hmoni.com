@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 const ARROW_SVG = (
@@ -57,7 +57,7 @@ export default function Section11({ classList = "" }: { classList?: string }) {
                                     width={600}
                                     height={700}
                                     className="w-100"
-                                    alt="orisa" loading="lazy" />
+                                    alt="H Moni" loading="lazy" />
                             </div>
                             <h6 className="mb-15 pt-50">Still no luck? We can help!</h6>
                             <p className="at-faq-dec mb-35">Let us Know how we can assist</p>
@@ -133,3 +133,4 @@ export default function Section11({ classList = "" }: { classList?: string }) {
         </div>
     );
 }
+

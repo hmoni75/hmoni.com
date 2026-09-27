@@ -7,7 +7,7 @@ type HeroMeta = { label: string; value: string; href?: string };
 const HERO_META: HeroMeta[] = [
     { label: "Start", value: "2–4 weeks" },
     { label: "Models", value: "Project · monthly" },
-    { label: "Talk", value: "hello@orisa.com", href: "mailto:hello@orisa.com" },
+    { label: "Talk", value: "hello@H Moni.com", href: "mailto:hello@H Moni.com" },
 ];
 
 export default function Section1() {
@@ -60,7 +60,7 @@ export default function Section1() {
                     <img
                         className="anim-zoomin"
                         src="/assets/imgs/pages/img-153.webp"
-                        alt="Orisa studio craft"
+                        alt="H Moni studio craft"
                         width={1920}
                         height={570} loading="lazy" />
                     <div className="svc5-hero__media-tag">

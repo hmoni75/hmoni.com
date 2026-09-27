@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 // About 1 Section 3 - Awards
@@ -154,7 +154,7 @@ export default function Section3() {
                                 <div className="content">
                                     <h5 className="revert-text mb-0 reveal-text">
                                         <RevealText>
-                                            Orisa is a digital agency creating impactful digital experiences. We think
+                                            H Moni is a digital agency creating impactful digital experiences. We think
                                             like strategists and execute with clarity, creativity, and performance.
                                         </RevealText>
                                     </h5>
@@ -167,3 +167,4 @@ export default function Section3() {
         </div>
     );
 }
+

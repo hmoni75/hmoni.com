@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-// Footer 5 - Orisa Nova (light style with grid background)
+﻿import { Link } from "react-router-dom";
+// Footer 5 - H Moni Nova (light style with grid background)
 
 const QUICK_LINKS_1 = [
     { label: "Home", href: "/" },
@@ -78,12 +78,12 @@ export default function Footer5() {
                                         +212 - 555-7398
                                     </Link>
                                 </h6>
-                                <span className="at-footer-copyright neutral-900 opacity-100">Orisa © 2026</span>
+                                <span className="at-footer-copyright neutral-900 opacity-100">H Moni © 2026</span>
                             </div>
                         </div>
                         <div className="col-xxl-3 col-md-6">
                             <h4 className="mb-0 fw-medium text-decoration-underline">
-                                <a href="mailto:hello@orisa.com">hello@orisa.com</a>
+                                <a href="mailto:hello@H Moni.com">hello@H Moni.com</a>
                             </h4>
                         </div>
                         <div className="col-xxl-3 col-lg-5 col-md-6">
@@ -135,12 +135,12 @@ export default function Footer5() {
                                     I&apos;m{" "}
                                     <img
                                         src="/assets/imgs/pages/img-116.webp"
-                                        alt="Orisa"
+                                        alt="H Moni"
                                         width={205}
                                         height={315}
                                         className="d-none d-md-block"
                                         style={{ width: "auto", height: "auto" }} loading="lazy" />{" "}
-                                    Orisa Nova <sup className="fz-80 fw-400">®</sup>
+                                    H Moni Nova <sup className="fz-80 fw-400">®</sup>
                                 </h1>
                             </div>
                             <div className="col-12">
@@ -164,3 +164,4 @@ export default function Footer5() {
         </footer>
     );
 }
+

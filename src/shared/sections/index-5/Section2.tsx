@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
-// Home 5 Section 2 - Why Orisa / Portfolio area
+// Home 5 Section 2 - Why H Moni / Portfolio area
 
 const ARROW_SVG = (
     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,8 +82,8 @@ export default function Section2() {
                             <div className="col-xxl-1 col-lg-2">
                                 <span className="at-btn common-black bg-transparent mb-10 rounded-0 p-0">
                                     <span className="text-uppercase">
-                                        <span className="text-1">why orisa</span>
-                                        <span className="text-2">why orisa</span>
+                                        <span className="text-1">why H Moni</span>
+                                        <span className="text-2">why H Moni</span>
                                     </span>
                                     <i>
                                         {ARROW_SVG}
@@ -181,7 +181,7 @@ export default function Section2() {
                                             ))}
                                         </div>
                                         <blockquote className="neutral-900 fz-font-lg fw-500 mb-4">
-                                            &quot;Orisa has a rare ability to bridge the gap between theoretical mathematics
+                                            &quot;H Moni has a rare ability to bridge the gap between theoretical mathematics
                                             and production-grade code. He doesn&apos;t just build models; he builds engines
                                             for real-world growth.&quot;
                                         </blockquote>
@@ -190,7 +190,7 @@ export default function Section2() {
                                                 <div key={i} className="sec-2-home-5__avatar-sm">
                                                     <img
                                                         src={src}
-                                                        alt="orisa"
+                                                        alt="H Moni"
                                                         width={65}
                                                         height={65}
                                                         className="img-cover" loading="lazy" />
@@ -234,7 +234,7 @@ export default function Section2() {
                                         <div className="p-absolute bottom-0 end-0">
                                             <img
                                                 src="/assets/imgs/pages/img-105.webp"
-                                                alt="orisa"
+                                                alt="H Moni"
                                                 width={447}
                                                 height={103}
                                                 className="at_fade_anim"

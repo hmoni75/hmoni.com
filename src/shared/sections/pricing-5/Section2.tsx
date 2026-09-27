@@ -39,7 +39,7 @@ const FAQS = [
     {
         id: "p5Faq4",
         question: "Who is doing the creative work?",
-        answer: "Senior specialists inside Orisa lead every deliverable—no opaque subcontract chain. You always know the designer or director reviewing your files.",
+        answer: "Senior specialists inside H Moni lead every deliverable—no opaque subcontract chain. You always know the designer or director reviewing your files.",
     },
     {
         id: "p5Faq5",
@@ -114,13 +114,13 @@ export default function Section2() {
                             ))}
                         </div>
                         <div className="pricing-5-more__row">
-                            <a className="pricing-5-more__email" href="mailto:hello@orisa.com">
-                                hello@orisa.com
+                            <a className="pricing-5-more__email" href="mailto:hello@H Moni.com">
+                                hello@H Moni.com
                             </a>
                             <Link
                                 className="pricing-5-more__arrow"
                                 to="/contact-1"
-                                aria-label="Contact Orisa"
+                                aria-label="Contact H Moni"
                             >
                                 {ARROW_SVG}
                             </Link>

@@ -63,8 +63,8 @@ export default function Section1() {
                                 ))}
                                 <div className="svc4-meta">
                                     <span className="svc4-meta__label">Contact</span>
-                                    <a className="svc4-meta__value" href="mailto:hello@orisa.com">
-                                        hello@orisa.com
+                                    <a className="svc4-meta__value" href="mailto:hello@H Moni.com">
+                                        hello@H Moni.com
                                     </a>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@ export default function Section1() {
                                     className="anim-zoomin layer"
                                     data-depth="0.35"
                                     src="/assets/imgs/pages/img-107.webp"
-                                    alt="Orisa services craft"
+                                    alt="H Moni services craft"
                                     width={822}
                                     height={674}
                                     loading="eager"

@@ -1,4 +1,4 @@
-import PageMeta from "@/seo/PageMeta";
+﻿import PageMeta from "@/seo/PageMeta";
 import About4Effect from "@/shared/effects/About4Effect";
 import Section1 from "@/shared/sections/about-4/Section1";
 import Section2 from "@/shared/sections/about-4/Section2";
@@ -10,7 +10,7 @@ import Section6 from "@/shared/sections/about-4/Section6";
 export default function About4Page() {
   return (
     <>
-      <PageMeta title="Orisa - About4" />
+      <PageMeta title="H Moni - About4" />
       <Section1 />
       <Section2 />
       <Section3 />
@@ -21,3 +21,4 @@ export default function About4Page() {
     </>
   );
 }
+

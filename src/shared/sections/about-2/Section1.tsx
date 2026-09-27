@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 import Marquee from "react-fast-marquee";
 
-// About 2 Section 1 - Hero (Orisa Studio) + image + brand ticker
+// About 2 Section 1 - Hero (H Moni Studio) + image + brand ticker
 
 const SOCIAL_ITEMS = [
     {
@@ -98,7 +98,7 @@ export default function Section1() {
                     <div className="col-xxl-9 col-lg-8">
                         <h1 className="section-title d-flex fw-600 lh-1 fz-200 reveal-text mb-0">
                             <RevealText>
-                                Orisa Studio<sup>®</sup>
+                                H Moni Studio<sup>®</sup>
                             </RevealText>
                         </h1>
                     </div>
@@ -126,7 +126,7 @@ export default function Section1() {
                             <div className="img anim-zoomin">
                                 <img
                                     src="/assets/imgs/pages/img-122.webp"
-                                    alt="orisa"
+                                    alt="H Moni"
                                     width={1700}
                                     height={830}
                                     className="img-cover" loading="lazy" />
@@ -176,3 +176,4 @@ export default function Section1() {
         </section>
     );
 }
+

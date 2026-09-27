@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import OdometerCounter from "@/shared/elements/OdometerCounter";
 
 const ARROW_SVG = (
@@ -8,11 +8,11 @@ const ARROW_SVG = (
 );
 
 const AVATARS = [
-    { src: "/assets/imgs/template/avatar/avatar-1.webp", alt: "orisa", zClass: "z-2" },
-    { src: "/assets/imgs/template/avatar/avatar-2.webp", alt: "orisa", zClass: "z-3" },
-    { src: "/assets/imgs/template/avatar/avatar-3.webp", alt: "orisa", zClass: "z-4" },
-    { src: "/assets/imgs/template/avatar/avatar-4.webp", alt: "orisa", zClass: "z-5" },
-    { src: "/assets/imgs/template/avatar/avatar-5.webp", alt: "orisa", zClass: "z-5" },
+    { src: "/assets/imgs/template/avatar/avatar-1.webp", alt: "H Moni", zClass: "z-2" },
+    { src: "/assets/imgs/template/avatar/avatar-2.webp", alt: "H Moni", zClass: "z-3" },
+    { src: "/assets/imgs/template/avatar/avatar-3.webp", alt: "H Moni", zClass: "z-4" },
+    { src: "/assets/imgs/template/avatar/avatar-4.webp", alt: "H Moni", zClass: "z-5" },
+    { src: "/assets/imgs/template/avatar/avatar-5.webp", alt: "H Moni", zClass: "z-5" },
 ] as const;
 
 export default function Section2() {
@@ -107,7 +107,7 @@ export default function Section2() {
                                                         data-parallax-speed="0.45"
                                                         data-parallax-range="100"
                                                         src="/assets/imgs/pages/img-3.webp"
-                                                        alt="orisa"
+                                                        alt="H Moni"
                                                         width={600}
                                                         height={450} loading="lazy" />
                                                 </div>
@@ -136,7 +136,7 @@ export default function Section2() {
                                                         data-fade-from="bottom"
                                                         data-ease="bounce"
                                                         src="/assets/imgs/pages/img-4.webp"
-                                                        alt="orisa"
+                                                        alt="H Moni"
                                                         width={500}
                                                         height={450} loading="lazy" />
                                                 </div>
@@ -152,3 +152,4 @@ export default function Section2() {
         </section>
     );
 }
+

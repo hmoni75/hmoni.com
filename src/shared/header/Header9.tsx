@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import MainMenu from "@/shared/MainMenu";
 import ThemeSwitcher from "@/shared/ThemeSwitcher";
 export default function Header9() {
@@ -19,7 +19,7 @@ export default function Header9() {
                       height={54}
                       className="invert-0"
                       src="/assets/imgs/template/logo/favicon-dark.svg"
-                      alt="Orisa"
+                      alt="H Moni"
                       style={{ width: "auto", height: "auto" }}
                       loading="lazy"
                     />
@@ -129,3 +129,4 @@ export default function Header9() {
     </>
   );
 }
+

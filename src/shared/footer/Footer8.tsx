@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 // Footer 8 (Home 8) - Background image, nav with image arrows, contact, image-based socials, newsletter
 
 const NAV_LINKS = [
@@ -59,7 +59,7 @@ export default function Footer8() {
             <div className="footer-8__bg" aria-hidden="true">
                 <img
                     src="/assets/imgs/pages/home-8/footer-8-bg.webp"
-                    alt="orisa"
+                    alt="H Moni"
                     style={{ objectFit: "cover" }}
                     loading="lazy" />
             </div>
@@ -79,7 +79,7 @@ export default function Footer8() {
                                 <img
                                     className="footer-8__nav-arrow"
                                     src="/assets/imgs/pages/home-8/footer-8-nav-arrow.svg"
-                                    alt="orisa"
+                                    alt="H Moni"
                                     width={14}
                                     height={13}
                                     aria-hidden="true"
@@ -98,7 +98,7 @@ export default function Footer8() {
                                     <Link to="tel:+12125557398">+212 - 555-7398</Link>
                                 </p>
                                 <p className="footer-8__contact-line mb-3">
-                                    <Link to="mailto:hello@orisa.com">hello@orisa.com</Link>
+                                    <Link to="mailto:hello@H Moni.com">hello@H Moni.com</Link>
                                 </p>
                                 <p className="footer-8__address mb-0">
                                     245 Fifth Avenue, Suite 1800<br />New York, NY 10016, USA
@@ -136,7 +136,7 @@ export default function Footer8() {
                                                 <img
                                                     className="footer-8__social-icon"
                                                     src={`/assets/imgs/pages/home-8/${social.icon}`}
-                                                    alt="orisa"
+                                                    alt="H Moni"
                                                     width={18}
                                                     height={18} loading="lazy" />
                                                 <span>{social.label}</span>
@@ -144,7 +144,7 @@ export default function Footer8() {
                                             <span className="footer-8__social-arrow" aria-hidden="true">
                                                 <img
                                                     src={`/assets/imgs/pages/home-8/${social.arrow}`}
-                                                    alt="orisa"
+                                                    alt="H Moni"
                                                     width={24}
                                                     height={10} loading="lazy" />
                                             </span>
@@ -213,7 +213,7 @@ export default function Footer8() {
                 {/* Bottom */}
                 <div className="footer-8__bottom">
                     <div className="footer-8__bottom-inner d-flex flex-wrap gap-3 align-items-center justify-content-between">
-                        <span className="footer-8__copy">Orisa &copy; 2026</span>
+                        <span className="footer-8__copy">H Moni &copy; 2026</span>
                         <ul className="footer-8__policies list-unstyled d-flex flex-wrap gap-3 mb-0">
                             <li>
                                 <Link to="#">Privacy Policy</Link>
@@ -231,3 +231,4 @@ export default function Footer8() {
         </footer>
     );
 }
+

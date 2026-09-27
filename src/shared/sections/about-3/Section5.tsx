@@ -1,4 +1,4 @@
-// About 3 Section 5 - Gallery (3 columns, parallax-style data-speed)
+﻿// About 3 Section 5 - Gallery (3 columns, parallax-style data-speed)
 
 const COLUMNS = [
     {
@@ -61,7 +61,7 @@ export default function Section5({ classList = "" }: { classList?: string }) {
                                                     <img
                                                         className="w-100"
                                                         src={src}
-                                                        alt="orisa"
+                                                        alt="H Moni"
                                                         width={620}
                                                         height={780}
                                                         style={{ width: "100%", height: "auto", objectFit: "cover" }} loading="lazy" />
@@ -78,3 +78,4 @@ export default function Section5({ classList = "" }: { classList?: string }) {
         </section>
     );
 }
+

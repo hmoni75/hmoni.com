@@ -9,7 +9,7 @@ import TESTIMONIALSection from "@/shared/sections/index-13/Section7";
 export default function Home12Page() {
   return (
     <>
-      <PageMeta title="Orisa - Home" />
+      <PageMeta title="H Moni - Home" />
       <HeroSection />
       <SelectedProjectsSection />
       <ServiceSection />

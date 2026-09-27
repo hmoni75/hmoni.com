@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import OdometerCounter from "@/shared/elements/OdometerCounter";
 
 const ARROW_SVG = (
@@ -82,7 +82,7 @@ export default function Section4() {
                                             </p>
                                         </div>
                                         <div className="thumb anim-zoomin">
-                                            <img src={s.thumb} alt="orisa" width={200} height={200} loading="lazy" />
+                                            <img src={s.thumb} alt="H Moni" width={200} height={200} loading="lazy" />
                                         </div>
                                     </div>
                                 </Link>
@@ -106,3 +106,4 @@ export default function Section4() {
         </div>
     );
 }
+

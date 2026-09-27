@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// Home 5 Section 1 - Hero (AI Engineer / Orisa Nova)
+// Home 5 Section 1 - Hero (AI Engineer / H Moni Nova)
 
 const ARROW_CIRCLE_SVG = (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
@@ -61,7 +61,7 @@ export default function Section1() {
                                 </p>
                                 <img
                                     src="/assets/imgs/pages/img-102.webp"
-                                    alt="orisa"
+                                    alt="H Moni"
                                     width={214}
                                     height={138}
                                     style={{ width: "auto", height: "auto" }} loading="lazy" />
@@ -76,19 +76,19 @@ export default function Section1() {
                                 >
                                     <img
                                         src="/assets/imgs/pages/img-101.webp"
-                                        alt="orisa"
+                                        alt="H Moni"
                                         width={560}
                                         height={860}
                                         className="d-none d-lg-block" loading="lazy" />
                                     <div className="p-absolute bottom-0 start-50 translate-middle-x z-n1 d-lg-none d-xxl-block">
-                                        <h1 className="fz-290 fw-600 text-nowrap lh-1">Orisa Nova</h1>
+                                        <h1 className="fz-290 fw-600 text-nowrap lh-1">H Moni Nova</h1>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="col-lg-3 col-md-6 mx-lg-auto z-index-2">
                                 <div className="icon mb-30">{DIAMOND_ICON}</div>
-                                <h4>I&apos;m Orisa Nova</h4>
+                                <h4>I&apos;m H Moni Nova</h4>
                                 <p className="fz-lg neutral-900 fw-600">
                                     I design, train, and deploy AI models that turn data into real-world decisions — from
                                     computer vision to large-scale machine learning systems.

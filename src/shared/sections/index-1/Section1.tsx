@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 function ArrowIcon() {
     return (
         <>
@@ -48,13 +48,13 @@ export default function Section1() {
                         className="layer"
                         data-depth=".1"
                         src="/assets/imgs/pages/img-1.webp"
-                        alt="orisa"
+                        alt="H Moni"
                         style={{ width: "auto", height: "auto", alignSelf: "flex-end" }} loading="lazy" />
                 </div>
                 <div className="container p-relative">
                     <div className="p-absolute bottom-100 start-0 ms-5 mb-100 d-none d-lg-block">
                         <a
-                            href="mailto:hello@orisa.com"
+                            href="mailto:hello@H Moni.com"
                             className="at-hero-button at-btn bg-transparent p-relative"
                         >
                             <img
@@ -180,8 +180,8 @@ export default function Section1() {
                             </div>
                         </div>
                         <div className="col-1 ms-auto text-end align-self-start rotate-90 order-xl-2 order-md-1 d-none d-md-block">
-                            <a href="mailto:hello@orisa.com" className="text-white fw-600">
-                                <span className="at_fade_anim">hello@orisa.com</span>
+                            <a href="mailto:hello@H Moni.com" className="text-white fw-600">
+                                <span className="at_fade_anim">hello@H Moni.com</span>
                             </a>
                         </div>
                     </div>
@@ -212,3 +212,4 @@ export default function Section1() {
         </>
     );
 }
+

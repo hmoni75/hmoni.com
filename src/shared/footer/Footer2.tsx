@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+﻿import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 
 const ARROW_SVG = (
@@ -46,15 +46,15 @@ const Footer2 = forwardRef<HTMLElement, Record<string, never>>(function Footer2(
               <div className="d-flex flex-wrap align-items-start gap-5">
                 <div className="at-header-logo">
                   <Link to="/" className="text-decoration-none d-inline-flex align-items-center gap-2">
-                    <img data-width="30" src="/assets/imgs/template/logo/favicon-dark.svg" alt="Orisa" width={30} height={30} />
-                    <h6 className="fw-700 text-white mb-0 fz-24">Orisa</h6>
+                    <img data-width="30" src="/assets/imgs/template/logo/favicon-dark.svg" alt="H Moni" width={30} height={30} />
+                    <h6 className="fw-700 text-white mb-0 fz-24">H Moni</h6>
                   </Link>
                 </div>
                 <div className="d-flex flex-column gap-3">
                   <h6 className="text-white mb-2 fw-medium">+212-555-7398</h6>
                   <h6 className="text-white mb-2">
-                    <a href="mailto:hello@orisa.com" className="text-white text-decoration-none">
-                      hello@orisa.com
+                    <a href="mailto:hello@H Moni.com" className="text-white text-decoration-none">
+                      hello@H Moni.com
                     </a>
                   </h6>
                   <h6 className="text-white mb-0">
@@ -136,7 +136,7 @@ const Footer2 = forwardRef<HTMLElement, Record<string, never>>(function Footer2(
           <div className="footer-2-border pt-40 pb-40">
             <div className="row align-items-end g-4">
               <div className="col-lg-10 col-md-8">
-                <span className="at-footer-copyright">Orisa © 2026</span>
+                <span className="at-footer-copyright">H Moni © 2026</span>
                 <div className="at-title-anim overflow-hidden">
                   <h2 className="footer-2-connect-title text-white mb-0 at-title-text text-scale-anim">Let&apos;s Connect</h2>
                 </div>
@@ -169,4 +169,5 @@ const Footer2 = forwardRef<HTMLElement, Record<string, never>>(function Footer2(
 });
 
 export default Footer2;
+
 

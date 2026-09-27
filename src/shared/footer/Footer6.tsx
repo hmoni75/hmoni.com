@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 // Footer 6 - Dark centered footer with branding title, quick links, contact, newsletter
 
 const QUICK_LINKS_1 = [
@@ -24,7 +24,7 @@ export default function Footer6() {
                     <div className="row g-5 pb-45 align-items-end">
                         <div className="col-12">
                             <h2 className="footer-3-connect-title fw-600 fz-180 text-white mb-0 text-scale-anim text-center">
-                                Orisa Branding Studio
+                                H Moni Branding Studio
                             </h2>
                         </div>
                         <div className="col-lg-3 col-md-6 d-flex flex-column justify-content-between">
@@ -60,8 +60,8 @@ export default function Footer6() {
                                     </Link>
                                 </p>
                                 <p className="h6 text-white mb-2">
-                                    <Link to="mailto:hello@orisa.com" className="text-white text-decoration-none">
-                                        hello@orisa.com
+                                    <Link to="mailto:hello@H Moni.com" className="text-white text-decoration-none">
+                                        hello@H Moni.com
                                     </Link>
                                 </p>
                                 <p className="h6 text-white mb-2">
@@ -141,7 +141,7 @@ export default function Footer6() {
                                     <div className="alt-footer-link-item">
                                         <ul className="d-flex flex-wrap align-items-center justify-content-between text-center gap-1">
                                             <li>
-                                                <span className="fz-font-md neutral-0 opacity-50">Orisa &copy; 2026 </span>
+                                                <span className="fz-font-md neutral-0 opacity-50">H Moni &copy; 2026 </span>
                                             </li>
                                             <li>
                                                 <span className="fz-font-md neutral-0 opacity-50">[ Since 2012 ] </span>
@@ -157,3 +157,4 @@ export default function Footer6() {
         </footer>
     );
 }
+

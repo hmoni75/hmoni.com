@@ -1,11 +1,11 @@
 import SwiperDynamic from "@/shared/components/SwiperDynamic";
 
 const SLIDES = [
-    { src: "/assets/imgs/pages/img-48.webp", alt: "orisa" },
-    { src: "/assets/imgs/pages/img-45.webp", alt: "orisa" },
-    { src: "/assets/imgs/pages/img-46.webp", alt: "orisa" },
-    { src: "/assets/imgs/pages/img-47.webp", alt: "orisa" },
-    { src: "/assets/imgs/pages/img-49.webp", alt: "orisa" },
+    { src: "/assets/imgs/pages/img-48.webp", alt: "H Moni" },
+    { src: "/assets/imgs/pages/img-45.webp", alt: "H Moni" },
+    { src: "/assets/imgs/pages/img-46.webp", alt: "H Moni" },
+    { src: "/assets/imgs/pages/img-47.webp", alt: "H Moni" },
+    { src: "/assets/imgs/pages/img-49.webp", alt: "H Moni" },
 ];
 
 export default function Section8() {

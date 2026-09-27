@@ -1,4 +1,4 @@
-export type TestimonialCard1Props = {
+﻿export type TestimonialCard1Props = {
   img: string;
   logo: string;
   name: string;
@@ -25,10 +25,10 @@ export default function TestimonialCard1({
         <div className="rectangular" />
         <div className="testimonial-top d-flex align-items-center justify-content-between">
           <div className="testimonial-top-left-img">
-            <img src={img} alt="orisa" width={85} height={85} />
+            <img src={img} alt="H Moni" width={85} height={85} />
           </div>
           <div className="testimonial-top-right-logo">
-            <img src={logo} alt="orisa" width={100} height={25} />
+            <img src={logo} alt="H Moni" width={100} height={25} />
           </div>
         </div>
         <div className="testimonial-bottom-wrap">
@@ -71,4 +71,5 @@ export default function TestimonialCard1({
     </div>
   );
 }
+
 

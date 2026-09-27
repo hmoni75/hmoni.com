@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 // About 5 Section 6 - Accent CTA
 
 export default function Section6() {
     return (
-        <section className="about-5-cta pb-120" aria-label="Work with Orisa">
+        <section className="about-5-cta pb-120" aria-label="Work with H Moni">
             <div className="container">
                 <div className="about-5-cta__panel">
                     <div className="about-5-cta__left">
@@ -19,8 +19,8 @@ export default function Section6() {
                             <Link className="about-5-cta__btn" to="/contact-1">
                                 Start a project
                             </Link>
-                            <a className="about-5-cta__mail" href="mailto:hello@orisa.com">
-                                hello@orisa.com
+                            <a className="about-5-cta__mail" href="mailto:hello@H Moni.com">
+                                hello@H Moni.com
                             </a>
                         </div>
                     </div>
@@ -29,3 +29,4 @@ export default function Section6() {
         </section>
     );
 }
+

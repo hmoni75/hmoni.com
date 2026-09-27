@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 
 const PREVIEW_SELECTOR = ".card-award-preview.card-award-hover-preview";
 const CARD_SELECTOR = ".card-award";
@@ -19,7 +19,7 @@ function getRotateOptions(card: Element): { isReversed: boolean; rotation: numbe
 }
 
 /**
- * Port of 3.Orisa-Nextjs/components/effects/CardAwardPreviewEffect.tsx / theme main.js §14.
+ * Port of 3.H Moni-Nextjs/components/effects/CardAwardPreviewEffect.tsx / theme main.js §14.
  * Desktop: hover `.card-award` shows fixed `.card-award-preview` with large image from `data-img-award`,
  * follows cursor via gsap.quickTo, rotation default -15deg (override with `data-rotate` on the card).
  */
@@ -188,3 +188,4 @@ export default function CardAwardPreviewEffect() {
 
   return null;
 }
+

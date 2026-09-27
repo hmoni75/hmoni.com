@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 // About 4 Section 1 - Editorial manifesto hero
@@ -54,7 +54,7 @@ const HERO_SHOTS: {
 
 export default function Section1() {
     return (
-        <section className="about-4-hero pt-150 pb-80" aria-label="About Orisa">
+        <section className="about-4-hero pt-150 pb-80" aria-label="About H Moni">
             <div className="container">
                 <div className="about-4-hero__grid">
                     <aside className="about-4-hero__aside">
@@ -80,7 +80,7 @@ export default function Section1() {
                             </RevealText>
                         </h1>
                         <p className="about-4-hero__lead">
-                            Orisa is a strategy-led design studio for teams that ship. We pair clear
+                            H Moni is a strategy-led design studio for teams that ship. We pair clear
                             thinking with sharp execution across identity, product, and campaigns—no
                             theatre, no filler decks.
                         </p>
@@ -124,3 +124,4 @@ export default function Section1() {
         </section>
     );
 }
+

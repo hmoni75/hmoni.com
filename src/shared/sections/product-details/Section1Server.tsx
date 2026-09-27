@@ -29,7 +29,7 @@ export default function Section1Server() {
                                                     <img
                                                         className="product-card__img"
                                                         src={img.src}
-                                                        alt="orisa"
+                                                        alt="H Moni"
                                                         width={img.width}
                                                         height={img.height}
                                                         style={{ width: "auto", height: "auto" }} loading="lazy" />

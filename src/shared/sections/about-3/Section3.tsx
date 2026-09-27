@@ -1,4 +1,4 @@
-import RevealText from "@/shared/effects/RevealText";
+﻿import RevealText from "@/shared/effects/RevealText";
 import SwiperDynamic from "@/shared/components/SwiperDynamic";
 
 // About 3 Section 3 - Testimonials slider
@@ -185,7 +185,7 @@ export default function Section3() {
                                                 <div className="testimonial-left-img">
                                                     <img
                                                         src={item.avatar}
-                                                        alt="orisa"
+                                                        alt="H Moni"
                                                         width={64}
                                                         height={64}
                                                         className="img-cover" loading="lazy" />
@@ -213,3 +213,4 @@ export default function Section3() {
         </section>
     );
 }
+

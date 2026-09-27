@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 // FAQs section 2 - Browse by topic (service-style cards)
 
 const TOPICS = [
@@ -80,7 +80,7 @@ export default function Section2() {
                                         <img
                                             className="img-cover rounded-2"
                                             src={topic.image}
-                                            alt="orisa"
+                                            alt="H Moni"
                                             width={400}
                                             height={260} loading="lazy" />
                                     </div>
@@ -93,3 +93,4 @@ export default function Section2() {
         </section>
     );
 }
+

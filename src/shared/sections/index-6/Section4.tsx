@@ -109,7 +109,7 @@ export default function Section4() {
             <h6 className="fw-600 reveal-text indent text-white mt-40 mb-50">
               <RevealText>
                 WE BELIEVE THAT A GREAT BRAND ISN&apos;T JUST SEEN; IT&apos;S
-                REMEMBERED. AT ORISA, WE ARCHITECT VISUAL SYSTEMS THAT BRIDGE THE
+                REMEMBERED. AT H Moni, WE ARCHITECT VISUAL SYSTEMS THAT BRIDGE THE
                 GAP BETWEEN STRATEGIC INTENT AND EMOTIONAL CONNECTION. WHETHER
                 IT&apos;S A MINIMALIST IDENTITY SYSTEM, A LUXURY PACKAGING
                 CONCEPT, OR A GLOBAL REBRAND, OUR FOCUS IS ON CRAFTING DESIGN

@@ -17,12 +17,12 @@ const ArrowSvg = (
 
 export default function Section8() {
     return (
-        <section className="sec-8-home-13" aria-label="The Orisa Distinction">
+        <section className="sec-8-home-13" aria-label="The H Moni Distinction">
             <div className="sec-8-home-13__inner">
                 <header className="sec-8-home-13__top">
                     <div className="sec-8-home-13__head">
                         <Link className="sec-8-home-13__tag at_fade_anim" data-fade-from="left" data-delay=".05" to="/about-1">
-                            <span>THE ORISA DISTINCTION</span>
+                            <span>THE H Moni DISTINCTION</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                                 <path d="M3.5 10.5L10.5 3.5M10.5 3.5H4.66667M10.5 3.5V9.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
@@ -53,7 +53,7 @@ export default function Section8() {
                 <div className="sec-8-home-13__body">
                     <div className="sec-8-home-13__left">
                         <figure className="sec-8-home-13__media anim-zoomin-wrap mb-0">
-                            <img className="anim-zoomin" src={`/assets/imgs/pages/home-13/${ITEMS[0].img}`} alt="Orisa" loading="lazy" />
+                            <img className="anim-zoomin" src={`/assets/imgs/pages/home-13/${ITEMS[0].img}`} alt="H Moni" loading="lazy" />
                         </figure>
                         <p className="sec-8-home-13__lede mb-0">{ITEMS[0].lede}</p>
                     </div>

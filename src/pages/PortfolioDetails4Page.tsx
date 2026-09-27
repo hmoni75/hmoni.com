@@ -1,4 +1,4 @@
-import PageMeta from "@/seo/PageMeta";
+﻿import PageMeta from "@/seo/PageMeta";
 import Section1 from "@/shared/sections/portfolio-details-4/Section1";
 import S2 from "@/shared/sections/portfolio-details-3/Section2";
 import S3 from "@/shared/sections/portfolio-details-3/Section3";
@@ -8,7 +8,7 @@ import S7 from "@/shared/sections/portfolio-details-3/Section7";
 export default function PortfolioDetails4Page() {
   return (
     <>
-      <PageMeta title="Orisa - PortfolioDetails4" />
+      <PageMeta title="H Moni - PortfolioDetails4" />
             <Section1 />
             <S2 />
             <S3 />
@@ -18,3 +18,4 @@ export default function PortfolioDetails4Page() {
     </>
   );
 }
+

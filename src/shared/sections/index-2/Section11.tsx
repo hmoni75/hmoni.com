@@ -11,8 +11,8 @@ interface MarqueeRow {
 
 const MARQUEE_ROWS: MarqueeRow[] = [
     { dir: "left", items: ["SHOWREEL 2026", "•", "WATCH NOW", "•", "PLAY", "•", "CREATIVE STUDIO", "•"] },
-    { dir: "right", items: ["SCROLL TO REVEAL", "•", "ORISA", "•", "BEHIND THE SCENES", "•", "2026", "•"] },
-    { dir: "left", items: ["PLAY", "•", "SHOWREEL", "•", "ORISA STUDIO", "•", "WATCH", "•"] },
+    { dir: "right", items: ["SCROLL TO REVEAL", "•", "H Moni", "•", "BEHIND THE SCENES", "•", "2026", "•"] },
+    { dir: "left", items: ["PLAY", "•", "SHOWREEL", "•", "H Moni STUDIO", "•", "WATCH", "•"] },
     { dir: "right", items: ["CREATIVE AGENCY", "•", "SHOWREEL 2026", "•", "PLAY", "•", "WATCH NOW", "•"] },
 ];
 
@@ -44,7 +44,7 @@ export default function Section11() {
                                 ))}
                             </div>
                             <a href="#">
-                                <img className="postbox-scroll-zoom-img img-cover" src="/assets/imgs/pages/bg-img-2.webp" alt="Orisa" loading="lazy" />
+                                <img className="postbox-scroll-zoom-img img-cover" src="/assets/imgs/pages/bg-img-2.webp" alt="H Moni" loading="lazy" />
                             </a>
                             <div className="postbox-play-btn postbox-scroll-zoom-play z-index-1 d-flex align-items-center justify-content-center gap-3">
                                 <h1 className="text-white d-none d-md-flex">Play</h1>

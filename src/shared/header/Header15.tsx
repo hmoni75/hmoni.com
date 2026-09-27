@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import MainMenu from "@/shared/MainMenu";
 import ThemeSwitcher from "@/shared/ThemeSwitcher";
 export default function Header15() {
@@ -16,7 +16,7 @@ export default function Header15() {
                   >
                     <img
                       src="/assets/imgs/template/logo/favicon.svg"
-                      alt="Orisa"
+                      alt="H Moni"
                       loading="lazy"
                     />
                     <p className="h6 fw-700 fz-24 mb-0">H Moni</p>
@@ -118,3 +118,4 @@ export default function Header15() {
     </>
   );
 }
+

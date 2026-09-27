@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 const LOGO_DIMS: Record<string, { width: number; height: number }> = {
@@ -16,7 +16,7 @@ const LOGO_DIMS: Record<string, { width: number; height: number }> = {
 
 const makeLogo = (n: string) => ({
     src: `/assets/imgs/template/logo/logo-brand-${n}.webp`,
-    alt: "orisa",
+    alt: "H Moni",
     dataLogo: n,
     ...LOGO_DIMS[n],
 });
@@ -74,7 +74,7 @@ export default function Section2() {
                             Trusted by 100+ businesses
                         </h3>
                         <h4 className="h5 fw-600 reveal-text pe-xxl-5">
-                            <RevealText>Orisa Nova is an AI Engineer architecting scalable, high-impact systems with research-driven precision.</RevealText>
+                            <RevealText>H Moni Nova is an AI Engineer architecting scalable, high-impact systems with research-driven precision.</RevealText>
                         </h4>
                     </div>
                     <div className="col-xxl-8 col-12">
@@ -139,3 +139,4 @@ export default function Section2() {
         </div>
     );
 }
+

@@ -1,5 +1,5 @@
 const CREDITS = [
-    { label: "Design", value: "Orisa Studio" },
+    { label: "Design", value: "H Moni Studio" },
     { label: "Direction", value: "Elena Morrison" },
     { label: "Client", value: "Nebula Labs" },
     { label: "Year", value: "2024" },

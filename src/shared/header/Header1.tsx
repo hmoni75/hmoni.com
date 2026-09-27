@@ -39,12 +39,12 @@ export default function Header1({
                   className="d-inline-flex align-items-center gap-2 text-decoration-none"
                 >
                   <img
-                    width={30}
-                    height={30}
-                    src="/assets/imgs/template/logo/favicon-dark.svg"
+                    width={100}
+                    height={100}
+                    src="/assets/imgs/template/logo/logo-d.svg"
                     alt="H Moni"
                   />
-                  <h6 className="fw-700 fz-24 text-white mb-0">H Moni</h6>
+                  {/* <h6 className="fw-700 fz-24 text-white mb-0">H Moni</h6> */}
                 </Link>
               </div>
             </div>

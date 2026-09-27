@@ -44559,7 +44559,7 @@ body.at-magic-cursor #magic-cursor {
 [data-bs-theme=dark] .invert-1 {
   filter: invert(0);
 }
-[data-bs-theme=dark] .at-header-logo img,
+[data-bs-theme=light] .at-header-logo img,
 [data-bs-theme=dark] .at-offcanvas-logo img {
   filter: invert(1);
 }

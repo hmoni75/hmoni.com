@@ -134,7 +134,7 @@ export default function Section6() {
                     <img
                       className="img-cover"
                       src={step.img}
-                      alt="orisa" loading="lazy" />
+                      alt="H Moni" loading="lazy" />
                   </div>
                 </div>
               </div>

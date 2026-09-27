@@ -50,7 +50,7 @@ export default function Section3() {
                             </h6>
                             <h5 className="fw-600 reveal-text pe-xxl-5">
                                 <RevealText>
-                                    Orisa Nova is an AI Engineer architecting scalable, high-impact systems with
+                                    H Moni Nova is an AI Engineer architecting scalable, high-impact systems with
                                     research-driven precision.
                                 </RevealText>
                             </h5>
@@ -76,7 +76,7 @@ export default function Section3() {
                                                         >
                                                             <img
                                                                 src={logoSrc(logo)}
-                                                                alt="orisa"
+                                                                alt="H Moni"
                                                                 width={120}
                                                                 height={48}
                                                                 className="dark-mode-invert" loading="lazy" />

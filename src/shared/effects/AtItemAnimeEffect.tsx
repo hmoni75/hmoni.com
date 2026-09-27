@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 
 type Killable = { kill?: () => void };
 
 /**
- * Port of 3.Orisa-Nextjs/components/effects/AtItemAnimeEffect.tsx (theme GSAP §35).
+ * Port of 3.H Moni-Nextjs/components/effects/AtItemAnimeEffect.tsx (theme GSAP §35).
  * Horizontal scroll-driven drift: `.at-item-anime.marque` moves x 35% → -200% while scrolling
  * through `.at-item-anime-area` (e.g. Home-2 Section8 about-me slider).
  */
@@ -78,3 +78,4 @@ export default function AtItemAnimeEffect() {
 
   return null;
 }
+

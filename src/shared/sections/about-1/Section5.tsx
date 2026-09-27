@@ -1,4 +1,4 @@
-import Marquee from "react-fast-marquee";
+﻿import Marquee from "react-fast-marquee";
 
 // About 1 Section 5 - Brand scroll (carousel ticker)
 
@@ -54,7 +54,7 @@ export default function Section5() {
                                         >
                                             <img
                                                 src={logoSrc(logo)}
-                                                alt="orisa"
+                                                alt="H Moni"
                                                 width={120}
                                                 height={48}
                                                 className="dark-mode-invert" loading="lazy" />
@@ -69,3 +69,4 @@ export default function Section5() {
         </section>
     );
 }
+

@@ -128,7 +128,7 @@ export default function Section8() {
                             <img
                               src={post.img}
                               className="blog-card-2__img rounded-0"
-                              alt="orisa" loading="lazy" />
+                              alt="H Moni" loading="lazy" />
                           </a>
                         </div>
                       </article>

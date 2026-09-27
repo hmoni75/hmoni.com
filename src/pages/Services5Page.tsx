@@ -10,7 +10,7 @@ import Section6 from "@/shared/sections/about-3/Section7";
 export default function Services5Page() {
   return (
     <>
-      <PageMeta title="Orisa - Services5" />
+      <PageMeta title="H Moni - Services5" />
       <Section1 />
       <Section2 />
       <Section3 />
