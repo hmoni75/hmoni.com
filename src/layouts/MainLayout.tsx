@@ -171,7 +171,7 @@ export default function MainLayout({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const HeaderComponent = HEADER_COMPONENTS[headerStyle] ?? Header1;
+  const HeaderComponent = Header1;
   const FooterComponent = FOOTER_COMPONENTS[footerStyle] ?? Footer1;
   const isFooterFloating = footerStyle === 2;
 
@@ -187,7 +187,11 @@ export default function MainLayout({
         onToggleSidebar={handlers.toggleSidebar}
         onOpenHamburgerMenu={handlers.openHamburgerMenu}
       />
-      <SideBar open={sidebarOpen} hamburgerOpen={hamburgerMenuOpen} onClose={handlers.closeAllMenus} />
+      <SideBar
+        open={sidebarOpen}
+        hamburgerOpen={hamburgerMenuOpen}
+        onClose={handlers.closeAllMenus}
+      />
       <PopupSearch open={searchOpen} onClose={handlers.closeSearch} />
 
       <div id="smooth-wrapper">
@@ -195,7 +199,9 @@ export default function MainLayout({
           <main className={mainClass}>
             <Outlet />
           </main>
-          {!noFooter && isFooterFloating ? <div className="footer-placeholder" aria-hidden="true" /> : null}
+          {!noFooter && isFooterFloating ? (
+            <div className="footer-placeholder" aria-hidden="true" />
+          ) : null}
           {!noFooter && !isFooterFloating ? <FooterComponent /> : null}
         </div>
         {!noFooter && isFooterFloating ? <Footer2 ref={footerRef} /> : null}
