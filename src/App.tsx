@@ -288,7 +288,7 @@ export default function App() {
         <Route path="/index-15-dark" element={<Home15Page />} />
       </Route>
       {/* Standalone Admin Dashboard Route with Fixed Header/Sidebar and Scrollable Body */}
-      <Route path="/manage" element={<ManagePage />} />
+      {/* <Route path="/manage" element={<ManagePage />} /> */}
 
       <Route element={<MainLayout headerStyle={2} footerStyle={2} />}>
         <Route path="*" element={<NotFoundPage />} />
