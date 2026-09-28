@@ -42,6 +42,15 @@ export default function MainMenu() {
 
       <li>
         <NavLink
+          to="/pricing"
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
+          <LinkSwap label="Pricing" />
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
           to="/archive-3"
           className={({ isActive }) => (isActive ? "active" : undefined)}
         >
