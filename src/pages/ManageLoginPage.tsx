@@ -46,20 +46,21 @@ export default function ManageLoginPage({
     <div
       className="min-vh-100 w-100 d-flex align-items-center justify-content-center p-3"
       style={{
-        backgroundColor: "#09090b",
-        color: "#f4f4f5",
+        backgroundColor: "#f8fafc",
+        color: "#0f172a",
         fontFamily: "DM Sans, system-ui, -apple-system, sans-serif",
       }}
     >
       <PageMeta title="H Moni — Admin Portal Login" />
 
       <div
-        className="w-100 rounded-4 p-4 p-md-5 border shadow-lg position-relative"
+        className="w-100 rounded-4 p-4 p-md-5 border position-relative"
         style={{
           maxWidth: "450px",
-          backgroundColor: "#121316",
-          borderColor: "#27272a",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8)",
+          backgroundColor: "#ffffff",
+          borderColor: "#cbd5e1",
+          boxShadow:
+            "0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01)",
         }}
       >
         <div className="text-center mb-4">
@@ -68,26 +69,28 @@ export default function ManageLoginPage({
             className="d-inline-flex align-items-center gap-2 mb-3 text-decoration-none"
           >
             <img
-              src="/assets/imgs/template/logo/logo-d.svg"
+              src="/assets/imgs/template/logo/favicon.svg"
               alt="H Moni"
               width={48}
               height={48}
+              style={{ filter: "none" }}
             />
           </Link>
-          <h3 className="fw-700 text-white mb-1">
+          <h3 className="fw-700 text-slate-900 mb-1">
             H Moni <span style={{ color: "#F0460E" }}>Admin</span>
           </h3>
-          <p className="fz-14 text-secondary mb-0">
+          <p className="fz-14 text-slate-500 mb-0">
             Protected Management Control Panel
           </p>
         </div>
 
         {errorMsg && (
           <div
-            className="alert p-3 rounded-3 fz-13 text-center mb-4 border-0"
+            className="alert p-3 rounded-3 fz-13 text-center mb-4 border"
             style={{
-              backgroundColor: "rgba(220, 38, 38, 0.15)",
-              color: "#ef4444",
+              backgroundColor: "#fef2f2",
+              borderColor: "#fca5a5",
+              color: "#dc2626",
             }}
           >
             ⚠️ {errorMsg}
@@ -96,13 +99,13 @@ export default function ManageLoginPage({
 
         <form onSubmit={handleLogin}>
           <div className="mb-3">
-            <label className="form-label fz-13 fw-600 text-white mb-1">
+            <label className="form-label fz-13 fw-600 text-slate-700 mb-1">
               Username or Email
             </label>
             <input
               type="text"
-              className="form-control bg-dark text-white border-secondary rounded-3 py-2 px-3 fz-14"
-              style={{ backgroundColor: "#18181b", borderColor: "#3f3f46" }}
+              className="form-control bg-white text-slate-900 rounded-3 py-2 px-3 fz-14"
+              style={{ borderColor: "#cbd5e1" }}
               placeholder="e.g. admin"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -111,14 +114,14 @@ export default function ManageLoginPage({
           </div>
 
           <div className="mb-4 position-relative">
-            <label className="form-label fz-13 fw-600 text-white mb-1">
+            <label className="form-label fz-13 fw-600 text-slate-700 mb-1">
               Password
             </label>
             <div className="position-relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="form-control bg-dark text-white border-secondary rounded-3 py-2 px-3 fz-14 pe-5"
-                style={{ backgroundColor: "#18181b", borderColor: "#3f3f46" }}
+                className="form-control bg-white text-slate-900 rounded-3 py-2 px-3 fz-14 pe-5"
+                style={{ borderColor: "#cbd5e1" }}
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -126,7 +129,7 @@ export default function ManageLoginPage({
               />
               <button
                 type="button"
-                className="btn btn-sm btn-link text-secondary position-absolute top-50 end-0 translate-middle-y me-2 text-decoration-none fz-12"
+                className="btn btn-sm btn-link text-slate-500 position-absolute top-50 end-0 translate-middle-y me-2 text-decoration-none fz-12"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? "Hide" : "Show"}
@@ -137,18 +140,18 @@ export default function ManageLoginPage({
           <button
             type="submit"
             disabled={isLoading}
-            className="btn w-100 py-3 rounded-3 fw-700 text-white border-0 transition-all"
+            className="btn w-100 py-3 rounded-3 fw-700 text-white border-0 transition-all shadow-sm"
             style={{ backgroundColor: "#F0460E", cursor: "pointer" }}
           >
             {isLoading ? "Signing in..." : "Login to Admin Dashboard"}
           </button>
         </form>
 
-        <div className="mt-4 pt-3 border-top border-dark text-center fz-12 text-secondary">
+        <div className="mt-4 pt-3 border-top border-slate-200 text-center fz-12 text-slate-500">
           <span>Protected Route • H Moni Digital Studio</span>
-          <div className="mt-1 text-muted">
-            Demo Credentials: <strong className="text-white">admin</strong> /
-            <strong className="text-white">hmoni123</strong>
+          <div className="mt-1 text-slate-600">
+            Demo Credentials: <strong className="text-slate-900">admin</strong>{" "}
+            / <strong className="text-slate-900">hmoni123</strong>
           </div>
         </div>
       </div>

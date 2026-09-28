@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ManageLayout from "@/layouts/ManageLayout";
 import ManageLoginPage from "@/pages/ManageLoginPage";
+import {
+  HeroTileItem,
+  INITIAL_HERO_TILES,
+  getHeroTilesFromStorage,
+} from "@/shared/sections/index-12/Section1";
 
 interface ProjectItem {
   id: number;
@@ -197,6 +203,22 @@ export default function ManagePage() {
         };
   });
 
+  // Hero Slider Tiles State & Persistence
+  const [heroTiles, setHeroTiles] = useState<HeroTileItem[]>(
+    getHeroTilesFromStorage,
+  );
+  const [newTile, setNewTile] = useState({
+    title: "",
+    img: "",
+    mod: "brand-1",
+  });
+  const [editingTile, setEditingTile] = useState<HeroTileItem | null>(null);
+
+  useEffect(() => {
+    localStorage.setItem("hmoni_manage_hero_tiles", JSON.stringify(heroTiles));
+    window.dispatchEvent(new Event("hmoni_hero_tiles_updated"));
+  }, [heroTiles]);
+
   // New Project Form State
   const [newProject, setNewProject] = useState({
     title: "",
@@ -224,6 +246,56 @@ export default function ManagePage() {
   useEffect(() => {
     localStorage.setItem("hmoni_manage_settings", JSON.stringify(siteSettings));
   }, [siteSettings]);
+
+  const handleAddHeroTile = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newTile.img.trim()) {
+      alert("Please provide an image URL or choose a photo file.");
+      return;
+    }
+    const tile: HeroTileItem = {
+      id: Date.now(),
+      title: newTile.title || `Photo ${heroTiles.length + 1}`,
+      img: newTile.img,
+      mod: newTile.mod,
+    };
+    setHeroTiles([...heroTiles, tile]);
+    setNewTile({ title: "", img: "", mod: "brand-1" });
+  };
+
+  const handleDeleteHeroTile = (id: number) => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this photo from the hero slider?",
+      )
+    ) {
+      setHeroTiles(heroTiles.filter((t) => t.id !== id));
+    }
+  };
+
+  const handleResetHeroTiles = () => {
+    if (window.confirm("Restore default hero slider photos?")) {
+      setHeroTiles(INITIAL_HERO_TILES);
+    }
+  };
+
+  const handleFileUpload = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    isEdit = false,
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const result = reader.result as string;
+      if (isEdit && editingTile) {
+        setEditingTile({ ...editingTile, img: result });
+      } else {
+        setNewTile((prev) => ({ ...prev, img: result }));
+      }
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("hmoni_admin_logged_in");
@@ -286,10 +358,10 @@ export default function ManagePage() {
         <div className="manage-overview">
           <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
             <div>
-              <h2 className="fw-700 text-white mb-1">
+              <h2 className="fw-700 text-slate-900 mb-1">
                 Welcome back, H Moni 👋
               </h2>
-              <p className="text-secondary mb-0">
+              <p className="text-slate-500 mb-0 fz-14">
                 Live control panel for H Moni Digital Studio & Portfolio.
               </p>
             </div>
@@ -297,271 +369,213 @@ export default function ManagePage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("projects")}
-                className="btn text-white px-4 py-2 rounded-3 fw-600 border-0"
+                className="btn text-white px-4 py-2 rounded-3 fw-600 border-0 shadow-sm"
                 style={{ backgroundColor: "#F0460E" }}
               >
-                + Add Real Work
+                + Add Project
               </button>
-            </div>
-          </div>
-
-          {/* Real Metrics Cards */}
-          <div className="row g-3 mb-5">
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div
-                className="p-4 rounded-4 border"
-                style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
-              >
-                <div className="fz-13 text-secondary mb-1">Live Inquiries</div>
-                <div className="fs-2 fw-700 text-white">
-                  {messages.length} Messages
-                </div>
-                <div className="fz-12 text-success mt-2">
-                  📬 Sent to hello@hmoni.com
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div
-                className="p-4 rounded-4 border"
-                style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
-              >
-                <div className="fz-13 text-secondary mb-1">
-                  Featured Portfolio Works
-                </div>
-                <div className="fs-2 fw-700 text-white">
-                  {projects.length} Projects
-                </div>
-                <div className="fz-12 text-info mt-2">
-                  ✨ Active on /portfolio-1
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div
-                className="p-4 rounded-4 border"
-                style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
-              >
-                <div className="fz-13 text-secondary mb-1">
-                  Target Contact Email
-                </div>
-                <div className="fz-15 fw-600 text-warning text-truncate mt-1">
-                  {siteSettings.contactEmail}
-                </div>
-                <div className="fz-12 text-success mt-2">
-                  Verified & Connected
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div
-                className="p-4 rounded-4 border"
-                style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
-              >
-                <div className="fz-13 text-secondary mb-1">
-                  Main Studio Address
-                </div>
-                <div className="fz-13 fw-600 text-light text-truncate mt-1">
-                  KUET IT Incubation Center
-                </div>
-                <div className="fz-12 text-secondary mt-2">
-                  Khulna - 9203, Bangladesh
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Real Projects Showcase */}
-          <div
-            className="rounded-4 p-4 border mb-5"
-            style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
-          >
-            <div className="d-flex justify-content-between align-items-center mb-4">
-              <div>
-                <h5 className="fw-700 text-white mb-0">
-                  Active Portfolio Projects
-                </h5>
-                <span className="fz-13 text-secondary">
-                  Real site projects currently visible on home & portfolio
-                  routes
-                </span>
-              </div>
               <button
                 type="button"
-                onClick={() => setActiveTab("projects")}
-                className="btn btn-sm btn-link text-secondary text-decoration-none"
+                onClick={() => setActiveTab("hero-slider")}
+                className="btn btn-outline-secondary bg-white text-slate-700 px-4 py-2 rounded-3 fw-600"
+                style={{ borderColor: "#cbd5e1" }}
               >
-                Manage All ({projects.length}) →
+                Hero Slider 🖼️
               </button>
             </div>
-
-            <div className="row g-3">
-              {projects.slice(0, 4).map((p: ProjectItem) => (
-                <div key={p.id} className="col-12 col-md-6 col-xl-3">
-                  <div
-                    className="rounded-3 border overflow-hidden p-3 h-100"
-                    style={{
-                      backgroundColor: "#18181b",
-                      borderColor: "#2d2d35",
-                    }}
-                  >
-                    <div
-                      className="mb-3 rounded-2 overflow-hidden position-relative"
-                      style={{ height: "140px" }}
-                    >
-                      <img
-                        src={p.img}
-                        alt={p.title}
-                        className="w-100 h-100 object-fit-cover"
-                      />
-                      <span className="position-absolute top-0 end-0 m-2 badge bg-dark border border-secondary text-white fz-11">
-                        {p.category}
-                      </span>
-                    </div>
-                    <h6 className="fw-700 text-white mb-1 text-truncate">
-                      {p.title}
-                    </h6>
-                    <div className="fz-12 text-secondary mb-2">
-                      📍 {p.location}
-                    </div>
-                    <div className="fz-12 text-muted">Service: {p.service}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* Real Journal Articles Showcase */}
-          <div
-            className="rounded-4 p-4 border mb-5"
-            style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
-          >
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <div>
-                <h5 className="fw-700 text-white mb-0">Journal Articles</h5>
-                <span className="fz-13 text-secondary">
-                  Live posts on /archive-3 Blog Journal
-                </span>
+          {/* Quick Stats Grid */}
+          <div className="row g-3 mb-4">
+            <div className="col-md-3">
+              <div
+                className="p-4 rounded-4 border bg-white shadow-sm"
+                style={{ borderColor: "#cbd5e1" }}
+              >
+                <div className="fz-12 text-slate-500 fw-700 text-uppercase tracking-wider mb-2">
+                  Total Projects
+                </div>
+                <div className="fs-2 fw-700 text-slate-900 mb-1">
+                  {projects.length}
+                </div>
+                <div className="fz-12 text-success fw-600">
+                  ● Published Live
+                </div>
               </div>
             </div>
-            <div className="row g-3">
-              {articles.map((art: ArticleItem) => (
-                <div key={art.id} className="col-12 col-md-6">
-                  <div
-                    className="d-flex gap-3 align-items-center p-3 rounded-3 border"
-                    style={{
-                      backgroundColor: "#18181b",
-                      borderColor: "#2d2d35",
-                    }}
-                  >
-                    <img
-                      src={art.img}
-                      alt={art.title}
-                      width={70}
-                      height={70}
-                      className="rounded-2 object-fit-cover flex-shrink-0"
-                    />
-                    <div>
-                      <span className="badge bg-danger-subtle text-danger fz-11 mb-1">
-                        {art.category}
-                      </span>
-                      <h6 className="fw-600 text-white mb-1 fz-14">
-                        {art.title}
-                      </h6>
-                      <div className="fz-12 text-secondary">
-                        By {art.author} • {art.date}
-                      </div>
-                    </div>
-                  </div>
+
+            <div className="col-md-3">
+              <div
+                className="p-4 rounded-4 border bg-white shadow-sm"
+                style={{ borderColor: "#cbd5e1" }}
+              >
+                <div className="fz-12 text-slate-500 fw-700 text-uppercase tracking-wider mb-2">
+                  Hero Photos
                 </div>
-              ))}
+                <div className="fs-2 fw-700 text-slate-900 mb-1">
+                  {heroTiles.length}
+                </div>
+                <div className="fz-12 text-primary fw-600">
+                  ● Running Slider
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-3">
+              <div
+                className="p-4 rounded-4 border bg-white shadow-sm"
+                style={{ borderColor: "#cbd5e1" }}
+              >
+                <div className="fz-12 text-slate-500 fw-700 text-uppercase tracking-wider mb-2">
+                  Contact Inquiries
+                </div>
+                <div className="fs-2 fw-700 text-slate-900 mb-1">
+                  {messages.length}
+                </div>
+                <div className="fz-12 text-warning fw-600">
+                  ● {messages.filter((m) => !m.read).length} Unread
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-3">
+              <div
+                className="p-4 rounded-4 border bg-white shadow-sm"
+                style={{ borderColor: "#cbd5e1" }}
+              >
+                <div className="fz-12 text-slate-500 fw-700 text-uppercase tracking-wider mb-2">
+                  System Status
+                </div>
+                <div className="fs-2 fw-700 text-success mb-1">100%</div>
+                <div className="fz-12 text-slate-500 fw-600">
+                  Vercel Ready & Active
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Live Inquiries List */}
+          {/* Recent Inquiries Preview */}
           <div
-            className="rounded-4 p-4 border"
-            style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
+            className="rounded-4 p-4 border bg-white shadow-sm mb-4"
+            style={{ borderColor: "#cbd5e1" }}
           >
             <div className="d-flex justify-content-between align-items-center mb-3">
-              <h5 className="fw-700 text-white mb-0">
-                Recent Contact Inquiries
-              </h5>
+              <h4 className="fw-700 text-slate-900 mb-0 fz-18">
+                Recent Inquiries & Leads
+              </h4>
               <button
                 type="button"
                 onClick={() => setActiveTab("messages")}
-                className="btn btn-sm btn-link text-secondary text-decoration-none"
+                className="btn btn-sm btn-outline-secondary bg-white text-slate-700 fz-12 fw-600"
+                style={{ borderColor: "#cbd5e1" }}
               >
-                View Inbox →
+                View All Inbox 📬
               </button>
             </div>
-
             <div className="table-responsive">
-              <table className="table table-dark table-hover align-middle mb-0">
-                <thead>
-                  <tr className="text-secondary fz-13 border-bottom border-dark">
-                    <th>Client Name</th>
-                    <th>Email Address</th>
-                    <th>Phone</th>
-                    <th>Inquiry Details</th>
-                    <th>Date</th>
+              <table className="table table-hover align-middle mb-0">
+                <thead className="bg-slate-50 border-bottom border-slate-200">
+                  <tr className="text-slate-600 fz-13 fw-700">
+                    <th className="py-2.5">Sender</th>
+                    <th className="py-2.5">Email / Phone</th>
+                    <th className="py-2.5">Location</th>
+                    <th className="py-2.5">Received Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {messages.map((m: MessageItem) => (
-                    <tr key={m.id} style={{ borderColor: "#27272a" }}>
-                      <td className="fw-600 text-white">{m.name}</td>
-                      <td className="text-warning">{m.email}</td>
-                      <td className="text-secondary">{m.phone}</td>
-                      <td
-                        className="text-light text-truncate"
-                        style={{ maxWidth: "280px" }}
-                      >
-                        {m.message}
-                      </td>
-                      <td className="fz-12 text-secondary">{m.date}</td>
+                  {messages.slice(0, 3).map((m) => (
+                    <tr key={m.id} style={{ borderColor: "#e2e8f0" }}>
+                      <td className="fw-600 text-slate-900 py-3">{m.name}</td>
+                      <td className="text-slate-600 fz-13">{m.email}</td>
+                      <td className="text-slate-500 fz-13">{m.location}</td>
+                      <td className="text-slate-500 fz-13">{m.date}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
           </div>
+
+          {/* Active Featured Works Preview */}
+          <div
+            className="rounded-4 p-4 border bg-white shadow-sm"
+            style={{ borderColor: "#cbd5e1" }}
+          >
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h4 className="fw-700 text-slate-900 mb-0 fz-18">
+                Featured Portfolio Projects
+              </h4>
+              <button
+                type="button"
+                onClick={() => setActiveTab("projects")}
+                className="btn btn-sm btn-outline-secondary bg-white text-slate-700 fz-12 fw-600"
+                style={{ borderColor: "#cbd5e1" }}
+              >
+                Manage Works 💼
+              </button>
+            </div>
+            <div className="row g-3">
+              {projects.slice(0, 3).map((p) => (
+                <div key={p.id} className="col-md-4">
+                  <div
+                    className="p-3 rounded-3 border bg-white h-100"
+                    style={{ borderColor: "#cbd5e1" }}
+                  >
+                    <img
+                      src={p.img}
+                      alt={p.title}
+                      className="w-100 rounded-2 mb-2 object-fit-cover"
+                      style={{ height: "140px" }}
+                    />
+                    <h5 className="fw-700 text-slate-900 fz-15 mb-1">
+                      {p.title}
+                    </h5>
+                    <div className="fz-12 text-slate-500 mb-2">
+                      {p.category}
+                    </div>
+                    <span className="badge bg-slate-100 text-slate-700 border border-slate-200">
+                      {p.location}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
-      {/* TAB 2: MANAGE PROJECTS */}
+      {/* TAB 2: PROJECTS MANAGER */}
       {activeTab === "projects" && (
         <div className="manage-projects">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <div>
-              <h2 className="fw-700 text-white mb-1">
+              <h2 className="fw-700 text-slate-900 mb-1">
                 Portfolio Works Manager
               </h2>
-              <p className="text-secondary mb-0">
-                Add, edit or remove projects displayed across the portfolio
-                showcase.
+              <p className="text-slate-500 mb-0 fz-14">
+                Add, edit, and organize real site projects.
               </p>
             </div>
           </div>
 
-          {/* Add Project Form */}
+          {/* Add New Project Card */}
           <div
-            className="p-4 rounded-4 border mb-4"
-            style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
+            className="p-4 rounded-4 border bg-white shadow-sm mb-4"
+            style={{ borderColor: "#cbd5e1" }}
           >
-            <h5 className="fw-700 text-white mb-3">Add Real Project Entry</h5>
+            <h4 className="fw-700 text-slate-900 mb-3 fz-18">
+              Add New Project 💼
+            </h4>
             <form onSubmit={handleAddProject} className="row g-3">
               <div className="col-md-4">
-                <label className="form-label text-secondary fz-13">
+                <label className="form-label text-slate-700 fw-600 fz-13">
                   Project Title
                 </label>
                 <input
                   type="text"
-                  className="form-control bg-dark text-white border-secondary rounded-3 py-2"
-                  placeholder="e.g. Smart City IoT Dashboard"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
+                  placeholder="e.g. Modern E-Commerce Platform"
                   value={newProject.title}
                   onChange={(e) =>
                     setNewProject({ ...newProject, title: e.target.value })
@@ -570,36 +584,33 @@ export default function ManagePage() {
                 />
               </div>
               <div className="col-md-3">
-                <label className="form-label text-secondary fz-13">
+                <label className="form-label text-slate-700 fw-600 fz-13">
                   Category
                 </label>
                 <select
-                  className="form-select bg-dark text-white border-secondary rounded-3 py-2"
+                  className="form-select bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
                   value={newProject.category}
                   onChange={(e) =>
                     setNewProject({ ...newProject, category: e.target.value })
                   }
                 >
                   <option value="UI/UX & Branding">UI/UX & Branding</option>
-                  <option value="Full-Stack Engineering">
-                    Full-Stack Engineering
-                  </option>
-                  <option value="Residential & Architecture">
-                    Residential & Architecture
-                  </option>
-                  <option value="Hospitality & Master Planning">
-                    Hospitality & Master Planning
+                  <option value="Full-Stack Web">Full-Stack Web</option>
+                  <option value="Architecture & Interior">
+                    Architecture & Interior
                   </option>
                   <option value="React & Next.js">React & Next.js</option>
                 </select>
               </div>
               <div className="col-md-3">
-                <label className="form-label text-secondary fz-13">
+                <label className="form-label text-slate-700 fw-600 fz-13">
                   Location
                 </label>
                 <input
                   type="text"
-                  className="form-control bg-dark text-white border-secondary rounded-3 py-2"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
                   placeholder="e.g. Khulna, Bangladesh"
                   value={newProject.location}
                   onChange={(e) =>
@@ -610,7 +621,7 @@ export default function ManagePage() {
               <div className="col-md-2 d-flex align-items-end">
                 <button
                   type="submit"
-                  className="btn w-100 py-2 rounded-3 fw-600 text-white border-0"
+                  className="btn w-100 py-2 rounded-3 fw-600 text-white border-0 shadow-sm"
                   style={{ backgroundColor: "#F0460E" }}
                 >
                   + Add Project
@@ -621,41 +632,41 @@ export default function ManagePage() {
 
           {/* Real Projects Table */}
           <div
-            className="rounded-4 p-4 border"
-            style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
+            className="rounded-4 p-4 border bg-white shadow-sm"
+            style={{ borderColor: "#cbd5e1" }}
           >
             <div className="table-responsive">
-              <table className="table table-dark table-hover align-middle mb-0">
-                <thead>
-                  <tr className="text-secondary fz-13">
-                    <th>Preview</th>
-                    <th>Project Name</th>
-                    <th>Category</th>
-                    <th>Location</th>
-                    <th>Service</th>
-                    <th>Actions</th>
+              <table className="table table-hover align-middle mb-0">
+                <thead className="bg-slate-50 border-bottom border-slate-200">
+                  <tr className="text-slate-600 fz-13 fw-700">
+                    <th className="py-2.5">Preview</th>
+                    <th className="py-2.5">Project Name</th>
+                    <th className="py-2.5">Category</th>
+                    <th className="py-2.5">Location</th>
+                    <th className="py-2.5">Service</th>
+                    <th className="py-2.5">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {projects.map((p: ProjectItem) => (
-                    <tr key={p.id} style={{ borderColor: "#27272a" }}>
+                    <tr key={p.id} style={{ borderColor: "#e2e8f0" }}>
                       <td>
                         <img
                           src={p.img}
                           alt={p.title}
                           width={48}
                           height={48}
-                          className="rounded-2 object-fit-cover"
+                          className="rounded-2 object-fit-cover border border-slate-200"
                         />
                       </td>
-                      <td className="fw-600 text-white">{p.title}</td>
+                      <td className="fw-600 text-slate-900 py-3">{p.title}</td>
                       <td>
-                        <span className="badge bg-dark border border-secondary text-secondary">
+                        <span className="badge bg-slate-100 border border-slate-300 text-slate-700">
                           {p.category}
                         </span>
                       </td>
-                      <td className="text-secondary fz-13">{p.location}</td>
-                      <td className="text-secondary fz-13">{p.service}</td>
+                      <td className="text-slate-600 fz-13">{p.location}</td>
+                      <td className="text-slate-600 fz-13">{p.service}</td>
                       <td>
                         <button
                           type="button"
@@ -674,13 +685,358 @@ export default function ManagePage() {
         </div>
       )}
 
+      {/* TAB: HERO SLIDER PHOTOS */}
+      {activeTab === "hero-slider" && (
+        <div className="manage-hero-slider">
+          <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div>
+              <h2 className="fw-700 text-slate-900 mb-1">
+                Hero Slider Photos 🖼️
+              </h2>
+              <p className="text-slate-500 mb-0 fz-14">
+                Add, update, or remove the running photos in the homepage Hero
+                section.
+              </p>
+            </div>
+            <div className="d-flex gap-2">
+              <button
+                type="button"
+                onClick={handleResetHeroTiles}
+                className="btn btn-outline-secondary bg-white text-slate-700 rounded-3 fz-13 fw-600"
+                style={{ borderColor: "#cbd5e1" }}
+              >
+                Reset Default Photos 🔄
+              </button>
+              <Link
+                to="/"
+                target="_blank"
+                className="btn text-white rounded-3 fz-13 text-decoration-none fw-600 shadow-sm"
+                style={{ backgroundColor: "#F0460E" }}
+              >
+                View Live Site ↗
+              </Link>
+            </div>
+          </div>
+
+          {/* Add New Hero Photo Card */}
+          <div
+            className="p-4 rounded-4 border bg-white shadow-sm mb-4"
+            style={{ borderColor: "#cbd5e1" }}
+          >
+            <h4 className="fw-700 text-slate-900 mb-3 fz-18">
+              Add New Hero Photo ➕
+            </h4>
+            <form onSubmit={handleAddHeroTile} className="row g-3">
+              <div className="col-md-4">
+                <label className="form-label text-slate-700 fw-600 fz-13">
+                  Photo Title / Label
+                </label>
+                <input
+                  type="text"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
+                  placeholder="e.g. Brand Identity Showcase"
+                  value={newTile.title}
+                  onChange={(e) =>
+                    setNewTile({ ...newTile, title: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="col-md-5">
+                <label className="form-label text-slate-700 fw-600 fz-13">
+                  Image File / URL
+                </label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control bg-white text-slate-900 border-slate-300 rounded-start-3 py-2"
+                    style={{ borderColor: "#cbd5e1" }}
+                    placeholder="Enter image URL or upload..."
+                    value={newTile.img}
+                    onChange={(e) =>
+                      setNewTile({ ...newTile, img: e.target.value })
+                    }
+                  />
+                  <input
+                    type="file"
+                    id="newTileFile"
+                    className="d-none"
+                    accept="image/*"
+                    onChange={(e) => handleFileUpload(e, false)}
+                  />
+                  <label
+                    htmlFor="newTileFile"
+                    className="btn btn-outline-secondary text-slate-700 mb-0 d-flex align-items-center rounded-end-3 bg-slate-50"
+                    style={{ borderColor: "#cbd5e1", cursor: "pointer" }}
+                  >
+                    Upload 📁
+                  </label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <label className="form-label text-slate-700 fw-600 fz-13">
+                  Tile Style Variant
+                </label>
+                <select
+                  className="form-select bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
+                  value={newTile.mod}
+                  onChange={(e) =>
+                    setNewTile({ ...newTile, mod: e.target.value })
+                  }
+                >
+                  <option value="brand-1">Brand Style 1</option>
+                  <option value="brand-2">Brand Style 2</option>
+                  <option value="neutral-100">Light Style</option>
+                  <option value="neutral-300">Gray Style</option>
+                  <option value="neutral-800">Dark Style</option>
+                </select>
+              </div>
+
+              {/* Preview Thumbnail */}
+              {newTile.img && (
+                <div className="col-12 mt-2">
+                  <div className="d-flex align-items-center gap-3">
+                    <span className="text-slate-500 fz-12">Preview:</span>
+                    <img
+                      src={
+                        newTile.img.startsWith("http") ||
+                        newTile.img.startsWith("data:") ||
+                        newTile.img.startsWith("/")
+                          ? newTile.img
+                          : `/assets/imgs/pages/home-12/${newTile.img}`
+                      }
+                      alt="Preview"
+                      width={90}
+                      height={60}
+                      className="rounded border border-slate-300 object-fit-cover shadow-sm"
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="col-12 mt-3">
+                <button
+                  type="submit"
+                  className="btn text-white px-4 py-2 rounded-3 fw-600 border-0 shadow-sm"
+                  style={{ backgroundColor: "#F0460E" }}
+                >
+                  Add Photo to Hero Slider 🚀
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Current Hero Photos Grid */}
+          <h4 className="fw-700 text-slate-900 mb-3 fz-18">
+            Active Hero Photos ({heroTiles.length})
+          </h4>
+          <div className="row g-3">
+            {heroTiles.map((tile, idx) => {
+              const imgSrc =
+                tile.img.startsWith("http") ||
+                tile.img.startsWith("data:") ||
+                tile.img.startsWith("/")
+                  ? tile.img
+                  : `/assets/imgs/pages/home-12/${tile.img}`;
+              return (
+                <div key={tile.id} className="col-md-4 col-lg-3">
+                  <div
+                    className="p-3 rounded-4 border bg-white shadow-sm h-100 d-flex flex-column justify-content-between"
+                    style={{ borderColor: "#cbd5e1" }}
+                  >
+                    <div>
+                      <div
+                        className="position-relative mb-2 rounded overflow-hidden border border-slate-200"
+                        style={{ height: "140px" }}
+                      >
+                        <img
+                          src={imgSrc}
+                          alt={tile.title || `Photo ${idx + 1}`}
+                          className="w-100 h-100 object-fit-cover"
+                        />
+                        <span className="position-absolute top-0 end-0 m-2 badge rounded-pill bg-white border border-slate-300 text-slate-800 fz-11 shadow-sm">
+                          #{idx + 1} • {tile.mod}
+                        </span>
+                      </div>
+                      <h5 className="fw-600 text-slate-900 fz-14 mb-1 text-truncate">
+                        {tile.title || `Photo #${idx + 1}`}
+                      </h5>
+                      <p
+                        className="text-slate-500 fz-11 mb-2 text-truncate"
+                        title={tile.img}
+                      >
+                        {tile.img}
+                      </p>
+                    </div>
+
+                    <div className="d-flex gap-2 mt-2 pt-2 border-top border-slate-200">
+                      <button
+                        type="button"
+                        onClick={() => setEditingTile(tile)}
+                        className="btn btn-sm btn-outline-secondary w-50 fz-12 fw-600"
+                        style={{ borderColor: "#cbd5e1" }}
+                      >
+                        Edit ✏️
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteHeroTile(tile.id)}
+                        className="btn btn-sm btn-outline-danger w-50 fz-12 fw-600"
+                      >
+                        Delete 🗑️
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Edit Hero Photo Modal */}
+          {editingTile && (
+            <div
+              className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center z-3"
+              style={{
+                backgroundColor: "rgba(15, 23, 42, 0.6)",
+                backdropFilter: "blur(4px)",
+              }}
+            >
+              <div
+                className="p-4 rounded-4 border bg-white text-slate-900 shadow-lg"
+                style={{
+                  borderColor: "#cbd5e1",
+                  width: "90%",
+                  maxWidth: "550px",
+                }}
+              >
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h4 className="fw-700 mb-0">Edit Hero Photo ✏️</h4>
+                  <button
+                    type="button"
+                    onClick={() => setEditingTile(null)}
+                    className="btn-close"
+                    aria-label="Close"
+                  />
+                </div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setHeroTiles(
+                      heroTiles.map((t) =>
+                        t.id === editingTile.id ? editingTile : t,
+                      ),
+                    );
+                    setEditingTile(null);
+                  }}
+                  className="row g-3"
+                >
+                  <div className="col-12">
+                    <label className="form-label text-slate-700 fw-600 fz-13">
+                      Photo Title / Label
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                      style={{ borderColor: "#cbd5e1" }}
+                      value={editingTile.title || ""}
+                      onChange={(e) =>
+                        setEditingTile({
+                          ...editingTile,
+                          title: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div className="col-12">
+                    <label className="form-label text-slate-700 fw-600 fz-13">
+                      Image File / URL
+                    </label>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control bg-white text-slate-900 border-slate-300 rounded-start-3 py-2"
+                        style={{ borderColor: "#cbd5e1" }}
+                        value={editingTile.img}
+                        onChange={(e) =>
+                          setEditingTile({
+                            ...editingTile,
+                            img: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="file"
+                        id="editTileFile"
+                        className="d-none"
+                        accept="image/*"
+                        onChange={(e) => handleFileUpload(e, true)}
+                      />
+                      <label
+                        htmlFor="editTileFile"
+                        className="btn btn-outline-secondary text-slate-700 mb-0 d-flex align-items-center rounded-end-3 bg-slate-50"
+                        style={{ borderColor: "#cbd5e1", cursor: "pointer" }}
+                      >
+                        Upload 📁
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="col-12">
+                    <label className="form-label text-slate-700 fw-600 fz-13">
+                      Tile Style Variant
+                    </label>
+                    <select
+                      className="form-select bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                      style={{ borderColor: "#cbd5e1" }}
+                      value={editingTile.mod}
+                      onChange={(e) =>
+                        setEditingTile({ ...editingTile, mod: e.target.value })
+                      }
+                    >
+                      <option value="brand-1">Brand Style 1</option>
+                      <option value="brand-2">Brand Style 2</option>
+                      <option value="neutral-100">Light Style</option>
+                      <option value="neutral-300">Gray Style</option>
+                      <option value="neutral-800">Dark Style</option>
+                    </select>
+                  </div>
+
+                  <div className="col-12 d-flex justify-content-end gap-2 mt-4">
+                    <button
+                      type="button"
+                      onClick={() => setEditingTile(null)}
+                      className="btn btn-outline-secondary text-slate-700 px-3 fw-600"
+                      style={{ borderColor: "#cbd5e1" }}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn text-white px-4 fw-600 border-0 shadow-sm"
+                      style={{ backgroundColor: "#F0460E" }}
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* TAB 3: INQUIRIES & MESSAGES */}
       {activeTab === "messages" && (
         <div className="manage-messages">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <div>
-              <h2 className="fw-700 text-white mb-1">Inquiries Inbox</h2>
-              <p className="text-secondary mb-0">
+              <h2 className="fw-700 text-slate-900 mb-1">Inquiries Inbox</h2>
+              <p className="text-slate-500 mb-0 fz-14">
                 Messages submitted from the contact form targeting
                 hello@hmoni.com
               </p>
@@ -691,48 +1047,37 @@ export default function ManagePage() {
             {messages.map((m: MessageItem) => (
               <div key={m.id} className="col-12">
                 <div
-                  className="p-4 rounded-4 border"
-                  style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
+                  className="p-4 rounded-4 border bg-white shadow-sm"
+                  style={{ borderColor: "#cbd5e1" }}
                 >
                   <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
                     <div>
-                      <h5 className="fw-700 text-white mb-1">{m.name}</h5>
-                      <span className="fz-13 text-warning me-3">
+                      <h5 className="fw-700 text-slate-900 mb-1">{m.name}</h5>
+                      <span className="fz-13 text-primary fw-600 me-3">
                         📧 {m.email}
                       </span>
-                      <span className="fz-13 text-secondary me-3">
+                      <span className="fz-13 text-slate-500 me-3">
                         📞 {m.phone}
                       </span>
-                      <span className="fz-12 text-muted">📍 {m.location}</span>
+                      <span className="fz-12 text-slate-400">
+                        📍 {m.location}
+                      </span>
                     </div>
-                    <div className="d-flex align-items-center gap-3">
-                      <span className="fz-12 text-secondary">{m.date}</span>
+                    <div className="d-flex align-items-center gap-2">
+                      <span className="badge bg-slate-100 border border-slate-300 text-slate-700 fz-12">
+                        {m.date}
+                      </span>
                       <button
                         type="button"
                         onClick={() => handleDeleteMessage(m.id)}
-                        className="btn btn-sm btn-outline-secondary border-0 text-danger"
+                        className="btn btn-sm btn-outline-danger border-0"
                       >
                         Delete 🗑️
                       </button>
                     </div>
                   </div>
-                  <p
-                    className="fz-14 text-light p-3 rounded-3 mb-0"
-                    style={{
-                      backgroundColor: "#18181b",
-                      whiteSpace: "pre-wrap",
-                    }}
-                  >
+                  <div className="p-3 rounded-3 bg-slate-50 border border-slate-200 text-slate-800 fz-14">
                     "{m.message}"
-                  </p>
-                  <div className="mt-3 d-flex gap-2">
-                    <a
-                      href={`mailto:${m.email}?subject=Response to your inquiry — H Moni`}
-                      className="btn btn-sm text-white rounded-pill px-4 py-2 fw-600 border-0 text-decoration-none"
-                      style={{ backgroundColor: "#F0460E" }}
-                    >
-                      Reply to Client ✉️
-                    </a>
                   </div>
                 </div>
               </div>
@@ -741,68 +1086,69 @@ export default function ManagePage() {
         </div>
       )}
 
-      {/* TAB 4: SEO & SETTINGS */}
+      {/* TAB 4: SETTINGS */}
       {activeTab === "settings" && (
         <div className="manage-settings">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <div>
-              <h2 className="fw-700 text-white mb-1">
-                Site Configuration & Metadata
+              <h2 className="fw-700 text-slate-900 mb-1">
+                Site Settings & Metadata
               </h2>
-              <p className="text-secondary mb-0">
-                Update brand details, studio location, and search engine SEO
-                settings.
+              <p className="text-slate-500 mb-0 fz-14">
+                Update global branding, contact details, and SEO metadata.
               </p>
             </div>
           </div>
 
           <div
-            className="p-4 rounded-4 border"
-            style={{ backgroundColor: "#121316", borderColor: "#27272a" }}
+            className="p-4 rounded-4 border bg-white shadow-sm"
+            style={{ borderColor: "#cbd5e1" }}
           >
             <form onSubmit={handleSettingsSubmit}>
-              <div className="row g-3 mb-3">
-                <div className="col-md-6">
-                  <label className="form-label text-white fw-600 fz-14">
-                    Brand Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control bg-dark text-white border-secondary"
-                    value={siteSettings.brandName}
-                    onChange={(e) =>
-                      setSiteSettings({
-                        ...siteSettings,
-                        brandName: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-                <div className="col-md-6">
-                  <label className="form-label text-white fw-600 fz-14">
-                    Target Contact Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control bg-dark text-white border-secondary"
-                    value={siteSettings.contactEmail}
-                    onChange={(e) =>
-                      setSiteSettings({
-                        ...siteSettings,
-                        contactEmail: e.target.value,
-                      })
-                    }
-                  />
-                </div>
+              <div className="mb-3">
+                <label className="form-label text-slate-700 fw-600 fz-14">
+                  Brand Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
+                  value={siteSettings.brandName}
+                  onChange={(e) =>
+                    setSiteSettings({
+                      ...siteSettings,
+                      brandName: e.target.value,
+                    })
+                  }
+                />
               </div>
 
               <div className="mb-3">
-                <label className="form-label text-white fw-600 fz-14">
+                <label className="form-label text-slate-700 fw-600 fz-14">
+                  Contact Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
+                  value={siteSettings.contactEmail}
+                  onChange={(e) =>
+                    setSiteSettings({
+                      ...siteSettings,
+                      contactEmail: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-slate-700 fw-600 fz-14">
                   Primary Office Address
                 </label>
                 <input
                   type="text"
-                  className="form-control bg-dark text-white border-secondary"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
                   value={siteSettings.officeAddress}
                   onChange={(e) =>
                     setSiteSettings({
@@ -814,12 +1160,13 @@ export default function ManagePage() {
               </div>
 
               <div className="mb-3">
-                <label className="form-label text-white fw-600 fz-14">
+                <label className="form-label text-slate-700 fw-600 fz-14">
                   Digital Studio Address
                 </label>
                 <input
                   type="text"
-                  className="form-control bg-dark text-white border-secondary"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
                   value={siteSettings.studioAddress}
                   onChange={(e) =>
                     setSiteSettings({
@@ -831,12 +1178,13 @@ export default function ManagePage() {
               </div>
 
               <div className="mb-3">
-                <label className="form-label text-white fw-600 fz-14">
+                <label className="form-label text-slate-700 fw-600 fz-14">
                   SEO Title
                 </label>
                 <input
                   type="text"
-                  className="form-control bg-dark text-white border-secondary"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
                   value={siteSettings.metaTitle}
                   onChange={(e) =>
                     setSiteSettings({
@@ -848,11 +1196,12 @@ export default function ManagePage() {
               </div>
 
               <div className="mb-4">
-                <label className="form-label text-white fw-600 fz-14">
+                <label className="form-label text-slate-700 fw-600 fz-14">
                   SEO Keywords
                 </label>
                 <textarea
-                  className="form-control bg-dark text-white border-secondary"
+                  className="form-control bg-white text-slate-900 border-slate-300 rounded-3 py-2"
+                  style={{ borderColor: "#cbd5e1" }}
                   rows={3}
                   value={siteSettings.metaKeywords}
                   onChange={(e) =>
@@ -866,7 +1215,7 @@ export default function ManagePage() {
 
               <button
                 type="submit"
-                className="btn text-white px-4 py-2 rounded-3 fw-600 border-0"
+                className="btn text-white px-4 py-2 rounded-3 fw-600 border-0 shadow-sm"
                 style={{ backgroundColor: "#F0460E" }}
               >
                 Save Settings
