@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useSidebarMenu from "@/shared/hooks/useSidebarMenu";
+import useSidebarMenu from "@/extra/shared/hooks/useSidebarMenu";
 
 const SEARCH_TRIGGER_SELECTOR = ".at-search-click, .search-btn";
 const HEADER_STICKY_ID = "header-sticky";

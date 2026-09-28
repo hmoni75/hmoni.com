@@ -1,19 +1,23 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useMobileMenuCloneRefs } from "@/shared/mobile-menu/MobileMenuCloneContext";
 
 /**
  * Clone desktop menu (.at-mobile-menu-active > ul) into ALL offcanvas navs
- * and bind submenu toggle behavior (slideDown/slideUp) like the HTML template.
+ * and bind submenu toggle behavior and SPA navigation with auto-sidebar-close.
  */
 export default function MenuClone() {
   const { menuSourceRef, offcanvasRootRef } = useMobileMenuCloneRefs();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const sourceUl = menuSourceRef.current;
     const root = offcanvasRootRef.current;
     if (!sourceUl || !root) return;
 
-    const targetNavs = root.querySelectorAll(".at-offcanvas .at-offcanvas-menu nav, .at-offcanvas-2-area .at-offcanvas-menu nav");
+    const targetNavs = root.querySelectorAll(
+      ".at-offcanvas .at-offcanvas-menu nav, .at-offcanvas-2-area .at-offcanvas-menu nav",
+    );
     if (!targetNavs.length) return;
 
     const slideDown = (el: HTMLElement) => {
@@ -54,17 +58,21 @@ export default function MenuClone() {
       });
     };
 
-    const setupClone = (clone: HTMLElement, opts?: { flattenLinkSwap?: boolean }) => {
+    const setupClone = (
+      clone: HTMLElement,
+      opts?: { flattenLinkSwap?: boolean },
+    ) => {
       if (opts?.flattenLinkSwap) {
-        // Hamburger offcanvas (.at-offcanvas-2-area) shows both .text-1 and .text-2 stacked
-        // because the hover-swap CSS doesn't apply here. Flatten each <span class="at-link-swap">
-        // to plain text (keep `.text-1` content only). Desktop main menu untouched.
         clone.querySelectorAll<HTMLElement>(".at-link-swap").forEach((swap) => {
-          const text = swap.querySelector<HTMLElement>(".text-1")?.textContent ?? swap.textContent ?? "";
+          const text =
+            swap.querySelector<HTMLElement>(".text-1")?.textContent ??
+            swap.textContent ??
+            "";
           const replacement = document.createTextNode(text);
           swap.replaceWith(replacement);
         });
       }
+
       const submenus = clone.querySelectorAll(".at-submenu");
       submenus.forEach((sub) => {
         const parentLi = sub.parentElement;
@@ -86,7 +94,8 @@ export default function MenuClone() {
         const isOpen = li.classList.contains("active");
         li.classList.toggle("active");
         const menuCloseBtn = li.querySelector("button.at-menu-close");
-        if (menuCloseBtn) menuCloseBtn.setAttribute("aria-expanded", String(!isOpen));
+        if (menuCloseBtn)
+          menuCloseBtn.setAttribute("aria-expanded", String(!isOpen));
         if (isOpen) slideUp(sub);
         else slideDown(sub);
       };
@@ -102,18 +111,65 @@ export default function MenuClone() {
         const link =
           target.closest(".has-dropdown > a") ||
           target.closest("li.has-dropdown ul li.menu-item-has-children > a");
-        const li = (btn?.parentElement || link?.closest("li.has-dropdown") || link?.closest("li")) as Element | null;
+        const li = (btn?.parentElement ||
+          link?.closest("li.has-dropdown") ||
+          link?.closest("li")) as Element | null;
         if (!li) return;
         const sub = li.querySelector(".at-submenu");
         if (!sub) return;
         toggleSubmenu(li);
       };
 
-      const targets = clone.querySelectorAll(
+      const handleNavClick = (e: Event) => {
+        const target = e.target as HTMLElement;
+        const anchor = target.closest("a") as HTMLAnchorElement | null;
+        if (!anchor) return;
+
+        // Skip dropdown toggles or hash links
+        if (
+          anchor.closest(".has-dropdown > a") ||
+          anchor.closest("li.has-dropdown ul li.menu-item-has-children > a")
+        ) {
+          return;
+        }
+
+        const href = anchor.getAttribute("href");
+        if (
+          href &&
+          href !== "#" &&
+          !href.startsWith("http") &&
+          !href.startsWith("mailto:") &&
+          !href.startsWith("tel:")
+        ) {
+          e.preventDefault();
+          navigate(href);
+
+          // Close sidebar overlays
+          const overlay = document.querySelector(
+            ".sidebar-overlay",
+          ) as HTMLElement | null;
+          if (overlay) {
+            overlay.click();
+          }
+        }
+      };
+
+      const toggleTargets = clone.querySelectorAll(
         "button.at-menu-close, ul > li.has-dropdown > a, li.has-dropdown ul li.menu-item-has-children > a",
       );
-      targets.forEach((el) => el.addEventListener("click", handleToggle));
-      return () => targets.forEach((el) => el.removeEventListener("click", handleToggle));
+      toggleTargets.forEach((el) => el.addEventListener("click", handleToggle));
+
+      const linkTargets = clone.querySelectorAll("a");
+      linkTargets.forEach((el) => el.addEventListener("click", handleNavClick));
+
+      return () => {
+        toggleTargets.forEach((el) =>
+          el.removeEventListener("click", handleToggle),
+        );
+        linkTargets.forEach((el) =>
+          el.removeEventListener("click", handleNavClick),
+        );
+      };
     };
 
     const cleanups: Array<() => void> = [];
@@ -122,7 +178,9 @@ export default function MenuClone() {
       const clone = sourceUl.cloneNode(true) as HTMLElement;
       targetNav.innerHTML = "";
       targetNav.appendChild(clone);
-      const insideOffcanvas2 = !!(targetNav as HTMLElement).closest(".at-offcanvas-2-area");
+      const insideOffcanvas2 = !!(targetNav as HTMLElement).closest(
+        ".at-offcanvas-2-area",
+      );
       const cleanup = setupClone(clone, { flattenLinkSwap: insideOffcanvas2 });
       if (cleanup) cleanups.push(cleanup);
     });
@@ -130,10 +188,8 @@ export default function MenuClone() {
     return () => {
       cleanups.forEach((fn) => fn());
     };
-    // Refs from context are stable for the app lifetime.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate]);
 
   return null;
 }
-

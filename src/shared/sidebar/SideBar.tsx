@@ -150,6 +150,7 @@ export default function SideBar({
             <div className="at-offcanvas-logo">
               <Link
                 to="/"
+                onClick={onClose}
                 className="text-decoration-none d-inline-flex align-items-center gap-2"
               >
                 <img
@@ -158,8 +159,9 @@ export default function SideBar({
                   alt="H Moni"
                   width={30}
                   height={30}
+                  style={{ filter: "none" }}
                 />
-                <h6 className="fw-700 fz-24 mb-0">H Moni</h6>
+                <h6 className="fw-700 fz-24 mb-0 text-white">H Moni</h6>
               </Link>
             </div>
             <div className="at-offcanvas-close-btn">
@@ -249,6 +251,7 @@ export default function SideBar({
             <div className="at-header-logo d-flex justify-content-between align-items-center mb-50">
               <Link
                 to="/"
+                onClick={onClose}
                 className="text-decoration-none d-inline-flex align-items-center gap-2"
               >
                 <img
@@ -258,8 +261,9 @@ export default function SideBar({
                   alt="H Moni"
                   width={30}
                   height={30}
+                  style={{ filter: "none" }}
                 />
-                <h6 className="fw-700 fz-24 mb-0">H Moni</h6>
+                <h6 className="fw-700 fz-24 mb-0 text-white">H Moni</h6>
               </Link>
               <span
                 className="hamburger-close-btn close-sidebar"
