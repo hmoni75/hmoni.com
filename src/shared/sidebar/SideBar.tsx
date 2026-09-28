@@ -129,6 +129,8 @@ export default function SideBar({
 }: SideBarProps) {
   const isAnyOpen = open || hamburgerOpen;
 
+  const isDarkMode = window.localStorage.getItem("theme") === "dark";
+
   return (
     <OffcanvasMenuMount>
       <MenuClone />
@@ -161,7 +163,13 @@ export default function SideBar({
                   height={30}
                   style={{ filter: "none" }}
                 />
-                <h6 className="fw-700 fz-24 mb-0 text-white">H Moni</h6>
+                <h6
+                  className={
+                    "fw-700 fz-24 mb-0" + (isDarkMode ? " text-white" : "black")
+                  }
+                >
+                  H Moni
+                </h6>
               </Link>
             </div>
             <div className="at-offcanvas-close-btn">
@@ -263,7 +271,14 @@ export default function SideBar({
                   height={30}
                   style={{ filter: "none" }}
                 />
-                <h6 className="fw-700 fz-24 mb-0 text-white">H Moni</h6>
+                <h6
+                  className={
+                    "fw-700 fz-24 mb-0 " +
+                    (isDarkMode ? "text-white" : "text-black")
+                  }
+                >
+                  H Moni
+                </h6>
               </Link>
               <span
                 className="hamburger-close-btn close-sidebar"
