@@ -39,7 +39,7 @@ export default function Header1({
                   className="d-inline-flex align-items-center gap-2 text-decoration-none"
                 >
                   <img
-                    width={100}
+                    width={130}
                     height={100}
                     src="/assets/imgs/template/logo/logo-d.svg"
                     alt="H Moni"
