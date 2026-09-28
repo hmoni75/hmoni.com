@@ -252,7 +252,7 @@ export default function SideBar({
                 className="text-decoration-none d-inline-flex align-items-center gap-2"
               >
                 <img
-                  className="dark-mode-invert"
+                  className=""
                   data-width="30"
                   src="/assets/imgs/template/logo/favicon.svg"
                   alt="H Moni"
