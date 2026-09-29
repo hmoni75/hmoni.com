@@ -248,11 +248,43 @@ export default function ManagePage() {
     }
 
     // Sync live database data from API on mount
-    fetchProjectsApi().then((data) => data.length && setProjects(data));
+    fetchProjectsApi().then((data) => {
+      if (data && data.length) {
+        setProjects(
+          data.map((p) => ({
+            id: p.id,
+            title: p.title,
+            category: p.category,
+            location: p.location || "",
+            size: p.size || "",
+            service: p.service || "",
+            link: p.link || "/portfolio-details-1",
+            img: p.img,
+            status: p.status || "Published",
+            featured: !!p.featured,
+          })),
+        );
+      }
+    });
     fetchHeroTilesApi().then((data) => data.length && setHeroTiles(data));
-    fetchMessagesApi().then((data) => data.length && setMessages(data));
+    fetchMessagesApi().then((data) => {
+      if (data && data.length) {
+        setMessages(
+          data.map((m) => ({
+            id: m.id,
+            name: m.name,
+            email: m.email,
+            phone: m.phone || "",
+            message: m.message,
+            date: m.date_str || "",
+            read: !!m.is_read,
+            location: m.location || "",
+          })),
+        );
+      }
+    });
     fetchSettingsApi().then((data) => {
-      if (Object.keys(data).length) {
+      if (data && Object.keys(data).length) {
         setSiteSettings((prev: typeof siteSettings) => ({ ...prev, ...data }));
       }
     });
