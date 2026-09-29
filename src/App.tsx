@@ -29,10 +29,8 @@ export default function App() {
         <Route path="/contact-1" element={<Contact1Page />} />
         <Route path="/contact-2" element={<Contact2Page />} />
       </Route>
-
       {/* Standalone Admin Dashboard Route (Headerless/Footerless Layout) */}
       <Route path="/manage" element={<ManagePage />} />
-
       <Route element={<MainLayout headerStyle={1} footerStyle={7} />}>
         <Route path="*" element={<NotFoundPage />} />
       </Route>

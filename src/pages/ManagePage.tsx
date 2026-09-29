@@ -7,6 +7,19 @@ import {
   INITIAL_HERO_TILES,
   getHeroTilesFromStorage,
 } from "@/shared/sections/index-12/Section1";
+import {
+  fetchProjectsApi,
+  createProjectApi,
+  deleteProjectApi,
+  fetchHeroTilesApi,
+  saveHeroTileApi,
+  deleteHeroTileApi,
+  resetHeroTilesApi,
+  fetchMessagesApi,
+  deleteMessageApi,
+  fetchSettingsApi,
+  updateSettingsApi,
+} from "@/services/api";
 
 interface ProjectItem {
   id: number;
@@ -233,6 +246,16 @@ export default function ManagePage() {
     if (session === "true") {
       setIsLoggedIn(true);
     }
+
+    // Sync live database data from API on mount
+    fetchProjectsApi().then((data) => data.length && setProjects(data));
+    fetchHeroTilesApi().then((data) => data.length && setHeroTiles(data));
+    fetchMessagesApi().then((data) => data.length && setMessages(data));
+    fetchSettingsApi().then((data) => {
+      if (Object.keys(data).length) {
+        setSiteSettings((prev: typeof siteSettings) => ({ ...prev, ...data }));
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -247,7 +270,7 @@ export default function ManagePage() {
     localStorage.setItem("hmoni_manage_settings", JSON.stringify(siteSettings));
   }, [siteSettings]);
 
-  const handleAddHeroTile = (e: React.FormEvent) => {
+  const handleAddHeroTile = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTile.img.trim()) {
       alert("Please provide an image URL or choose a photo file.");
@@ -260,22 +283,25 @@ export default function ManagePage() {
       mod: newTile.mod,
     };
     setHeroTiles([...heroTiles, tile]);
+    saveHeroTileApi(tile);
     setNewTile({ title: "", img: "", mod: "brand-1" });
   };
 
-  const handleDeleteHeroTile = (id: number) => {
+  const handleDeleteHeroTile = async (id: number) => {
     if (
       window.confirm(
         "Are you sure you want to delete this photo from the hero slider?",
       )
     ) {
       setHeroTiles(heroTiles.filter((t) => t.id !== id));
+      deleteHeroTileApi(id);
     }
   };
 
-  const handleResetHeroTiles = () => {
+  const handleResetHeroTiles = async () => {
     if (window.confirm("Restore default hero slider photos?")) {
       setHeroTiles(INITIAL_HERO_TILES);
+      resetHeroTilesApi();
     }
   };
 
@@ -303,7 +329,7 @@ export default function ManagePage() {
     setIsLoggedIn(false);
   };
 
-  const handleAddProject = (e: React.FormEvent) => {
+  const handleAddProject = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newProject.title.trim()) return;
     const project: ProjectItem = {
@@ -319,6 +345,7 @@ export default function ManagePage() {
       featured: true,
     };
     setProjects([project, ...projects]);
+    createProjectApi(project);
     setNewProject({
       title: "",
       category: "UI/UX & Branding",
@@ -328,18 +355,21 @@ export default function ManagePage() {
     });
   };
 
-  const handleDeleteProject = (id: number) => {
+  const handleDeleteProject = async (id: number) => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       setProjects(projects.filter((p: ProjectItem) => p.id !== id));
+      deleteProjectApi(id);
     }
   };
 
-  const handleDeleteMessage = (id: number) => {
+  const handleDeleteMessage = async (id: number) => {
     setMessages(messages.filter((m: MessageItem) => m.id !== id));
+    deleteMessageApi(id);
   };
 
-  const handleSettingsSubmit = (e: React.FormEvent) => {
+  const handleSettingsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    updateSettingsApi(siteSettings);
     alert("Site Settings & Metadata updated successfully!");
   };
 

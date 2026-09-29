@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
+import { submitMessageApi } from "@/services/api";
 
 // Contact 1 Section 1 - Reach out / Contact form
 
@@ -230,6 +231,23 @@ export default function Section1() {
     setIsSubmitting(true);
 
     try {
+      // 1. Submit inquiry to MySQL database API
+      await submitMessageApi({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        location: "Website Contact Form",
+        date: new Date().toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+        }),
+      });
+
+      // 2. Email notification via Web3Forms
       await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
