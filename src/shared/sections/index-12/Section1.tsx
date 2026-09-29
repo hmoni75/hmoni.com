@@ -108,11 +108,17 @@ export default function Section1() {
   const getImgSrc = (img: string) => {
     if (!img) return "/assets/imgs/pages/home-12/sec-1-tile-1.webp";
     if (
-      img.startsWith("http") ||
-      img.startsWith("data:") ||
-      img.startsWith("/")
+      img.startsWith("http://") ||
+      img.startsWith("https://") ||
+      img.startsWith("data:")
     ) {
       return img;
+    }
+    if (img.startsWith("/")) {
+      return img;
+    }
+    if (img.startsWith("uploads/") || img.startsWith("storage/")) {
+      return `https://manage.hmoni.com/${img}`;
     }
     return `/assets/imgs/pages/home-12/${img}`;
   };

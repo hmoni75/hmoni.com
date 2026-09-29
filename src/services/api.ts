@@ -149,6 +149,8 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T |
 // -------------------------------------------------------------
 // 1. HERO CAROUSEL TILES
 // -------------------------------------------------------------
+const MANAGE_HERO_API_URL = 'https://manage.hmoni.com/api/hero';
+
 const DEFAULT_HERO_TILES: HeroTile[] = [
   { id: 1, title: 'Brand Identity 1', img: 'sec-1-tile-1.webp', mod: 'brand-1' },
   { id: 2, title: 'Digital Product 2', img: 'sec-1-tile-2.webp', mod: 'neutral-100' },
@@ -159,11 +161,48 @@ const DEFAULT_HERO_TILES: HeroTile[] = [
 ];
 
 export async function getHeroTiles(): Promise<HeroTile[]> {
+  // 1. Try Primary endpoint: https://manage.hmoni.com/api/hero
+  try {
+    const res = await fetch(MANAGE_HERO_API_URL, {
+      headers: { 'Accept': 'application/json' },
+    });
+    if (res.ok) {
+      const json = await res.json();
+      const rawList = Array.isArray(json)
+        ? json
+        : (json.data || json.hero || json.tiles || json.slides || json.images || []);
+
+      if (Array.isArray(rawList) && rawList.length > 0) {
+        const mappedTiles: HeroTile[] = rawList.map((item: any, idx: number) => {
+          if (typeof item === 'string') {
+            return { id: idx + 1, title: `Slide ${idx + 1}`, img: item, mod: 'brand-1' };
+          }
+          return {
+            id: item.id || idx + 1,
+            title: item.title || item.name || `Slide ${idx + 1}`,
+            img: item.img || item.image || item.url || item.src || item.image_url || item.path || '',
+            mod: item.mod || item.style || 'brand-1',
+          };
+        }).filter((t: HeroTile) => !!t.img);
+
+        if (mappedTiles.length > 0) {
+          localStorage.setItem('hmoni_hero_tiles', JSON.stringify(mappedTiles));
+          return mappedTiles;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Fetch from manage.hmoni.com/api/hero failed, attempting secondary API endpoint:', err);
+  }
+
+  // 2. Secondary fallback: /api/hero.php
   const remote = await fetchApi<HeroTile[]>('hero.php');
-  if (remote && Array.isArray(remote)) {
+  if (remote && Array.isArray(remote) && remote.length > 0) {
     localStorage.setItem('hmoni_hero_tiles', JSON.stringify(remote));
     return remote;
   }
+
+  // 3. Tertiary fallback: LocalStorage or Default Tiles
   const local = localStorage.getItem('hmoni_hero_tiles');
   return local ? JSON.parse(local) : DEFAULT_HERO_TILES;
 }
