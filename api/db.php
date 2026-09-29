@@ -12,37 +12,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 header("Content-Type: application/json; charset=UTF-8");
 
 $host = 'localhost';
+$user = 'hmoni24';
 $pass = '15HBF&~AVNqu';
+$db   = 'hmoni24_hmoni.com';
 
-// Try combination of user and database names according to cPanel configuration
-$dbCandidates = ['hmoni24_db', 'hmoni24_hmoni', 'hmoni24_hmoni.com', 'hmoni24_hmonicom'];
-$userCandidates = ['hmoni24_hmoni24', 'hmoni24'];
-
-$pdo = null;
-$lastError = null;
-
-foreach ($userCandidates as $u) {
-    foreach ($dbCandidates as $d) {
-        try {
-            $pdo = new PDO("mysql:host=$host;dbname=$d;charset=utf8mb4", $u, $pass, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false
-            ]);
-            if ($pdo) {
-                break 2;
-            }
-        } catch (PDOException $e) {
-            $lastError = $e->getMessage();
-        }
-    }
-}
-
-if (!$pdo) {
-    http_response_code(500);
-    echo json_encode([
-        "status" => "error",
-        "message" => "Database connection failed: " . ($lastError ?? "Unknown error")
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false
     ]);
-    exit();
+} catch (PDOException $e) {
+    // Fallback if dbname has underscores stripped by cPanel
+    try {
+        $dbFallback = 'hmoni24_hmonicom';
+        $pdo = new PDO("mysql:host=$host;dbname=$dbFallback;charset=utf8mb4", $user, $pass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false
+        ]);
+    } catch (PDOException $e2) {
+        http_response_code(500);
+        echo json_encode([
+            "status" => "error",
+            "message" => "Database connection failed: " . $e2->getMessage()
+        ]);
+        exit();
+    }
 }
