@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
 import RevealText from "@/shared/effects/RevealText";
+import { getServices, Service } from "@/services/api";
 
-const SERVICES = [
+const DEFAULT_SERVICES: Service[] = [
   {
+    id: 1,
     delay: "0.05",
     num: "01",
     title: "Brand Identity",
@@ -9,6 +12,7 @@ const SERVICES = [
     tags: ["Logo", "Type system", "Guidelines"],
   },
   {
+    id: 2,
     delay: "0.1",
     num: "02",
     title: "Web Design",
@@ -16,6 +20,7 @@ const SERVICES = [
     tags: ["Landing", "Portfolio", "Marketing"],
   },
   {
+    id: 3,
     delay: "0.15",
     num: "03",
     title: "Webflow & Framer",
@@ -23,6 +28,7 @@ const SERVICES = [
     tags: ["Framer", "Webflow", "CMS"],
   },
   {
+    id: 4,
     delay: "0.2",
     num: "04",
     title: "Product UI/UX",
@@ -30,6 +36,7 @@ const SERVICES = [
     tags: ["Dashboard", "App UI", "Flows"],
   },
   {
+    id: 5,
     delay: "0.25",
     num: "05",
     title: "Art Direction",
@@ -37,6 +44,7 @@ const SERVICES = [
     tags: ["Editorial", "Photography", "Style"],
   },
   {
+    id: 6,
     delay: "0.3",
     num: "06",
     title: "Front-End Build",
@@ -46,6 +54,15 @@ const SERVICES = [
 ];
 
 export default function Section3() {
+  const [services, setServices] = useState<Service[]>(DEFAULT_SERVICES);
+
+  useEffect(() => {
+    getServices().then((data) => {
+      if (data && data.length > 0) {
+        setServices(data);
+      }
+    });
+  }, []);
   return (
     <section className="sec-3-home-12" aria-label="Our Services">
       <div className="container">
@@ -73,7 +90,7 @@ export default function Section3() {
         </header>
 
         <div className="sec-3-home-12__grid">
-          {SERVICES.map((s) => (
+          {services.map((s) => (
             <div
               key={s.num}
               className="card-home-12-service at_fade_anim"

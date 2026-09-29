@@ -1,11 +1,19 @@
 const mysql = require('mysql2/promise');
 
 const candidates = [
-  { host: '51.79.229.154', port: 3306, user: 'hmoni24_hmoni24', password: '15HBF&~AVNqu', database: 'hmoni24_db' },
-  { host: '51.79.229.154', port: 3306, user: 'hmoni24', password: '15HBF&~AVNqu', database: 'hmoni24_db' },
   { host: '51.79.229.154', port: 3306, user: 'hmoni24_hmoni24', password: '15HBF&~AVNqu', database: 'hmoni24_hmoni' },
+  { host: '51.79.229.154', port: 3306, user: 'hmoni24_hmoni24', password: '15HBF&~AVNqu', database: 'hmoni24_db' },
   { host: '51.79.229.154', port: 3306, user: 'hmoni24', password: '15HBF&~AVNqu', database: 'hmoni24_hmoni' },
+  { host: '51.79.229.154', port: 3306, user: 'hmoni24', password: '15HBF&~AVNqu', database: 'hmoni24_db' },
 ];
+
+async function safeAlter(connection, table, columnDef) {
+  try {
+    await connection.query(`ALTER TABLE ${table} ADD COLUMN ${columnDef}`);
+  } catch (e) {
+    // column exists or table fine
+  }
+}
 
 async function run() {
   let connection;
@@ -43,14 +51,27 @@ async function run() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
+    await safeAlter(connection, 'projects', "img TEXT NOT NULL");
+    await safeAlter(connection, 'projects', "location VARCHAR(150) DEFAULT ''");
+    await safeAlter(connection, 'projects', "size VARCHAR(100) DEFAULT ''");
+    await safeAlter(connection, 'projects', "service VARCHAR(150) DEFAULT ''");
+    await safeAlter(connection, 'projects', "link VARCHAR(255) DEFAULT '/portfolio-details-1'");
+    await safeAlter(connection, 'projects', "status VARCHAR(50) DEFAULT 'Published'");
+    await safeAlter(connection, 'projects', "featured TINYINT(1) DEFAULT 1");
+    await safeAlter(connection, 'projects', "description TEXT");
+    await safeAlter(connection, 'projects', "tags_json TEXT");
+
     // 2. Hero Tiles
     await connection.query(`CREATE TABLE IF NOT EXISTS hero_tiles (
       id BIGINT PRIMARY KEY AUTO_INCREMENT,
       title VARCHAR(255) DEFAULT '',
       img TEXT NOT NULL,
-      mod VARCHAR(50) DEFAULT 'brand-1',
+      \`mod\` VARCHAR(50) DEFAULT 'brand-1',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
+
+    await safeAlter(connection, 'hero_tiles', "img TEXT NOT NULL");
+    await safeAlter(connection, 'hero_tiles', "`mod` VARCHAR(50) DEFAULT 'brand-1'");
 
     // 3. Services
     await connection.query(`CREATE TABLE IF NOT EXISTS services (
@@ -63,6 +84,11 @@ async function run() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
+    await safeAlter(connection, 'services', "num VARCHAR(20) DEFAULT '01'");
+    await safeAlter(connection, 'services', "desc_text TEXT");
+    await safeAlter(connection, 'services', "tags_json TEXT");
+    await safeAlter(connection, 'services', "delay VARCHAR(20) DEFAULT '0.05'");
+
     // 4. Process Philosophy
     await connection.query(`CREATE TABLE IF NOT EXISTS process_steps (
       id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -72,6 +98,10 @@ async function run() {
       tags_json TEXT,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
+
+    await safeAlter(connection, 'process_steps', "step_num VARCHAR(20) DEFAULT '01'");
+    await safeAlter(connection, 'process_steps', "desc_text TEXT");
+    await safeAlter(connection, 'process_steps', "tags_json TEXT");
 
     // 5. Testimonials
     await connection.query(`CREATE TABLE IF NOT EXISTS testimonials (
@@ -85,6 +115,13 @@ async function run() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
+    await safeAlter(connection, 'testimonials', "author VARCHAR(150)");
+    await safeAlter(connection, 'testimonials', "role VARCHAR(150) DEFAULT ''");
+    await safeAlter(connection, 'testimonials', "company VARCHAR(150) DEFAULT ''");
+    await safeAlter(connection, 'testimonials', "content TEXT");
+    await safeAlter(connection, 'testimonials', "avatar TEXT");
+    await safeAlter(connection, 'testimonials', "stars INT DEFAULT 5");
+
     // 6. FAQs
     await connection.query(`CREATE TABLE IF NOT EXISTS faqs (
       id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -94,6 +131,10 @@ async function run() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
+    await safeAlter(connection, 'faqs', "question TEXT");
+    await safeAlter(connection, 'faqs', "answer TEXT");
+    await safeAlter(connection, 'faqs', "category VARCHAR(100) DEFAULT 'General'");
+
     // 7. Social Links
     await connection.query(`CREATE TABLE IF NOT EXISTS social_links (
       id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -102,6 +143,10 @@ async function run() {
       handle VARCHAR(100) DEFAULT '',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
+
+    await safeAlter(connection, 'social_links', "platform VARCHAR(100)");
+    await safeAlter(connection, 'social_links', "url TEXT");
+    await safeAlter(connection, 'social_links', "handle VARCHAR(100) DEFAULT ''");
 
     // 8. Experience
     await connection.query(`CREATE TABLE IF NOT EXISTS experience (
@@ -113,6 +158,11 @@ async function run() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
+    await safeAlter(connection, 'experience', "period VARCHAR(100)");
+    await safeAlter(connection, 'experience', "role VARCHAR(200)");
+    await safeAlter(connection, 'experience', "company VARCHAR(200)");
+    await safeAlter(connection, 'experience', "description TEXT");
+
     // 9. Stats
     await connection.query(`CREATE TABLE IF NOT EXISTS stats (
       id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -123,6 +173,11 @@ async function run() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
+    await safeAlter(connection, 'stats', "stat_key VARCHAR(100)");
+    await safeAlter(connection, 'stats', "label VARCHAR(200)");
+    await safeAlter(connection, 'stats', "number_value VARCHAR(50)");
+    await safeAlter(connection, 'stats', "suffix VARCHAR(20) DEFAULT '+'");
+
     // 10. Tech Stack
     await connection.query(`CREATE TABLE IF NOT EXISTS tech_stack (
       id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -132,6 +187,11 @@ async function run() {
       proficiency VARCHAR(50) DEFAULT 'Advanced',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
+
+    await safeAlter(connection, 'tech_stack', "name VARCHAR(150)");
+    await safeAlter(connection, 'tech_stack', "category VARCHAR(100)");
+    await safeAlter(connection, 'tech_stack', "icon_url TEXT");
+    await safeAlter(connection, 'tech_stack', "proficiency VARCHAR(50) DEFAULT 'Advanced'");
 
     // 11. Blogs
     await connection.query(`CREATE TABLE IF NOT EXISTS blogs (
@@ -147,6 +207,15 @@ async function run() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
+    await safeAlter(connection, 'blogs', "title VARCHAR(255)");
+    await safeAlter(connection, 'blogs', "slug VARCHAR(255)");
+    await safeAlter(connection, 'blogs', "category VARCHAR(100)");
+    await safeAlter(connection, 'blogs', "author VARCHAR(150)");
+    await safeAlter(connection, 'blogs', "date_str VARCHAR(100)");
+    await safeAlter(connection, 'blogs', "img TEXT");
+    await safeAlter(connection, 'blogs', "excerpt TEXT");
+    await safeAlter(connection, 'blogs', "content LONGTEXT");
+
     // 12. Messages
     await connection.query(`CREATE TABLE IF NOT EXISTS messages (
       id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -160,6 +229,14 @@ async function run() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
+    await safeAlter(connection, 'messages', "name VARCHAR(150)");
+    await safeAlter(connection, 'messages', "email VARCHAR(150)");
+    await safeAlter(connection, 'messages', "phone VARCHAR(50) DEFAULT ''");
+    await safeAlter(connection, 'messages', "message TEXT");
+    await safeAlter(connection, 'messages', "date_str VARCHAR(100) DEFAULT ''");
+    await safeAlter(connection, 'messages', "is_read TINYINT(1) DEFAULT 0");
+    await safeAlter(connection, 'messages', "location VARCHAR(150) DEFAULT ''");
+
     // 13. Site Settings
     await connection.query(`CREATE TABLE IF NOT EXISTS site_settings (
       setting_key VARCHAR(100) PRIMARY KEY,
@@ -167,7 +244,7 @@ async function run() {
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`);
 
-    console.log('✅ Checked/created all 13 MySQL tables!');
+    console.log('✅ Checked & updated all 13 MySQL tables!');
 
     // SEEDING DATA FOR ALL 13 SECTIONS
 
@@ -187,7 +264,7 @@ async function run() {
     // 2. Hero Tiles
     const [hRows] = await connection.query('SELECT COUNT(*) as cnt FROM hero_tiles');
     if (hRows[0].cnt === 0) {
-      await connection.query(`INSERT INTO hero_tiles (title, img, mod) VALUES
+      await connection.query(`INSERT INTO hero_tiles (title, img, \`mod\`) VALUES
         ('Brand Identity 1', 'sec-1-tile-1.webp', 'brand-1'),
         ('Digital Product 2', 'sec-1-tile-2.webp', 'neutral-100'),
         ('Creative Layout 3', 'sec-1-tile-3.webp', 'neutral-800'),

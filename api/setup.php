@@ -24,7 +24,7 @@ try {
         id BIGINT PRIMARY KEY AUTO_INCREMENT,
         title VARCHAR(255) DEFAULT '',
         img TEXT NOT NULL,
-        mod VARCHAR(50) DEFAULT 'brand-1',
+        `mod` VARCHAR(50) DEFAULT 'brand-1',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
@@ -172,7 +172,7 @@ try {
             ['Visual Story 5', 'sec-1-tile-5.webp', 'neutral-300'],
             ['Mobile App 6', 'sec-1-tile-6.webp', 'brand-1']
         ];
-        $insertStmt = $pdo->prepare("INSERT INTO hero_tiles (title, img, mod) VALUES (?, ?, ?)");
+        $insertStmt = $pdo->prepare("INSERT INTO hero_tiles (title, img, `mod`) VALUES (?, ?, ?)");
         foreach ($initialHeroTiles as $t) {
             $insertStmt->execute($t);
         }

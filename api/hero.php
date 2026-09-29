@@ -27,7 +27,7 @@ try {
                 ['Visual Story 5', 'sec-1-tile-5.webp', 'neutral-300'],
                 ['Mobile App 6', 'sec-1-tile-6.webp', 'brand-1']
             ];
-            $insertStmt = $pdo->prepare("INSERT INTO hero_tiles (title, img, mod) VALUES (?, ?, ?)");
+            $insertStmt = $pdo->prepare("INSERT INTO hero_tiles (title, img, `mod`) VALUES (?, ?, ?)");
             foreach ($initialHeroTiles as $t) {
                 $insertStmt->execute($t);
             }
@@ -42,7 +42,7 @@ try {
         }
 
         if (!empty($input['id'])) {
-            $stmt = $pdo->prepare("UPDATE hero_tiles SET title = ?, img = ?, mod = ? WHERE id = ?");
+            $stmt = $pdo->prepare("UPDATE hero_tiles SET title = ?, img = ?, `mod` = ? WHERE id = ?");
             $stmt->execute([
                 $input['title'] ?? '',
                 $input['img'],
@@ -52,7 +52,7 @@ try {
             echo json_encode(["status" => "success", "message" => "Hero tile updated successfully"]);
             exit();
         } else {
-            $stmt = $pdo->prepare("INSERT INTO hero_tiles (title, img, mod) VALUES (?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO hero_tiles (title, img, `mod`) VALUES (?, ?, ?)");
             $stmt->execute([
                 $input['title'] ?? '',
                 $input['img'],
