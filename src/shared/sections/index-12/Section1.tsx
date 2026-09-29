@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import Swiper from "swiper";
 import { Autoplay, FreeMode } from "swiper/modules";
 
-import { getHeroTiles } from "@/services/api";
-
 export interface HeroTileItem {
   id: number;
   img: string;
@@ -42,7 +40,7 @@ export const INITIAL_HERO_TILES: HeroTileItem[] = [
 ];
 
 export function getHeroTilesFromStorage(): HeroTileItem[] {
-  const saved = localStorage.getItem("hmoni_hero_tiles") || localStorage.getItem("hmoni_manage_hero_tiles");
+  const saved = localStorage.getItem("hmoni_manage_hero_tiles");
   if (!saved) return INITIAL_HERO_TILES;
   try {
     const parsed = JSON.parse(saved);
@@ -55,23 +53,12 @@ export function getHeroTilesFromStorage(): HeroTileItem[] {
 }
 
 export default function Section1() {
-  const [tiles, setTiles] = useState<HeroTileItem[]>(INITIAL_HERO_TILES);
+  const [tiles, setTiles] = useState<HeroTileItem[]>(getHeroTilesFromStorage);
   const sliderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Fetch live hero carousel photos from database API
-    getHeroTiles().then((data) => {
-      if (data && data.length > 0) {
-        setTiles(data);
-      }
-    });
-
     const handleUpdate = () => {
-      getHeroTiles().then((data) => {
-        if (data && data.length > 0) {
-          setTiles(data);
-        }
-      });
+      setTiles(getHeroTilesFromStorage());
     };
     window.addEventListener("hmoni_hero_tiles_updated", handleUpdate);
     window.addEventListener("storage", handleUpdate);
