@@ -1,4 +1,4 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
 const SOCIAL_ARROW = (

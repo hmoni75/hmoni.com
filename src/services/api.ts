@@ -236,6 +236,11 @@ export async function resetHeroTiles(): Promise<boolean> {
 // -------------------------------------------------------------
 // 2. PROJECTS
 // -------------------------------------------------------------
+const MANAGE_PROJECTS_API_ENDPOINTS = [
+  '/api/manage-projects', // Same-origin proxy (Vercel/Vite rewrite) - Zero CORS issues
+  'https://manage.hmoni.com/api/projects',
+];
+
 const DEFAULT_PROJECTS: Project[] = [
   {
     id: 1,
@@ -282,11 +287,54 @@ const DEFAULT_PROJECTS: Project[] = [
 ];
 
 export async function getProjects(): Promise<Project[]> {
+  for (const url of MANAGE_PROJECTS_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'Accept': 'application/json' },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json)
+          ? json
+          : (json.data || json.projects || json.items || []);
+
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mappedProjects: Project[] = rawList.map((p: any, idx: number) => {
+            return {
+              id: p.id || idx + 1,
+              title: p.title || `Project ${idx + 1}`,
+              category: p.category || 'Architecture',
+              location: p.location || p.loc || '',
+              size: p.size || '',
+              service: p.service || '',
+              link: p.link || '/portfolio-details-1',
+              img: p.img || p.image || p.url || p.src || p.image_url || p.path || '',
+              status: p.status || 'Published',
+              featured: p.featured !== undefined ? !!p.featured : true,
+              description: p.description || p.desc || '',
+              tags: Array.isArray(p.tags) ? p.tags : (p.tags_json ? JSON.parse(p.tags_json) : [])
+            };
+          }).filter((p: Project) => !!p.title);
+
+          if (mappedProjects.length > 0) {
+            localStorage.setItem('hmoni_projects', JSON.stringify(mappedProjects));
+            return mappedProjects;
+          }
+        }
+      }
+    } catch (err) {
+      // ignore and try next fallback endpoint
+    }
+  }
+
+  // Secondary fallback: /api/projects.php
   const remote = await fetchApi<Project[]>('projects.php');
-  if (remote && Array.isArray(remote)) {
+  if (remote && Array.isArray(remote) && remote.length > 0) {
     localStorage.setItem('hmoni_projects', JSON.stringify(remote));
     return remote;
   }
+
+  // Tertiary fallback: LocalStorage or Default Projects
   const local = localStorage.getItem('hmoni_projects');
   return local ? JSON.parse(local) : DEFAULT_PROJECTS;
 }

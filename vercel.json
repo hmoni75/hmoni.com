@@ -5,6 +5,10 @@
       "destination": "https://manage.hmoni.com/api/hero"
     },
     {
+      "source": "/api/manage-projects",
+      "destination": "https://manage.hmoni.com/api/projects"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
