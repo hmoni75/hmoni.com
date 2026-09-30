@@ -1008,36 +1008,7 @@ export async function deleteTechStack(id: number): Promise<boolean> {
   return !!res;
 }
 
-// -------------------------------------------------------------
-// 11. BLOG & RESOURCES
-// -------------------------------------------------------------
-const DEFAULT_BLOGS: BlogPost[] = [
-  { id: 1, title: 'Designing Digital Experiences That Connect Brands and People', slug: 'designing-digital-experiences', category: 'UI / UX Design', author: 'H Moni', date_str: 'July 3, 2026', img: '/assets/imgs/pages/img-201.webp', excerpt: 'Exploring design principles that build emotional connection and clarity.', content: 'Digital experience design is more than aesthetics...' },
-  { id: 2, title: 'From Concept to Launch: Building Products That Truly Matter', slug: 'concept-to-launch', category: 'Product Engineering', author: 'H Moni', date_str: 'July 8, 2026', img: '/assets/imgs/pages/img-202.webp', excerpt: 'A step-by-step roadmap to building scalable digital products.', content: 'Going from idea to live deployment requires strategy...' }
-];
-
-export async function getBlogs(): Promise<BlogPost[]> {
-  const remote = await fetchApi<BlogPost[]>('blogs.php');
-  if (remote && Array.isArray(remote)) {
-    localStorage.setItem('hmoni_blogs', JSON.stringify(remote));
-    return remote;
-  }
-  const local = localStorage.getItem('hmoni_blogs');
-  return local ? JSON.parse(local) : DEFAULT_BLOGS;
-}
-
-export async function saveBlog(blog: Partial<BlogPost>): Promise<boolean> {
-  const res = await fetchApi<any>('blogs.php', {
-    method: 'POST',
-    body: JSON.stringify(blog),
-  });
-  return !!res;
-}
-
-export async function deleteBlog(id: number): Promise<boolean> {
-  const res = await fetchApi<any>(`blogs.php?id=${id}`, { method: 'DELETE' });
-  return !!res;
-}
+// Duplicate blog definitions removed - using BlogItem implementation above
 
 // -------------------------------------------------------------
 // 12. MESSAGES & INQUIRIES
