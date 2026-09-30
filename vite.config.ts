@@ -10,8 +10,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5173,
-    strictPort: true,
+    port: 5174,
+    // strictPort: true, // optional, allow fallback to next available port
     proxy: {
       "/api/manage-hero": {
         target: "https://manage.hmoni.com",
