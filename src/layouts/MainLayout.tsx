@@ -204,7 +204,7 @@ export default function MainLayout({
           ) : null}
           {!noFooter && !isFooterFloating ? <FooterComponent /> : null}
         </div>
-        {!noFooter && isFooterFloating ? <Footer2 ref={footerRef} /> : null}
+        {!noFooter && isFooterFloating ? <Footer7 ref={footerRef} /> : null}
       </div>
 
       <BackToTop />

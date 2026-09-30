@@ -14,7 +14,7 @@ import NotFoundPage from "@/pages/NotFoundPage";
 export default function App() {
   return (
     <Routes>
-      <Route element={<MainLayout headerStyle={1} footerStyle={12} />}>
+      <Route element={<MainLayout headerStyle={1} footerStyle={7} />}>
         <Route path="/" element={<Home12Page />} />
         <Route path="/about-3" element={<About3Page />} />
         <Route path="/portfolio-1" element={<Portfolio1Page />} />

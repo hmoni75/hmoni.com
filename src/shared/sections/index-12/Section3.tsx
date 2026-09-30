@@ -72,7 +72,9 @@ export default function Section3() {
                     className="card-home-12-service__num-line"
                     aria-hidden="true"
                   ></span>
-                  <span className="card-home-12-service__num">{s.num || String(idx + 1).padStart(2, '0')}</span>
+                  <span className="card-home-12-service__num">
+                    {s.num || String(idx + 1).padStart(2, "0")}
+                  </span>
                 </div>
               </div>
               <h3 className="card-home-12-service__title">{s.title}</h3>

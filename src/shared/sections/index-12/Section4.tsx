@@ -1,27 +1,51 @@
-﻿import RevealText from "@/shared/effects/RevealText";
+import { useEffect, useState } from "react";
+import RevealText from "@/shared/effects/RevealText";
+import { getProcessSteps, ProcessStep, getImgSrc } from "@/services/api";
 
-const PROCESS = [
-  {
-    delay: "0.05",
-    img: "sec-4-process-10.png",
-    title: "Discover",
-    desc: "We dive deep into your brand's DNA to define a clear strategic roadmap.",
-  },
-  {
-    delay: "0.15",
-    img: "sec-4-process-12.png",
-    title: "Design",
-    desc: "Crafting intuitive interfaces and cinematic motions that bring your vision to life.",
-  },
-  {
-    delay: "0.25",
-    img: "sec-4-process-11.png",
-    title: "Deploy",
-    desc: "Delivering high-performance solutions with clean code and seamless functionality.",
-  },
-];
+const getInitialCache = (): ProcessStep[] => {
+  try {
+    const cached = localStorage.getItem("hmoni_process");
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch {}
+  return [];
+};
 
 export default function Section4() {
+  const [steps, setSteps] = useState<ProcessStep[]>(getInitialCache);
+
+  useEffect(() => {
+    let isMounted = true;
+    getProcessSteps()
+      .then((data) => {
+        if (!isMounted) return;
+        if (Array.isArray(data) && data.length > 0) {
+          setSteps(data);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const getStepImage = (p: ProcessStep, idx: number) => {
+    if (p.image_url) return getImgSrc(p.image_url);
+    if (p.img && (p.img.startsWith("/") || p.img.startsWith("http"))) {
+      return getImgSrc(p.img);
+    }
+    const defaultImgs = [
+      "sec-4-process-10.png",
+      "sec-4-process-12.png",
+      "sec-4-process-11.png",
+    ];
+    const imgName = p.img || defaultImgs[idx % defaultImgs.length];
+    return `/assets/imgs/pages/home-12/${imgName}`;
+  };
+
   return (
     <section className="sec-4-home-12" aria-label="Process Philosophy">
       <div className="container">
@@ -39,24 +63,29 @@ export default function Section4() {
         </header>
 
         <div className="sec-4-home-12__row">
-          {PROCESS.map((p) => (
+          {steps.map((p, idx) => (
             <div
-              key={p.title}
+              key={p.id || p.title || idx}
               className="card-home-12-process at_fade_anim"
               data-fade-from="bottom"
-              data-delay={p.delay}
+              data-delay={p.delay || `${(0.05 + idx * 0.1).toFixed(2)}`}
             >
               <div className="card-home-12-process__image anim-zoomin-wrap">
                 <img
                   className="card-home-12-process__img anim-zoomin"
-                  src={`/assets/imgs/pages/home-12/${p.img}`}
-                  alt="H Moni"
+                  src={getStepImage(p, idx)}
+                  alt={p.title}
                   loading="lazy"
                 />
               </div>
               <div className="card-home-12-process__text">
-                <h3 className="card-home-12-process__title">{p.title}</h3>
-                <p className="card-home-12-process__desc">{p.desc}</p>
+                <h3 className="card-home-12-process__title">
+                  {p.step_num ? `${p.step_num}. ` : ""}
+                  {p.title}
+                </h3>
+                <p className="card-home-12-process__desc">
+                  {p.desc || p.description}
+                </p>
               </div>
             </div>
           ))}
@@ -65,4 +94,3 @@ export default function Section4() {
     </section>
   );
 }
-

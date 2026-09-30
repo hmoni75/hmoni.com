@@ -66,10 +66,16 @@ export interface Service {
 
 export interface ProcessStep {
   id: number;
-  step_num: string;
+  step_num?: string;
+  step_number?: number | string;
   title: string;
-  desc: string;
-  tags: string[];
+  desc?: string;
+  description?: string;
+  icon?: string;
+  image_url?: string;
+  img?: string;
+  tags?: string[];
+  delay?: string;
 }
 
 export interface Testimonial {
@@ -87,6 +93,22 @@ export interface FaqItem {
   question: string;
   answer: string;
   category: string;
+}
+
+export interface PricingPlan {
+  id: number;
+  name: string;
+  title: string;
+  plan_key: string;
+  price: string;
+  price_numeric?: string;
+  billing_period?: string;
+  description: string;
+  badge?: string;
+  is_popular: boolean;
+  button_text?: string;
+  button_link?: string;
+  features: string[];
 }
 
 export interface SocialLink {
@@ -473,21 +495,249 @@ export async function deleteService(id: number): Promise<boolean> {
 }
 
 // -------------------------------------------------------------
+// 3.5. PRICING PLANS
+// -------------------------------------------------------------
+const MANAGE_PRICING_API_ENDPOINTS = [
+  '/api/manage-pricing', // Same-origin proxy (Vercel/Vite rewrite)
+  '/api/manage-pricing.php', // cPanel / PHP server proxy
+  'https://manage.hmoni.com/api/pricing',
+];
+
+const DEFAULT_PRICING_PLANS: PricingPlan[] = [
+  {
+    id: 1,
+    name: 'Starter',
+    title: 'Starter',
+    plan_key: 'starter',
+    price: '$1,200',
+    billing_period: '/monthly',
+    description: 'A solid digital foundation focused on clarity, usability, and performance essentials.',
+    badge: '',
+    is_popular: false,
+    button_text: 'Get Started',
+    button_link: '#contact',
+    features: [
+      'Digital strategy setup',
+      'Digital audit & Insights',
+      'Positioning & Messaging',
+      'SEO & Technical setup',
+      'Analytics tracking',
+    ],
+  },
+  {
+    id: 2,
+    name: 'Growth',
+    title: 'Growth',
+    plan_key: 'growth',
+    price: '$2,800',
+    billing_period: '/monthly',
+    description: 'A performance-driven plan to accelerate acquisition and conversion.',
+    badge: 'MOST POPULAR',
+    is_popular: true,
+    button_text: 'Choose Growth',
+    button_link: '#contact',
+    features: [
+      'Growth strategy',
+      'Conversion optimization',
+      'SEO & Content performance',
+      'Campaign setup & Reporting',
+      'Advance analytics tracking',
+    ],
+  },
+  {
+    id: 3,
+    name: 'Scale',
+    title: 'Scale',
+    plan_key: 'scale',
+    price: '$3,600',
+    billing_period: '/monthly',
+    description: 'A long-term digital partnership for sustainable growth at scale.',
+    badge: '',
+    is_popular: false,
+    button_text: 'Scale Your Business',
+    button_link: '#contact',
+    features: [
+      'Full strategy & execution',
+      'Dedicated success manager',
+      'Advanced SEO & content',
+      'Multi-channel campaigns',
+      'Custom reporting & insights',
+    ],
+  },
+];
+
+export async function getPricingPlans(): Promise<PricingPlan[]> {
+  for (const url of MANAGE_PRICING_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, {
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json)
+          ? json
+          : json.data || json.plans || json.pricing || [];
+
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mappedPlans: PricingPlan[] = rawList
+            .map((p: any, idx: number) => {
+              let featuresArr: string[] = [];
+              if (Array.isArray(p.features)) {
+                featuresArr = p.features;
+              } else if (p.features_json) {
+                try {
+                  featuresArr = JSON.parse(p.features_json);
+                } catch {}
+              } else if (typeof p.features === 'string') {
+                featuresArr = p.features
+                  .split('\n')
+                  .map((f: string) => f.trim())
+                  .filter(Boolean);
+              }
+
+              const isPop =
+                p.is_popular === true ||
+                p.is_popular === 1 ||
+                (p.badge && p.badge.toLowerCase().includes('popular'));
+
+              return {
+                id: p.id || idx + 1,
+                name: p.name || p.title || `Plan ${idx + 1}`,
+                title: p.title || p.name || `Plan ${idx + 1}`,
+                plan_key:
+                  p.plan_key ||
+                  p.key ||
+                  (p.title || '').toLowerCase() ||
+                  `plan-${idx + 1}`,
+                price: p.price || `$${p.price_numeric || '1,200'}`,
+                price_numeric: p.price_numeric || '',
+                billing_period: p.billing_period || '/monthly',
+                description: p.description || p.desc || '',
+                badge: p.badge || (isPop ? 'MOST POPULAR' : ''),
+                is_popular: isPop,
+                button_text: p.button_text
+                  ? p.button_text.replace(/[^\x20-\x7E]/g, '').trim()
+                  : 'Get Started',
+                button_link: p.button_link || '#contact',
+                features:
+                  featuresArr.length > 0
+                    ? featuresArr
+                    : ['Digital strategy setup', 'SEO & Technical setup'],
+              };
+            })
+            .filter((p: PricingPlan) => !!p.title);
+
+          if (mappedPlans.length > 0) {
+            localStorage.setItem(
+              'hmoni_pricing_plans',
+              JSON.stringify(mappedPlans)
+            );
+            return mappedPlans;
+          }
+        }
+      }
+    } catch (err) {
+      // ignore network/CORS error and try next endpoint
+    }
+  }
+
+  // Secondary fallback: /api/pricing.php
+  const remote = await fetchApi<PricingPlan[]>('pricing.php');
+  if (remote && Array.isArray(remote) && remote.length > 0) {
+    localStorage.setItem('hmoni_pricing_plans', JSON.stringify(remote));
+    return remote;
+  }
+
+  // Tertiary fallback: LocalStorage or DEFAULT_PRICING_PLANS
+  const local = localStorage.getItem('hmoni_pricing_plans');
+  return local ? JSON.parse(local) : DEFAULT_PRICING_PLANS;
+}
+
+// -------------------------------------------------------------
 // 4. PROCESS PHILOSOPHY
 // -------------------------------------------------------------
+const MANAGE_PROCESS_API_ENDPOINTS = [
+  '/api/manage-process', // Same-origin proxy (Vercel/Vite rewrite)
+  '/api/manage-process.php', // cPanel / PHP server proxy
+  'https://manage.hmoni.com/api/process',
+];
+
+const MANAGE_FAQS_API_ENDPOINTS = [
+  '/api/manage-faqs',
+  '/api/manage-faqs.php',
+  'https://manage.hmoni.com/api/faqs',
+];
+
 const DEFAULT_PROCESS: ProcessStep[] = [
-  { id: 1, step_num: '01', title: 'Discovery & Alignment', desc: 'Uncovering core business goals, target audience, and edge.', tags: ['Strategy', 'Audit', 'Goals'] },
-  { id: 2, step_num: '02', title: 'Architecture & UX', desc: 'Building wireframes, content hierarchy, and user journeys.', tags: ['Wireframe', 'UX Research', 'Flows'] },
-  { id: 3, step_num: '03', title: 'Visual Direction & UI', desc: 'Crafting elevated UI components and visual systems.', tags: ['Figma', 'Design System', 'Motion'] },
-  { id: 4, step_num: '04', title: 'Production Build & Launch', desc: 'Developing clean React/Next.js code and shipping to live production.', tags: ['React', 'Testing', 'Vercel'] }
+  { id: 1, step_num: '01', step_number: 1, title: 'Discovery & Alignment', desc: 'We start by uncovering the core business goals, target audience, and competitive edge.', tags: ['Strategy', 'Audit', 'Goals'], img: 'sec-4-process-10.png', delay: '0.05' },
+  { id: 2, step_num: '02', step_number: 2, title: 'Architecture & UX', desc: 'Building wireframes, content hierarchy, and intuitive user journeys.', tags: ['Wireframe', 'UX Research', 'Flows'], img: 'sec-4-process-12.png', delay: '0.15' },
+  { id: 3, step_num: '03', step_number: 3, title: 'Visual Direction & UI', desc: 'Crafting elevated UI components, micro-animations, and visual systems.', tags: ['Figma', 'Design System', 'Motion'], img: 'sec-4-process-11.png', delay: '0.25' },
+  { id: 4, step_num: '04', step_number: 4, title: 'Production Build & Launch', desc: 'Developing clean React/Next.js code, performing QA tests, and shipping to live production.', tags: ['React', 'Testing', 'Vercel'], img: 'sec-4-process-10.png', delay: '0.35' }
 ];
 
 export async function getProcessSteps(): Promise<ProcessStep[]> {
+  for (const url of MANAGE_PROCESS_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, {
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json)
+          ? json
+          : json.data || json.process || json.steps || [];
+
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mappedSteps: ProcessStep[] = rawList
+            .map((p: any, idx: number) => {
+              const numVal =
+                p.step_number || p.step_num || String(idx + 1).padStart(2, '0');
+              const defaultImgs = [
+                'sec-4-process-10.png',
+                'sec-4-process-12.png',
+                'sec-4-process-11.png',
+              ];
+              const imgVal =
+                p.img || p.image || p.image_url || defaultImgs[idx % defaultImgs.length];
+
+              return {
+                id: p.id || idx + 1,
+                step_num: String(numVal).padStart(2, '0'),
+                step_number: numVal,
+                title: p.title || p.name || `Step ${idx + 1}`,
+                desc: p.desc || p.description || p.summary || '',
+                description: p.description || p.desc || '',
+                icon: p.icon || '',
+                image_url: p.image_url || '',
+                img: imgVal,
+                tags: Array.isArray(p.tags) ? p.tags : [],
+                delay: p.delay || `${(0.05 + idx * 0.1).toFixed(2)}`,
+              };
+            })
+            .filter((p: ProcessStep) => !!p.title);
+
+          if (mappedSteps.length > 0) {
+            localStorage.setItem(
+              'hmoni_process',
+              JSON.stringify(mappedSteps)
+            );
+            return mappedSteps;
+          }
+        }
+      }
+    } catch (err) {
+      // ignore network/CORS error and try next endpoint
+    }
+  }
+
+  // Secondary fallback: /api/process.php
   const remote = await fetchApi<ProcessStep[]>('process.php');
-  if (remote && Array.isArray(remote)) {
+  if (remote && Array.isArray(remote) && remote.length > 0) {
     localStorage.setItem('hmoni_process', JSON.stringify(remote));
     return remote;
   }
+
+  // Tertiary fallback: LocalStorage or DEFAULT_PROCESS
   const local = localStorage.getItem('hmoni_process');
   return local ? JSON.parse(local) : DEFAULT_PROCESS;
 }
@@ -545,11 +795,42 @@ const DEFAULT_FAQS: FaqItem[] = [
 ];
 
 export async function getFaqs(): Promise<FaqItem[]> {
+  for (const url of MANAGE_FAQS_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json) ? json : json.data || json.faqs || json.items || [];
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mappedFaqs: FaqItem[] = rawList
+            .map((f: any, idx: number) => {
+              return {
+                id: f.id || idx + 1,
+                question: f.question || f.q || `Question ${idx + 1}`,
+                answer: f.answer || f.a || '',
+                category: f.category || f.type || 'General',
+              };
+            })
+            .filter((f: FaqItem) => !!f.question);
+          if (mappedFaqs.length > 0) {
+            localStorage.setItem('hmoni_faqs', JSON.stringify(mappedFaqs));
+            return mappedFaqs;
+          }
+        }
+      }
+    } catch (err) {
+      // ignore and try next endpoint
+    }
+  }
+
+  // Secondary fallback: PHP proxy
   const remote = await fetchApi<FaqItem[]>('faqs.php');
   if (remote && Array.isArray(remote)) {
     localStorage.setItem('hmoni_faqs', JSON.stringify(remote));
     return remote;
   }
+
+  // Tertiary fallback: LocalStorage or defaults
   const local = localStorage.getItem('hmoni_faqs');
   return local ? JSON.parse(local) : DEFAULT_FAQS;
 }
@@ -576,7 +857,38 @@ const DEFAULT_SOCIALS: SocialLink[] = [
   { id: 3, platform: 'GitHub', url: 'https://github.com/hmoni', handle: '@hmoni' }
 ];
 
+const MANAGE_SOCIALS_API_ENDPOINTS = [
+  '/api/manage-socials', // Same-origin proxy (Vite/Vercel rewrite)
+  '/api/manage-socials.php', // cPanel / PHP server proxy
+  'https://manage.hmoni.com/api/socials',
+];
+
 export async function getSocials(): Promise<SocialLink[]> {
+  // Try managed endpoints first
+  for (const url of MANAGE_SOCIALS_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json) ? json : json.data || json.socials || json.items || [];
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mappedSocials: SocialLink[] = rawList.map((s: any, idx: number) => ({
+            id: s.id || idx + 1,
+            platform: s.platform || s.label || s.name || `Social ${idx + 1}`,
+            url: s.url || s.href || s.link || '#',
+            handle: s.handle || s.username || ''
+          })).filter((s) => !!s.platform && !!s.url);
+          if (mappedSocials.length > 0) {
+            localStorage.setItem('hmoni_socials', JSON.stringify(mappedSocials));
+            return mappedSocials;
+          }
+        }
+      }
+    } catch (err) {
+      // ignore error and continue
+    }
+  }
+  // Secondary fallback: PHP proxy
   const remote = await fetchApi<SocialLink[]>('socials.php');
   if (remote && Array.isArray(remote)) {
     localStorage.setItem('hmoni_socials', JSON.stringify(remote));
@@ -857,3 +1169,62 @@ export async function uploadImage(file: File): Promise<string | null> {
   return null;
 }
 
+
+// -------------------------------------------------------------
+// 9. BLOGS
+// -------------------------------------------------------------
+interface BlogItem {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  author?: string;
+  date?: string;
+  image?: string;
+}
+
+const DEFAULT_BLOGS: BlogItem[] = [];
+
+const MANAGE_BLOGS_API_ENDPOINTS = [
+  '/api/manage-blogs', // Same-origin proxy (Vite/Vercel rewrite)
+  '/api/manage-blogs.php', // PHP proxy fallback
+  'https://manage.hmoni.com/api/blogs', // Direct remote API
+];
+
+export async function getBlogs(): Promise<BlogItem[]> {
+  for (const url of MANAGE_BLOGS_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json) ? json : json.data || json.blogs || json.items || [];
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mapped: BlogItem[] = rawList.map((b: any, idx: number) => ({
+            id: b.id || idx + 1,
+            title: b.title || b.name || b.heading || `Blog ${idx + 1}`,
+            slug: b.slug || b.id?.toString() || `${idx + 1}`,
+            excerpt: b.excerpt || b.summary || b.description || '',
+            content: b.content || b.body || '',
+            author: b.author || b.author_name || '',
+            date: b.date || b.published_at || '',
+            image: b.image || b.thumbnail || '',
+          }));
+          localStorage.setItem('hmoni_blogs', JSON.stringify(mapped));
+          return mapped;
+        }
+      }
+    } catch (err) {
+      // ignore and try next endpoint
+    }
+  }
+  // Secondary fallback: PHP proxy
+  const remote = await fetchApi<BlogItem[]>('blogs.php');
+  if (remote && Array.isArray(remote) && remote.length > 0) {
+    localStorage.setItem('hmoni_blogs', JSON.stringify(remote));
+    return remote;
+  }
+  // Tertiary fallback: LocalStorage or defaults
+  const local = localStorage.getItem('hmoni_blogs');
+  return local ? JSON.parse(local) : DEFAULT_BLOGS;
+}

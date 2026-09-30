@@ -13,6 +13,14 @@
       "destination": "https://manage.hmoni.com/api/services"
     },
     {
+      "source": "/api/manage-pricing",
+      "destination": "https://manage.hmoni.com/api/pricing"
+    },
+    {
+      "source": "/api/manage-process",
+      "destination": "https://manage.hmoni.com/api/process"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
