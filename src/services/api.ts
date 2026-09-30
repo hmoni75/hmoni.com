@@ -177,7 +177,8 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T |
 // 1. HERO CAROUSEL TILES
 // -------------------------------------------------------------
 const MANAGE_HERO_API_ENDPOINTS = [
-  '/api/manage-hero', // Same-origin proxy (Vercel/Vite rewrite) - Zero CORS issues
+  '/api/manage-hero', // Same-origin proxy (Vercel/Vite rewrite)
+  '/api/manage-hero.php', // cPanel / PHP server proxy
   'https://manage.hmoni.com/api/hero',
 ];
 
@@ -264,7 +265,8 @@ export async function resetHeroTiles(): Promise<boolean> {
 // 2. PROJECTS
 // -------------------------------------------------------------
 const MANAGE_PROJECTS_API_ENDPOINTS = [
-  '/api/manage-projects', // Same-origin proxy (Vercel/Vite rewrite) - Zero CORS issues
+  '/api/manage-projects', // Same-origin proxy (Vercel/Vite rewrite)
+  '/api/manage-projects.php', // cPanel / PHP server proxy
   'https://manage.hmoni.com/api/projects',
 ];
 
