@@ -97,6 +97,21 @@ const DECO_SVG_3 = (
 );
 
 export default function Footer7() {
+  const [socials, setSocials] = useState<{ id: number; label: string; url: string; delay?: string }[]>([]);
+
+  useEffect(() => {
+    fetchSocialsApi().then((data: SocialLink[]) => {
+      setSocials(
+        data.map((s, idx) => ({
+          id: s.id,
+          label: s.platform || s.handle || `Social ${idx + 1}`,
+          url: s.url || '#',
+          delay: `${0.1 + idx * 0.1}`,
+        }))
+      );
+    }).catch(() => {});
+  }, []);
+
   return (
     <footer className="footer-7 overflow-hidden">
       <div className="container-2200 px-lg-5 px-3">
