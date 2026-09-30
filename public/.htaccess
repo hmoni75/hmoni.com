@@ -1,0 +1,32 @@
+# Disable directory browsing
+Options -Indexes
+
+# Enable Rewrite Engine
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Allow direct access to existing files and directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Allow direct access to php scripts in /api/
+  RewriteCond %{REQUEST_URI} ^/api/.*\.php$ [NC]
+  RewriteRule ^ - [L]
+
+  # Route /api/manage-<section> without .php extension to /api/manage-<section>.php
+  RewriteRule ^api/manage-([a-zA-Z0-9_-]+)/?$ api/manage-$1.php [L,QSA]
+
+  # Single Page Application (SPA) - redirect all other requests to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Handle CORS headers for API calls
+<IfModule mod_headers.c>
+  <FilesMatch "\.(php)$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With, Accept"
+  </FilesMatch>
+</IfModule>

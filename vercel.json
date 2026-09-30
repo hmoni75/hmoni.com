@@ -21,6 +21,30 @@
       "destination": "https://manage.hmoni.com/api/process"
     },
     {
+      "source": "/api/manage-faqs",
+      "destination": "https://manage.hmoni.com/api/faqs"
+    },
+    {
+      "source": "/api/manage-testimonials",
+      "destination": "https://manage.hmoni.com/api/testimonials"
+    },
+    {
+      "source": "/api/manage-experiences",
+      "destination": "https://manage.hmoni.com/api/experiences"
+    },
+    {
+      "source": "/api/manage-techstack",
+      "destination": "https://manage.hmoni.com/api/techstack"
+    },
+    {
+      "source": "/api/manage-blogs",
+      "destination": "https://manage.hmoni.com/api/blogs"
+    },
+    {
+      "source": "/api/manage-socials",
+      "destination": "https://manage.hmoni.com/api/socials"
+    },
+    {
       "source": "/api/manage-contacts",
       "destination": "https://manage.hmoni.com/api/contacts"
     },

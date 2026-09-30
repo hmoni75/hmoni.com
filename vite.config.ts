@@ -37,6 +37,36 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/manage-process/, "/api/process"),
       },
+      "/api/manage-faqs": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-faqs/, "/api/faqs"),
+      },
+      "/api/manage-testimonials": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-testimonials/, "/api/testimonials"),
+      },
+      "/api/manage-experiences": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-experiences/, "/api/experiences"),
+      },
+      "/api/manage-techstack": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-techstack/, "/api/techstack"),
+      },
+      "/api/manage-blogs": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-blogs/, "/api/blogs"),
+      },
+      "/api/manage-socials": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-socials/, "/api/socials"),
+      },
       "/api/manage-contacts": {
         target: "https://manage.hmoni.com",
         changeOrigin: true,

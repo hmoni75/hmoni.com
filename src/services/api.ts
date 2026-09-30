@@ -1,9 +1,7 @@
 // Centralized API Service for hmoni.com
 // Syncs with cPanel MySQL database backend (/api/*.php) with automatic localStorage fallback
 
-const API_BASE_URL = typeof window !== 'undefined' && window.location.hostname.includes('hmoni.com')
-  ? 'https://hmoni.com/api'
-  : '/api';
+const API_BASE_URL = '/api';
 
 // Interfaces
 export interface HeroTile {
@@ -668,6 +666,24 @@ const MANAGE_FAQS_API_ENDPOINTS = [
   'https://manage.hmoni.com/api/faqs',
 ];
 
+const MANAGE_TESTIMONIALS_API_ENDPOINTS = [
+  '/api/manage-testimonials',
+  '/api/manage-testimonials.php',
+  'https://manage.hmoni.com/api/testimonials',
+];
+
+const MANAGE_EXPERIENCE_API_ENDPOINTS = [
+  '/api/manage-experiences',
+  '/api/manage-experiences.php',
+  'https://manage.hmoni.com/api/experiences',
+];
+
+const MANAGE_TECHSTACK_API_ENDPOINTS = [
+  '/api/manage-techstack',
+  '/api/manage-techstack.php',
+  'https://manage.hmoni.com/api/techstack',
+];
+
 const DEFAULT_PROCESS: ProcessStep[] = [
   { id: 1, step_num: '01', step_number: 1, title: 'Discovery & Alignment', desc: 'We start by uncovering the core business goals, target audience, and competitive edge.', tags: ['Strategy', 'Audit', 'Goals'], img: 'sec-4-process-10.png', delay: '0.05' },
   { id: 2, step_num: '02', step_number: 2, title: 'Architecture & UX', desc: 'Building wireframes, content hierarchy, and intuitive user journeys.', tags: ['Wireframe', 'UX Research', 'Flows'], img: 'sec-4-process-12.png', delay: '0.15' },
@@ -764,11 +780,41 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
 ];
 
 export async function getTestimonials(): Promise<Testimonial[]> {
+  for (const url of MANAGE_TESTIMONIALS_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json) ? json : json.data || json.testimonials || json.items || [];
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mapped: Testimonial[] = rawList.map((t: any, idx: number) => ({
+            id: t.id || idx + 1,
+            author: t.author || t.client_name || t.name || `Client ${idx + 1}`,
+            role: t.role || t.position || t.designation || 'Client',
+            company: t.company || t.client_title || '',
+            content: t.content || t.comment || t.quote || t.description || '',
+            avatar: t.avatar || t.image || t.avatar_url || `/assets/imgs/template/avatar/avatar-${10 + (idx % 5)}.webp`,
+            stars: Number(t.stars || t.rating || 5),
+          })).filter((t: Testimonial) => !!t.content);
+
+          if (mapped.length > 0) {
+            localStorage.setItem('hmoni_testimonials', JSON.stringify(mapped));
+            return mapped;
+          }
+        }
+      }
+    } catch {
+      // try next endpoint
+    }
+  }
+
+  // Secondary fallback: PHP proxy
   const remote = await fetchApi<Testimonial[]>('testimonials.php');
-  if (remote && Array.isArray(remote)) {
+  if (remote && Array.isArray(remote) && remote.length > 0) {
     localStorage.setItem('hmoni_testimonials', JSON.stringify(remote));
     return remote;
   }
+
   const local = localStorage.getItem('hmoni_testimonials');
   return local ? JSON.parse(local) : DEFAULT_TESTIMONIALS;
 }
@@ -920,11 +966,39 @@ const DEFAULT_EXPERIENCE: ExperienceItem[] = [
 ];
 
 export async function getExperience(): Promise<ExperienceItem[]> {
+  for (const url of MANAGE_EXPERIENCE_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json) ? json : json.data || json.experiences || json.items || [];
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mapped: ExperienceItem[] = rawList.map((e: any, idx: number) => ({
+            id: e.id || idx + 1,
+            period: e.period || (e.start_date && e.end_date ? `${e.start_date} — ${e.end_date}` : (e.duration || '2022 — Present')),
+            role: e.role || e.position || e.title || `Role ${idx + 1}`,
+            company: e.company || e.organization || '',
+            description: e.description || e.details || '',
+          }));
+
+          if (mapped.length > 0) {
+            localStorage.setItem('hmoni_experience', JSON.stringify(mapped));
+            return mapped;
+          }
+        }
+      }
+    } catch {
+      // try next endpoint
+    }
+  }
+
+  // Secondary fallback: PHP proxy
   const remote = await fetchApi<ExperienceItem[]>('experience.php');
-  if (remote && Array.isArray(remote)) {
+  if (remote && Array.isArray(remote) && remote.length > 0) {
     localStorage.setItem('hmoni_experience', JSON.stringify(remote));
     return remote;
   }
+
   const local = localStorage.getItem('hmoni_experience');
   return local ? JSON.parse(local) : DEFAULT_EXPERIENCE;
 }
@@ -986,11 +1060,39 @@ const DEFAULT_TECH_STACK: TechStackItem[] = [
 ];
 
 export async function getTechStack(): Promise<TechStackItem[]> {
+  for (const url of MANAGE_TECHSTACK_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json) ? json : json.data || json.techstack || json.items || [];
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mapped: TechStackItem[] = rawList.map((t: any, idx: number) => ({
+            id: t.id || idx + 1,
+            name: t.name || t.title || `Tech ${idx + 1}`,
+            category: t.category || 'Development',
+            icon_url: t.icon_url || t.icon || t.image_url || '/assets/imgs/icons/tech-react.svg',
+            proficiency: t.proficiency || t.level || 'Expert',
+          }));
+
+          if (mapped.length > 0) {
+            localStorage.setItem('hmoni_techstack', JSON.stringify(mapped));
+            return mapped;
+          }
+        }
+      }
+    } catch {
+      // try next endpoint
+    }
+  }
+
+  // Secondary fallback: PHP proxy
   const remote = await fetchApi<TechStackItem[]>('techstack.php');
-  if (remote && Array.isArray(remote)) {
+  if (remote && Array.isArray(remote) && remote.length > 0) {
     localStorage.setItem('hmoni_techstack', JSON.stringify(remote));
     return remote;
   }
+
   const local = localStorage.getItem('hmoni_techstack');
   return local ? JSON.parse(local) : DEFAULT_TECH_STACK;
 }
