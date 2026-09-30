@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
+import { saveContact } from "@/services/api";
 
 // Contact 1 Section 1 - Reach out / Contact form
 
@@ -230,26 +231,37 @@ export default function Section1() {
     setIsSubmitting(true);
 
     try {
-      await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key:
-            import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE",
-          subject: `New Inquiry from ${formData.name} — H Moni Website`,
-          from_name: "H Moni Portfolio Website",
-          to_email: "hello@hmoni.com",
+      // Send to both APIs simultaneously
+      await Promise.allSettled([
+        // 1. Save to manage.hmoni.com/api/contacts
+        saveContact({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           message: formData.message,
         }),
-      });
+        // 2. Send email notification via web3forms
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key:
+              import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE",
+            subject: `New Inquiry from ${formData.name} — H Moni Website`,
+            from_name: "H Moni Portfolio Website",
+            to_email: "hello@hmoni.com",
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            message: formData.message,
+          }),
+        }),
+      ]);
     } catch (err) {
-      console.log("Form submission response:", err);
+      console.log("Form submission error:", err);
     } finally {
       setIsSubmitting(false);
       setSubmittedData({ ...formData });

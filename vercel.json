@@ -21,6 +21,10 @@
       "destination": "https://manage.hmoni.com/api/process"
     },
     {
+      "source": "/api/manage-contacts",
+      "destination": "https://manage.hmoni.com/api/contacts"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

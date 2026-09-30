@@ -1036,6 +1036,29 @@ export async function deleteMessage(id: number): Promise<boolean> {
   return !!res;
 }
 
+// Save contact form data to manage.hmoni.com/api/contacts
+const MANAGE_CONTACTS_API_ENDPOINTS = [
+  '/api/manage-contacts',           // Same-origin proxy (Vite/Vercel rewrite)
+  '/api/manage-contacts.php',       // PHP proxy fallback
+  'https://manage.hmoni.com/api/contacts', // Direct remote API
+];
+
+export async function saveContact(data: { name: string; email: string; phone?: string; message: string }): Promise<boolean> {
+  for (const url of MANAGE_CONTACTS_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) return true;
+    } catch (err) {
+      // ignore and try next endpoint
+    }
+  }
+  return false;
+}
+
 // -------------------------------------------------------------
 // 13. SITE SETTINGS & METADATA
 // -------------------------------------------------------------

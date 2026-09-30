@@ -37,6 +37,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/manage-process/, "/api/process"),
       },
+      "/api/manage-contacts": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-contacts/, "/api/contacts"),
+      },
     },
   },
 });
