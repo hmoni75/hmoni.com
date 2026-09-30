@@ -1,51 +1,37 @@
+import { useEffect, useState } from "react";
 import RevealText from "@/shared/effects/RevealText";
+import { getServices, Service } from "@/services/api";
 
-const SERVICES = [
-  {
-    delay: "0.05",
-    num: "01",
-    title: "Brand Identity",
-    desc: "Logo systems, type pairings, color, and visual language that travels across every touchpoint.",
-    tags: ["Logo", "Type system", "Guidelines"],
-  },
-  {
-    delay: "0.1",
-    num: "02",
-    title: "Web Design",
-    desc: "Marketing sites, portfolios, and product pages designed in Figma and ready for development.",
-    tags: ["Landing", "Portfolio", "Marketing"],
-  },
-  {
-    delay: "0.15",
-    num: "03",
-    title: "Webflow & Framer",
-    desc: "Hand-built no-code sites with motion, CMS, and clean structure you can actually maintain.",
-    tags: ["Framer", "Webflow", "CMS"],
-  },
-  {
-    delay: "0.2",
-    num: "04",
-    title: "Product UI/UX",
-    desc: "Dashboards, onboarding flows, and product surfaces — clear, considered, ready for engineering.",
-    tags: ["Dashboard", "App UI", "Flows"],
-  },
-  {
-    delay: "0.25",
-    num: "05",
-    title: "Art Direction",
-    desc: "Visual systems, photography direction, and editorial layouts for brands that need a point of view.",
-    tags: ["Editorial", "Photography", "Style"],
-  },
-  {
-    delay: "0.3",
-    num: "06",
-    title: "Front-End Build",
-    desc: "Pixel-perfect React or Next.js builds, accessible by default and shipped with care.",
-    tags: ["React", "Next.js", "Tailwind"],
-  },
-];
+const getInitialCache = (): Service[] => {
+  try {
+    const cached = localStorage.getItem("hmoni_services");
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch {}
+  return [];
+};
 
 export default function Section3() {
+  const [services, setServices] = useState<Service[]>(getInitialCache);
+
+  useEffect(() => {
+    let isMounted = true;
+    getServices()
+      .then((data) => {
+        if (!isMounted) return;
+        if (Array.isArray(data) && data.length > 0) {
+          setServices(data);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <section className="sec-3-home-12" aria-label="Our Services">
       <div className="container">
@@ -73,12 +59,12 @@ export default function Section3() {
         </header>
 
         <div className="sec-3-home-12__grid">
-          {SERVICES.map((s) => (
+          {services.map((s, idx) => (
             <div
-              key={s.num}
+              key={s.id || s.num || idx}
               className="card-home-12-service at_fade_anim"
               data-fade-from="bottom"
-              data-delay={s.delay}
+              data-delay={s.delay || `${(0.05 * (idx + 1)).toFixed(2)}`}
             >
               <div className="card-home-12-service__top">
                 <div className="card-home-12-service__num-wrap">
@@ -86,21 +72,23 @@ export default function Section3() {
                     className="card-home-12-service__num-line"
                     aria-hidden="true"
                   ></span>
-                  <span className="card-home-12-service__num">{s.num}</span>
+                  <span className="card-home-12-service__num">{s.num || String(idx + 1).padStart(2, '0')}</span>
                 </div>
               </div>
               <h3 className="card-home-12-service__title">{s.title}</h3>
               <p className="card-home-12-service__desc">{s.desc}</p>
-              <ul
-                className="card-home-12-service__tags"
-                aria-label="Service tags"
-              >
-                {s.tags.map((tag) => (
-                  <li key={tag}>
-                    <span className="card-home-12-service__tag">{tag}</span>
-                  </li>
-                ))}
-              </ul>
+              {s.tags && s.tags.length > 0 && (
+                <ul
+                  className="card-home-12-service__tags"
+                  aria-label="Service tags"
+                >
+                  {s.tags.map((tag) => (
+                    <li key={tag}>
+                      <span className="card-home-12-service__tag">{tag}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>

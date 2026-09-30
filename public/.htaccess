@@ -1,0 +1,20 @@
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Proxy API endpoints for manage.hmoni.com
+    RewriteRule ^api/manage-hero$ https://manage.hmoni.com/api/hero [P,L]
+    RewriteRule ^api/manage-projects$ https://manage.hmoni.com/api/projects [P,L]
+    RewriteRule ^api/manage-services$ https://manage.hmoni.com/api/services [P,L]
+
+    # React SPA Routing fallback
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.html [L]
+</IfModule>

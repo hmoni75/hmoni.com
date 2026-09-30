@@ -9,6 +9,10 @@
       "destination": "https://manage.hmoni.com/api/projects"
     },
     {
+      "source": "/api/manage-services",
+      "destination": "https://manage.hmoni.com/api/services"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

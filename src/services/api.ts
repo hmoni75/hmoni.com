@@ -393,19 +393,68 @@ export async function deleteProject(id: number): Promise<boolean> {
 // -------------------------------------------------------------
 // 3. SERVICES
 // -------------------------------------------------------------
+const MANAGE_SERVICES_API_ENDPOINTS = [
+  '/api/manage-services', // Same-origin proxy (Vercel/Vite rewrite)
+  '/api/manage-services.php', // cPanel / PHP server proxy
+  'https://manage.hmoni.com/api/services',
+];
+
 const DEFAULT_SERVICES: Service[] = [
-  { id: 1, num: '01', title: 'Brand Identity', desc: 'Logo systems, type pairings, color, and visual language.', tags: ['Logo', 'Type system', 'Guidelines'] },
-  { id: 2, num: '02', title: 'Web Design', desc: 'Marketing sites, portfolios, and product pages designed in Figma.', tags: ['Landing', 'Portfolio', 'Marketing'] },
-  { id: 3, num: '03', title: 'Webflow & Framer', desc: 'Hand-built no-code sites with motion and CMS.', tags: ['Framer', 'Webflow', 'CMS'] },
-  { id: 4, num: '04', title: 'Product UI/UX', desc: 'Dashboards, onboarding flows, and product surfaces.', tags: ['Dashboard', 'App UI', 'Flows'] }
+  { id: 1, num: '01', title: 'Brand Identity', desc: 'Logo systems, type pairings, color, and visual language that travels across every touchpoint.', tags: ['Logo', 'Type system', 'Guidelines'], delay: '0.05' },
+  { id: 2, num: '02', title: 'Web Design', desc: 'Marketing sites, portfolios, and product pages designed in Figma and ready for development.', tags: ['Landing', 'Portfolio', 'Marketing'], delay: '0.1' },
+  { id: 3, num: '03', title: 'Webflow & Framer', desc: 'Hand-built no-code sites with motion, CMS, and clean structure you can actually maintain.', tags: ['Framer', 'Webflow', 'CMS'], delay: '0.15' },
+  { id: 4, num: '04', title: 'Product UI/UX', desc: 'Dashboards, onboarding flows, and product surfaces — clear, considered, ready for engineering.', tags: ['Dashboard', 'App UI', 'Flows'], delay: '0.2' },
+  { id: 5, num: '05', title: 'Art Direction', desc: 'Visual systems, photography direction, and editorial layouts for brands that need a point of view.', tags: ['Editorial', 'Photography', 'Style'], delay: '0.25' },
+  { id: 6, num: '06', title: 'Front-End Build', desc: 'Pixel-perfect React or Next.js builds, accessible by default and shipped with care.', tags: ['React', 'Next.js', 'Tailwind'], delay: '0.3' }
 ];
 
 export async function getServices(): Promise<Service[]> {
+  for (const url of MANAGE_SERVICES_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'Accept': 'application/json' },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json)
+          ? json
+          : (json.data || json.services || json.items || []);
+
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mappedServices: Service[] = rawList.map((s: any, idx: number) => {
+            const numVal = s.num || s.step_num || String(idx + 1).padStart(2, '0');
+            const tagsArr = Array.isArray(s.tags)
+              ? s.tags
+              : (s.tags_json ? JSON.parse(s.tags_json) : (typeof s.tags === 'string' ? s.tags.split(',').map((t: string) => t.trim()) : []));
+            return {
+              id: s.id || idx + 1,
+              num: numVal,
+              title: s.title || s.name || `Service ${idx + 1}`,
+              desc: s.desc || s.description || s.summary || '',
+              tags: tagsArr.length > 0 ? tagsArr : ['Design', 'Development'],
+              delay: s.delay || `${(0.05 * (idx + 1)).toFixed(2)}`,
+            };
+          }).filter((s: Service) => !!s.title);
+
+          if (mappedServices.length > 0) {
+            localStorage.setItem('hmoni_services', JSON.stringify(mappedServices));
+            return mappedServices;
+          }
+        }
+      }
+    } catch (err) {
+      // ignore network/CORS error and try next endpoint
+    }
+  }
+
+  // Secondary fallback: /api/services.php
   const remote = await fetchApi<Service[]>('services.php');
-  if (remote && Array.isArray(remote)) {
+  if (remote && Array.isArray(remote) && remote.length > 0) {
     localStorage.setItem('hmoni_services', JSON.stringify(remote));
     return remote;
   }
+
+  // Tertiary fallback: LocalStorage or DEFAULT_SERVICES
   const local = localStorage.getItem('hmoni_services');
   return local ? JSON.parse(local) : DEFAULT_SERVICES;
 }
