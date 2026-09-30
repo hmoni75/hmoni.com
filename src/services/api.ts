@@ -1109,9 +1109,7 @@ export const fetchTechStackApi = getTechStack;
 export const createTechStackApi = saveTechStack;
 export const deleteTechStackApi = deleteTechStack;
 
-export const fetchBlogsApi = getBlogs;
-export const createBlogApi = saveBlog;
-export const deleteBlogApi = deleteBlog;
+// Blog aliases moved to after new getBlogs definition below
 
 export const fetchMessagesApi = getMessages;
 export const deleteMessageApi = deleteMessage;
@@ -1199,3 +1197,6 @@ export async function getBlogs(): Promise<BlogItem[]> {
   const local = localStorage.getItem('hmoni_blogs');
   return local ? JSON.parse(local) : DEFAULT_BLOGS;
 }
+
+// Blog backward compatibility alias
+export const fetchBlogsApi = getBlogs;
