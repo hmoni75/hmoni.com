@@ -42,6 +42,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/manage-contacts/, "/api/contacts"),
       },
+      "/api/manage-cv": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-cv/, "/api/cv"),
+      },
     },
   },
 });

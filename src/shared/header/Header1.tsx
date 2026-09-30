@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MainMenu from "@/shared/MainMenu";
 import ThemeSwitcher from "@/shared/ThemeSwitcher";
+import { downloadCv } from "@/services/api";
 
 interface Header1Props {
   onOpenSearch?: () => void;
@@ -60,11 +61,12 @@ export default function Header1({
                 <div className="dark-light-mode">
                   <ThemeSwitcher />
                 </div>
-                <a
-                  href="/assets/cv.pdf"
-                  download="H_Moni_CV.pdf"
+                <button
+                  type="button"
+                  onClick={() => downloadCv()}
                   className="at-btn text-white rounded-pill px-4 py-2 fz-14 fw-600 d-inline-flex align-items-center gap-2 border-0 text-decoration-none"
-                  style={{ backgroundColor: "#F0460E" }}
+                  style={{ backgroundColor: "#F0460E", cursor: "pointer" }}
+                  aria-label="Download CV"
                 >
                   <span>Download CV</span>
                   <svg
@@ -82,7 +84,7 @@ export default function Header1({
                     <polyline points="7 10 12 15 17 10" />
                     <line x1="12" y1="15" x2="12" y2="3" />
                   </svg>
-                </a>
+                </button>
               </div>
             </div>
           </div>

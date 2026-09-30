@@ -25,6 +25,10 @@
       "destination": "https://manage.hmoni.com/api/contacts"
     },
     {
+      "source": "/api/manage-cv/:path*",
+      "destination": "https://manage.hmoni.com/api/cv/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

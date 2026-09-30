@@ -1223,3 +1223,68 @@ export async function getBlogs(): Promise<BlogItem[]> {
 
 // Blog backward compatibility alias
 export const fetchBlogsApi = getBlogs;
+
+// -------------------------------------------------------------
+// 14. CV DOWNLOAD
+// -------------------------------------------------------------
+export interface CvMetadata {
+  id?: number;
+  filename?: string;
+  file_size?: number;
+  title?: string;
+}
+
+export const MANAGE_CV_DOWNLOAD_ENDPOINTS = [
+  '/api/manage-cv/download',
+  '/api/manage-cv.php',
+  'https://manage.hmoni.com/api/cv/download',
+  'https://manage.hmoni.com/api/cv',
+  '/assets/cv.pdf',
+];
+
+export async function downloadCv(): Promise<void> {
+  // First try fetching the file blob through the endpoint hierarchy
+  for (const url of MANAGE_CV_DOWNLOAD_ENDPOINTS) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) continue;
+
+      const contentType = res.headers.get('content-type') || '';
+
+      // If the endpoint directly returns the PDF
+      if (contentType.includes('application/pdf') || contentType.includes('octet-stream')) {
+        const blob = await res.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'H_Moni_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => window.URL.revokeObjectURL(blobUrl), 10000);
+        return;
+      }
+
+      // If the endpoint returns JSON metadata containing a download URL
+      if (contentType.includes('application/json')) {
+        const json = await res.json();
+        const fileUrl = json?.data?.url || json?.url || json?.data?.file_url;
+        if (fileUrl) {
+          window.open(fileUrl, '_blank');
+          return;
+        }
+      }
+    } catch {
+      // try next endpoint
+    }
+  }
+
+  // Fallback: direct browser navigation to download URL
+  const link = document.createElement('a');
+  link.href = 'https://manage.hmoni.com/api/cv/download';
+  link.download = 'H_Moni_CV.pdf';
+  link.target = '_blank';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}

@@ -1,5 +1,6 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
+import { downloadCv } from "@/services/api";
 
 // About 3 Section 1 - About me + banner + Experience / Journey
 
@@ -91,9 +92,11 @@ export default function Section1() {
                                     {ARROW_CIRCLE_SVG}
                                 </Link>
                             </div>
-                            <Link
-                                to="#"
-                                className="at-btn common-black border-bottom-900 text-uppercase bg-transparent rounded-0 p-0 pb-2"
+                            <button
+                                type="button"
+                                onClick={() => downloadCv()}
+                                className="at-btn common-black border-bottom-900 text-uppercase bg-transparent rounded-0 p-0 pb-2 border-0"
+                                style={{ cursor: "pointer" }}
                             >
                                 <span className="text-uppercase">
                                     <span className="text-1">Download CV</span>
@@ -103,7 +106,7 @@ export default function Section1() {
                                     {ARROW_SVG}
                                     {ARROW_SVG}
                                 </i>
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </div>
