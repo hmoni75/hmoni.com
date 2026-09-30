@@ -39,7 +39,7 @@ export default function Footer12() {
 
                     <div className="footer-12__columns">
                         <div className="footer-12__col footer-12__col--brand">
-                            <Link className="footer-12__brand" to="/index-12" aria-label="H Moni home">
+                            <Link className="footer-12__brand" to="/" aria-label="H Moni home">
                                 <img className="footer-12__brand-logo" src="/assets/imgs/template/logo/logo-w.svg" alt="H Moni" loading="lazy" />
                             </Link>
                             <p className="footer-12__brand-desc">Quiet craft for loud ideas. An independent studio shaping portfolios, identities, and digital products built to last.</p>
@@ -54,8 +54,8 @@ export default function Footer12() {
                         <div className="footer-12__col">
                             <p className="footer-12__col-title">STUDIO</p>
                             <ul className="footer-12__col-links">
-                                <li><Link to="/about-1">About</Link></li>
-                                <li><Link to="/services-details">Process</Link></li>
+                                <li><Link to="/about-3">About</Link></li>
+                                <li><Link to="/pricing">Process</Link></li>
                                 <li><a href="#">Careers</a></li>
                                 <li><Link to="/contact-1">Contact</Link></li>
                             </ul>
@@ -75,8 +75,8 @@ export default function Footer12() {
                             <p className="footer-12__col-title">RESOURCES</p>
                             <ul className="footer-12__col-links">
                                 <li><Link to="/pricing">Pricing</Link></li>
-                                <li><Link to="/faqs">FAQ</Link></li>
-                                <li><Link to="/archive-1">Blog</Link></li>
+                                <li><Link to="/pricing">FAQ</Link></li>
+                                <li><Link to="/archive-3">Blog</Link></li>
                                 <li><a href="#">Templates</a></li>
                             </ul>
                         </div>

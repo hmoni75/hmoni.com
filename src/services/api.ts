@@ -26,6 +26,33 @@ export interface Project {
   featured?: boolean;
   description?: string;
   tags?: string[];
+  client?: string;
+  release_date?: string;
+  role?: string;
+  duration?: string;
+  intro?: string;
+  challenge?: string;
+  solution?: string;
+  outcome?: string;
+  images?: string[];
+}
+
+export function getImgSrc(img?: string): string {
+  if (!img) return "/assets/imgs/pages/home-13/sec-3-img-1.webp";
+  if (
+    img.startsWith("http://") ||
+    img.startsWith("https://") ||
+    img.startsWith("data:")
+  ) {
+    return img;
+  }
+  if (img.startsWith("/")) {
+    return img;
+  }
+  if (img.startsWith("uploads/") || img.startsWith("storage/")) {
+    return `https://manage.hmoni.com/${img}`;
+  }
+  return `/assets/imgs/pages/home-13/${img}`;
 }
 
 export interface Service {
@@ -307,12 +334,21 @@ export async function getProjects(): Promise<Project[]> {
               location: p.location || p.loc || '',
               size: p.size || '',
               service: p.service || '',
-              link: p.link || '/portfolio-details-1',
+              link: p.link || `/portfolio-details-1?id=${p.id || idx + 1}`,
               img: p.img || p.image || p.url || p.src || p.image_url || p.path || '',
               status: p.status || 'Published',
               featured: p.featured !== undefined ? !!p.featured : true,
               description: p.description || p.desc || '',
-              tags: Array.isArray(p.tags) ? p.tags : (p.tags_json ? JSON.parse(p.tags_json) : [])
+              tags: Array.isArray(p.tags) ? p.tags : (p.tags_json ? JSON.parse(p.tags_json) : []),
+              client: p.client || p.client_name || '',
+              release_date: p.release_date || p.year || p.date || '',
+              role: p.role || p.service || p.category || '',
+              duration: p.duration || '',
+              intro: p.intro || p.description || p.desc || '',
+              challenge: p.challenge || '',
+              solution: p.solution || '',
+              outcome: p.outcome || '',
+              images: Array.isArray(p.images) ? p.images : (p.images_json ? JSON.parse(p.images_json) : [])
             };
           }).filter((p: Project) => !!p.title);
 

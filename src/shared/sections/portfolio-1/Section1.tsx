@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import PortfolioCard1, { type PortfolioCard1Tag } from "@/shared/cards/PortfolioCard1";
 import PortfolioFilterSort, { type FilterValue } from "./PortfolioFilterSort";
+import { getProjects, getImgSrc, Project } from "@/services/api";
 
 type PortfolioItem = {
     classList: string;
@@ -11,11 +13,11 @@ type PortfolioItem = {
     tags: PortfolioCard1Tag[];
 };
 
-const PORTFOLIO_DATA: PortfolioItem[] = [
+const DEFAULT_PORTFOLIO_DATA: PortfolioItem[] = [
     {
         classList: "col-xxl-6 col-lg-7",
         category: "design",
-        link: "/portfolio-details-1",
+        link: "/portfolio-details-1?id=1",
         img: "/assets/imgs/pages/img-11.webp",
         title: "Noirform",
         description: "Brand art direction & visual identity",
@@ -29,7 +31,7 @@ const PORTFOLIO_DATA: PortfolioItem[] = [
     {
         classList: "col-xxl-6 col-lg-7",
         category: "photography",
-        link: "/portfolio-details-1",
+        link: "/portfolio-details-1?id=2",
         img: "/assets/imgs/pages/img-12.webp",
         title: "Nebula",
         description: "UI/UX & product design for digital platforms",
@@ -43,7 +45,7 @@ const PORTFOLIO_DATA: PortfolioItem[] = [
     {
         classList: "col-xxl-6 col-lg-7",
         category: "marketing",
-        link: "/portfolio-details-1",
+        link: "/portfolio-details-1?id=3",
         img: "/assets/imgs/pages/img-13.webp",
         title: "Voidline",
         description: "3D animation & motion branding",
@@ -52,48 +54,6 @@ const PORTFOLIO_DATA: PortfolioItem[] = [
             { label: "motion design", href: "#" },
             { label: "visual storytelling", href: "#" },
             { label: "cgi", href: "#" },
-        ],
-    },
-    {
-        classList: "col-xxl-6 col-lg-7",
-        category: "marketing",
-        link: "/portfolio-details-1",
-        img: "/assets/imgs/pages/img-14.webp",
-        title: "Lumen",
-        description: "Branding system for modern startups",
-        tags: [
-            { label: "brand strategy", href: "#" },
-            { label: "visual identity", href: "#" },
-            { label: "startup branding", href: "#" },
-            { label: "design system", href: "#" },
-        ],
-    },
-    {
-        classList: "col-xxl-6 col-lg-7",
-        category: "photography",
-        link: "/portfolio-details-1",
-        img: "/assets/imgs/pages/img-170.webp",
-        title: "Globale",
-        description: "Branding system for modern startups",
-        tags: [
-            { label: "brand strategy", href: "#" },
-            { label: "visual identity", href: "#" },
-            { label: "startup branding", href: "#" },
-            { label: "design system", href: "#" },
-        ],
-    },
-    {
-        classList: "col-xxl-6 col-lg-7",
-        category: "photography",
-        link: "/portfolio-details-1",
-        img: "/assets/imgs/pages/img-171.webp",
-        title: "Finteck",
-        description: "Branding system for modern startups",
-        tags: [
-            { label: "brand strategy", href: "#" },
-            { label: "visual identity", href: "#" },
-            { label: "startup branding", href: "#" },
-            { label: "design system", href: "#" },
         ],
     },
 ];
@@ -107,7 +67,63 @@ const ARROW_SVG = (
     </svg>
 );
 
+const getInitialCache = (): PortfolioItem[] => {
+    try {
+        const cached = localStorage.getItem("hmoni_projects");
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                return mapApiProjects(parsed);
+            }
+        }
+    } catch {}
+    return DEFAULT_PORTFOLIO_DATA;
+};
+
+function mapApiProjects(projects: Project[]): PortfolioItem[] {
+    return projects.map((p) => {
+        const tags: PortfolioCard1Tag[] = (p.tags && p.tags.length > 0)
+            ? p.tags.map((t) => ({ label: t, href: "#" }))
+            : [
+                { label: p.category || "branding", href: "#" },
+                { label: p.service || "design", href: "#" },
+            ];
+
+        const cat: FilterValue =
+            p.category?.toLowerCase().includes("photo") ? "photography" :
+            p.category?.toLowerCase().includes("market") ? "marketing" : "design";
+
+        return {
+            classList: "col-xxl-6 col-lg-7",
+            category: cat,
+            link: p.link && p.link !== "/portfolio-details-1" ? p.link : `/portfolio-details-1?id=${p.id}`,
+            img: getImgSrc(p.img),
+            title: p.title,
+            description: p.description || p.service || p.location || "Quiet craft for loud ideas.",
+            tags,
+        };
+    });
+}
+
 export default function Section1() {
+    const [portfolioData, setPortfolioData] = useState<PortfolioItem[]>(getInitialCache);
+
+    useEffect(() => {
+        let isMounted = true;
+        getProjects()
+            .then((data) => {
+                if (!isMounted) return;
+                if (Array.isArray(data) && data.length > 0) {
+                    setPortfolioData(mapApiProjects(data));
+                }
+            })
+            .catch(() => {});
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
     return (
         <section className="sec-1-portfolio-1 overflow-hidden pt-150 pb-110 border-bottom-100">
             <div className="container pb-60">
@@ -123,7 +139,7 @@ export default function Section1() {
                 </div>
             </div>
             <div className="container">
-                <PortfolioFilterSort items={PORTFOLIO_DATA}>
+                <PortfolioFilterSort items={portfolioData}>
                     {(visibleItems, { hasMore, onLoadMore }) => (
                         <div className="row g-4 justify-content-center">
                             {visibleItems.map((item, idx) => (
