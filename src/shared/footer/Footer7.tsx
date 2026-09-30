@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getSocials as fetchSocialsApi, SocialLink } from "@/services/api";
 
-import { fetchSocialsApi, SocialLink } from "@/services/api";
+
 // Footer 7 (Home 7) - Big nav with arrow SVGs, socials, decorative SVGs, contact, newsletter, "ELEVATE STARTUPS" word
 
 const NAV_LINKS = [
