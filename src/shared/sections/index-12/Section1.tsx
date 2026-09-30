@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Swiper from "swiper";
 import { Autoplay, FreeMode } from "swiper/modules";
+import { getHeroTiles, HeroTile } from "@/services/api";
 
 export interface HeroTileItem {
   id: number;
@@ -10,59 +11,57 @@ export interface HeroTileItem {
   title?: string;
 }
 
-export const INITIAL_HERO_TILES: HeroTileItem[] = [
-  {
-    id: 1,
-    img: "sec-1-tile-1.webp",
-    mod: "brand-1",
-    title: "Brand Identity 1",
-  },
-  {
-    id: 2,
-    img: "sec-1-tile-2.webp",
-    mod: "neutral-100",
-    title: "Digital Product 2",
-  },
-  {
-    id: 3,
-    img: "sec-1-tile-3.webp",
-    mod: "neutral-800",
-    title: "Creative Layout 3",
-  },
-  { id: 4, img: "sec-1-tile-4.webp", mod: "brand-2", title: "UIUX Showcase 4" },
-  {
-    id: 5,
-    img: "sec-1-tile-5.webp",
-    mod: "neutral-300",
-    title: "Visual Story 5",
-  },
-  { id: 6, img: "sec-1-tile-6.webp", mod: "brand-1", title: "Mobile App 6" },
-];
-
-export function getHeroTilesFromStorage(): HeroTileItem[] {
-  const saved = localStorage.getItem("hmoni_manage_hero_tiles");
-  if (!saved) return INITIAL_HERO_TILES;
+const getInitialCache = (): HeroTileItem[] => {
   try {
-    const parsed = JSON.parse(saved);
-    return Array.isArray(parsed) && parsed.length > 0
-      ? parsed
-      : INITIAL_HERO_TILES;
-  } catch {
-    return INITIAL_HERO_TILES;
-  }
-}
+    const cached = localStorage.getItem("hmoni_hero_tiles");
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch {}
+  return [];
+};
 
 export default function Section1() {
-  const [tiles, setTiles] = useState<HeroTileItem[]>(getHeroTilesFromStorage);
+  const [tiles, setTiles] = useState<HeroTileItem[]>(getInitialCache);
+  const [isLoading, setIsLoading] = useState<boolean>(() => tiles.length === 0);
+  const [isLoaded, setIsLoaded] = useState<boolean>(() => tiles.length > 0);
   const sliderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+
+    // Fetch live Hero carousel data exclusively from API
+    getHeroTiles()
+      .then((data) => {
+        if (!isMounted) return;
+        if (Array.isArray(data) && data.length > 0) {
+          setTiles(data);
+          setIsLoading(false);
+          setTimeout(() => setIsLoaded(true), 50);
+        } else {
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) setIsLoading(false);
+      });
+
     const handleUpdate = () => {
-      setTiles(getHeroTilesFromStorage());
+      getHeroTiles().then((data) => {
+        if (!isMounted) return;
+        if (Array.isArray(data) && data.length > 0) {
+          setTiles(data);
+          setIsLoading(false);
+          setIsLoaded(true);
+        }
+      });
     };
+
     window.addEventListener("hmoni_hero_tiles_updated", handleUpdate);
     window.addEventListener("storage", handleUpdate);
     return () => {
+      isMounted = false;
       window.removeEventListener("hmoni_hero_tiles_updated", handleUpdate);
       window.removeEventListener("storage", handleUpdate);
     };
@@ -128,6 +127,23 @@ export default function Section1() {
       className="sec-1-home-12 pt-110"
       aria-label="Pure Design. Potent Storytelling Hero"
     >
+      <style>{`
+        @keyframes heroShimmerWave {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+        .hero-skeleton-card {
+          width: 240px;
+          height: 320px;
+          border-radius: 16px;
+          background: linear-gradient(90deg, #18181b 25%, #27272a 50%, #18181b 75%);
+          background-size: 200% 100%;
+          animation: heroShimmerWave 1.8s infinite linear;
+          flex-shrink: 0;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+      `}</style>
+
       <div className="sec-1-home-12__hero">
         <div className="container">
           <div className="sec-1-home-12__hero-inner d-flex flex-column align-items-center text-center">
@@ -220,26 +236,48 @@ export default function Section1() {
       </div>
 
       <div className="sec-1-home-12__strip">
-        <div ref={sliderRef} className="swiper sec-1-home-12-slider">
-          <div className="swiper-wrapper">
-            {slides.map((t, i) => (
-              <Link
-                key={`${t.id}-${i}`}
-                className={`swiper-slide sec-1-home-12__tile sec-1-home-12__tile--${t.mod}`}
-                to="/portfolio-1"
-                aria-label={`View portfolio item ${t.title || i + 1}`}
-              >
-                <img
-                  className="sec-1-home-12__tile-img"
-                  src={getImgSrc(t.img)}
-                  alt={t.title || "Hero Photo"}
-                  loading="lazy"
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              </Link>
-            ))}
+        {isLoading && tiles.length === 0 ? (
+          <div className="d-flex gap-3 justify-content-center overflow-hidden py-3">
+            <div className="hero-skeleton-card"></div>
+            <div className="hero-skeleton-card"></div>
+            <div className="hero-skeleton-card"></div>
+            <div className="hero-skeleton-card"></div>
+            <div className="hero-skeleton-card"></div>
+            <div className="hero-skeleton-card"></div>
           </div>
-        </div>
+        ) : (
+          <div
+            ref={sliderRef}
+            className="swiper sec-1-home-12-slider"
+            style={{
+              opacity: isLoaded ? 1 : 0.2,
+              transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          >
+            <div className="swiper-wrapper">
+              {slides.map((t, i) => (
+                <Link
+                  key={`${t.id}-${i}`}
+                  className={`swiper-slide sec-1-home-12__tile sec-1-home-12__tile--${t.mod}`}
+                  to="/portfolio-1"
+                  aria-label={`View portfolio item ${t.title || i + 1}`}
+                >
+                  <img
+                    className="sec-1-home-12__tile-img"
+                    src={getImgSrc(t.img)}
+                    alt={t.title || "Hero Photo"}
+                    loading="lazy"
+                    style={{
+                      objectFit: "cover",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

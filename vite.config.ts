@@ -12,6 +12,12 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
+    proxy: {
+      "/api/manage-hero": {
+        target: "https://manage.hmoni.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/manage-hero/, "/api/hero"),
+      },
+    },
   },
 });
-

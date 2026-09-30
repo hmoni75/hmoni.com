@@ -149,7 +149,10 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T |
 // -------------------------------------------------------------
 // 1. HERO CAROUSEL TILES
 // -------------------------------------------------------------
-const MANAGE_HERO_API_URL = 'https://manage.hmoni.com/api/hero';
+const MANAGE_HERO_API_ENDPOINTS = [
+  '/api/manage-hero', // Same-origin proxy (Vercel/Vite rewrite) - Zero CORS issues
+  'https://manage.hmoni.com/api/hero',
+];
 
 const DEFAULT_HERO_TILES: HeroTile[] = [
   { id: 1, title: 'Brand Identity 1', img: 'sec-1-tile-1.webp', mod: 'brand-1' },
@@ -161,38 +164,40 @@ const DEFAULT_HERO_TILES: HeroTile[] = [
 ];
 
 export async function getHeroTiles(): Promise<HeroTile[]> {
-  // 1. Try Primary endpoint: https://manage.hmoni.com/api/hero
-  try {
-    const res = await fetch(MANAGE_HERO_API_URL, {
-      headers: { 'Accept': 'application/json' },
-    });
-    if (res.ok) {
-      const json = await res.json();
-      const rawList = Array.isArray(json)
-        ? json
-        : (json.data || json.hero || json.tiles || json.slides || json.images || []);
+  // 1. Try Manage Project Endpoints (proxy first to avoid CORS)
+  for (const url of MANAGE_HERO_API_ENDPOINTS) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'Accept': 'application/json' },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        const rawList = Array.isArray(json)
+          ? json
+          : (json.data || json.hero || json.tiles || json.slides || json.images || []);
 
-      if (Array.isArray(rawList) && rawList.length > 0) {
-        const mappedTiles: HeroTile[] = rawList.map((item: any, idx: number) => {
-          if (typeof item === 'string') {
-            return { id: idx + 1, title: `Slide ${idx + 1}`, img: item, mod: 'brand-1' };
+        if (Array.isArray(rawList) && rawList.length > 0) {
+          const mappedTiles: HeroTile[] = rawList.map((item: any, idx: number) => {
+            if (typeof item === 'string') {
+              return { id: idx + 1, title: `Slide ${idx + 1}`, img: item, mod: 'brand-1' };
+            }
+            return {
+              id: item.id || idx + 1,
+              title: item.title || item.name || `Slide ${idx + 1}`,
+              img: item.img || item.image || item.url || item.src || item.image_url || item.path || '',
+              mod: item.mod || item.style || 'brand-1',
+            };
+          }).filter((t: HeroTile) => !!t.img);
+
+          if (mappedTiles.length > 0) {
+            localStorage.setItem('hmoni_hero_tiles', JSON.stringify(mappedTiles));
+            return mappedTiles;
           }
-          return {
-            id: item.id || idx + 1,
-            title: item.title || item.name || `Slide ${idx + 1}`,
-            img: item.img || item.image || item.url || item.src || item.image_url || item.path || '',
-            mod: item.mod || item.style || 'brand-1',
-          };
-        }).filter((t: HeroTile) => !!t.img);
-
-        if (mappedTiles.length > 0) {
-          localStorage.setItem('hmoni_hero_tiles', JSON.stringify(mappedTiles));
-          return mappedTiles;
         }
       }
+    } catch (err) {
+      // ignore CORS/network error and try next endpoint
     }
-  } catch (err) {
-    console.warn('Fetch from manage.hmoni.com/api/hero failed, attempting secondary API endpoint:', err);
   }
 
   // 2. Secondary fallback: /api/hero.php
