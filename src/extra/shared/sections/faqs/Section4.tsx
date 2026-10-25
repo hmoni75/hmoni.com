@@ -61,7 +61,7 @@ export default function Section4() {
                             </a>
                         </h5>
                         <h6>
-                            <a href="tel:+2125557398">(212) 555-7398</a>
+                            <a href="tel:+8801931488975">8801931488975</a>
                         </h6>
                     </div>
                 </div>

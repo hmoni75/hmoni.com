@@ -18,7 +18,7 @@ export default function Section1() {
                         </h5>
                         <h6 className="fw-600">
                             <a href="tel:+2125557398" className="text-decoration-none">
-                                (212) 555-7398
+                                8801931488975
                             </a>
                         </h6>
                     </div>

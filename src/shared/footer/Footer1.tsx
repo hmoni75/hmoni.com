@@ -92,7 +92,7 @@ export default function Footer1() {
             </div>
             <div className="col-xxl-3 col-lg-5 col-md-8 ms-lg-auto text-lg-end">
               <div className="at-footer-title-wrap">
-                <h6 className="text-white">(212) 555-7398</h6>
+                <h6 className="text-white">8801931488975</h6>
                 <h4 className="text-white text-decoration-underline text-wrap">
                   <a href="mailto:hello@hmoni.com" className="text-white text-decoration-underline">
                     hello@hmoni.com

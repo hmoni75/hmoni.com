@@ -219,8 +219,8 @@ export default function SideBar({
             <h5 className="at-offcanvas-title sm">Get in touch</h5>
             <ul>
               {/* <li>
-                <a className="fz-font-lg" href="tel:(212) 555-7398">
-                  (212) 555-7398
+                <a className="fz-font-lg" href="tel:8801931488975">
+                  8801931488975
                 </a>
               </li> */}
               <li>
