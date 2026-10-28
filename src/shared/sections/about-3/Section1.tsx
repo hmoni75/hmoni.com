@@ -58,8 +58,8 @@ export default function Section1() {
                     <div className="col-xxl-6 col-lg-7 h-100">
                         <span className="at-btn common-black bg-transparent mb-10 rounded-0 p-0">
                             <span className="text-uppercase">
-                                <span className="text-1">hi, i&apos;m H Moni nova</span>
-                                <span className="text-2">hi, i&apos;m H Moni nova</span>
+                                <span className="text-1">hi, i&apos;m H Moni</span>
+                                <span className="text-2">hi, i&apos;m H Moni</span>
                             </span>
                             <i>
                                 {ARROW_SVG}
