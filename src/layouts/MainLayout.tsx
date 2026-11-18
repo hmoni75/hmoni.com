@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import PopupSearch from "@/shared/PopupSearch";
 import Header1 from "@/shared/header/Header1";
@@ -98,6 +98,14 @@ export default function MainLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
   const footerRef = useRef<HTMLElement | null>(null);
+
+  // Reset scroll on SPA route change. MainLayout is not remounted between sibling
+  // routes, so without this the new page inherits the previous page's scroll offset
+  // and you land mid-page (or at the very bottom, footer already on screen).
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
 
   const handlers = useMemo(
     () => ({

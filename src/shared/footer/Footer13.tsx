@@ -59,11 +59,11 @@ export default function Footer13() {
                         <div className="footer-13__col at_fade_anim" data-fade-from="bottom" data-delay=".3">
                             <p className="footer-13__col-title mb-0">WORKS</p>
                             <ul className="footer-13__col-list list-unstyled mb-0">
-                                <li><Link to="/portfolio-1">Selected</Link></li>
-                                <li><Link to="/portfolio-1">Residential</Link></li>
-                                <li><Link to="/portfolio-1">Cultural</Link></li>
-                                <li><Link to="/portfolio-1">Commercial</Link></li>
-                                <li><Link to="/portfolio-1">Master Plans</Link></li>
+                                <li><Link to="/portfolio">Selected</Link></li>
+                                <li><Link to="/portfolio">Residential</Link></li>
+                                <li><Link to="/portfolio">Cultural</Link></li>
+                                <li><Link to="/portfolio">Commercial</Link></li>
+                                <li><Link to="/portfolio">Master Plans</Link></li>
                             </ul>
                         </div>
                         <div className="footer-13__col at_fade_anim" data-fade-from="bottom" data-delay=".4">
@@ -71,9 +71,9 @@ export default function Footer13() {
                             <ul className="footer-13__col-list list-unstyled mb-0">
                                 <li><a href="mailto:studio@H Moni.architecture">studio@H Moni.architecture</a></li>
                                 <li><a href="tel:+12125550142">+1 (212) 555-0142</a></li>
-                                <li><Link to="/contact-1">Press inquiries</Link></li>
-                                <li><Link to="/contact-1">Schedule a visit</Link></li>
-                                <li><Link to="/contact-1">Job applications</Link></li>
+                                <li><Link to="/contact">Press inquiries</Link></li>
+                                <li><Link to="/contact">Schedule a visit</Link></li>
+                                <li><Link to="/contact">Job applications</Link></li>
                             </ul>
                         </div>
                     </nav>

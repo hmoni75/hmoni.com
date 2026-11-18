@@ -16,16 +16,16 @@ export default function App() {
     <Routes>
       <Route element={<MainLayout headerStyle={1} footerStyle={7} />}>
         <Route path="/" element={<Home12Page />} />
-        <Route path="/about-3" element={<About3Page />} />
-        <Route path="/portfolio-1" element={<Portfolio1Page />} />
+        <Route path="/about-me" element={<About3Page />} />
+        <Route path="/portfolio" element={<Portfolio1Page />} />
         <Route
           path="/portfolio-details-1"
           element={<PortfolioDetails1Page />}
         />
-        <Route path="/archive-3" element={<Archive3Page />} />
+        <Route path="/blog" element={<Archive3Page />} />
         <Route path="/blog-details" element={<BlogDetailsPage />} />
         <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/contact-1" element={<Contact1Page />} />
+        <Route path="/contact" element={<Contact1Page />} />
         <Route path="/contact-2" element={<Contact2Page />} />
       </Route>
       <Route element={<MainLayout headerStyle={1} footerStyle={12} />}>

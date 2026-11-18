@@ -202,7 +202,7 @@ export default function Section1() {
               data-fade-from="bottom"
               data-delay=".3"
             >
-              <Link className="sec-1-home-12__btn-primary" to="/contact-1">
+              <Link className="sec-1-home-12__btn-primary" to="/contact">
                 <span className="sec-1-home-12__btn-primary-label">
                   Book a Call
                 </span>
@@ -259,7 +259,7 @@ export default function Section1() {
                 <Link
                   key={`${t.id}-${i}`}
                   className={`swiper-slide sec-1-home-12__tile sec-1-home-12__tile--${t.mod}`}
-                  to="/portfolio-1"
+                  to="/portfolio"
                   aria-label={`View portfolio item ${t.title || i + 1}`}
                 >
                   <img

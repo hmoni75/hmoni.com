@@ -4,9 +4,9 @@
 const QUICK_LINKS_1 = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about-1" },
-  { label: "Works", href: "/portfolio-1" },
+  { label: "Works", href: "/portfolio" },
   { label: "Blog", href: "/archive-1" },
-  { label: "Contact", href: "/contact-1" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const QUICK_LINKS_2 = [

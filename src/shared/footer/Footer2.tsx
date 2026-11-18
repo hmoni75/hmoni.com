@@ -108,13 +108,13 @@ const Footer2 = forwardRef<HTMLElement, object>(function Footer2(_, ref) {
                       <Link to="/about-1">About</Link>
                     </li>
                     <li className="mb-15">
-                      <Link to="/portfolio-1">Works</Link>
+                      <Link to="/portfolio">Works</Link>
                     </li>
                     <li className="mb-15">
                       <Link to="/archive-1">Blog</Link>
                     </li>
                     <li className="mb-15">
-                      <Link to="/contact-1">Contact</Link>
+                      <Link to="/contact">Contact</Link>
                     </li>
                   </ul>
                 </div>

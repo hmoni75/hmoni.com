@@ -97,7 +97,7 @@ export default function Header14() {
                         />
                       </svg>
                     </button>
-                    <Link className="at-btn d-none d-md-block" to="/contact-1">
+                    <Link className="at-btn d-none d-md-block" to="/contact">
                       <span>
                         <span className="text-1 text-capitalize">
                           Get started

@@ -7,10 +7,10 @@ import { getSocials as fetchSocialsApi, SocialLink } from "@/services/api";
 
 const NAV_LINKS = [
   { label: "Home", href: "/", delay: "0.1" },
-  { label: "About", href: "/about-3", delay: "0.2" },
-  { label: "Works", href: "/portfolio-1", delay: "0.3" },
-  { label: "Blog", href: "/archive-3", delay: "0.4" },
-  { label: "Contact", href: "/contact-1", delay: "0.5" },
+  { label: "About", href: "/about-me", delay: "0.2" },
+  { label: "Works", href: "/portfolio", delay: "0.3" },
+  { label: "Blog", href: "/blog", delay: "0.4" },
+  { label: "Contact", href: "/contact", delay: "0.5" },
 ];
 
 // Social links will be fetched dynamically inside the Footer7 component

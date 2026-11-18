@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const NAV_LINKS = [
     { label: "Home", href: "/index-8", delay: "0.1" },
     { label: "About", href: "/about-1", delay: "0.2" },
-    { label: "Works", href: "/portfolio-1", delay: "0.3" },
+    { label: "Works", href: "/portfolio", delay: "0.3" },
     { label: "Blog", href: "/archive-1", delay: "0.4" },
-    { label: "Contact", href: "/contact-1", delay: "0.5" },
+    { label: "Contact", href: "/contact", delay: "0.5" },
 ];
 
 const SOCIAL_LINKS = [

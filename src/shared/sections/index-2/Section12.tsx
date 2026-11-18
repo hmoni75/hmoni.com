@@ -109,7 +109,7 @@ export default function Section12({ className = "", showNoise = true }: Section1
                         </div>
 
                         <div className="col-xxl-2 text-end d-flex flex-column gap-2">
-                            <Link to="/contact-1" className="text-decoration-underline">
+                            <Link to="/contact" className="text-decoration-underline">
                                 Contact Us
                             </Link>
                             <h6 className="fw-600">

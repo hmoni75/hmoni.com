@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const NAV_LINKS_1 = [
     { label: "Home", href: "/index-10" },
     { label: "About", href: "/about-1" },
-    { label: "Works", href: "/portfolio-1" },
+    { label: "Works", href: "/portfolio" },
     { label: "Blog", href: "/archive-1" },
-    { label: "Contact", href: "/contact-1" },
+    { label: "Contact", href: "/contact" },
 ];
 
 const NAV_LINKS_2 = [
@@ -110,13 +110,13 @@ export default function Footer10() {
                                 data-fade-from="bottom"
                                 data-ease="bounce"
                             >
-                                <Link className="at-btn-circle" to="/portfolio-1">
+                                <Link className="at-btn-circle" to="/portfolio">
                                     {CTA_ARROW_SVG}
                                 </Link>
-                                <Link className="at-btn z-index-1" to="/portfolio-1">
+                                <Link className="at-btn z-index-1" to="/portfolio">
                                     INITIATE COLLABORATION
                                 </Link>
-                                <Link className="at-btn-circle" to="/portfolio-1">
+                                <Link className="at-btn-circle" to="/portfolio">
                                     {CTA_ARROW_SVG}
                                 </Link>
                             </div>

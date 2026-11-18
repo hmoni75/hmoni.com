@@ -120,13 +120,13 @@ export default function Section3() {
             data-fade-from="bottom"
             data-ease="bounce"
           >
-            <Link className="at-btn-circle" to="/portfolio-1">
+            <Link className="at-btn-circle" to="/portfolio">
               {ARROW_ICON}
             </Link>
-            <Link className="at-btn z-index-1" to="/portfolio-1">
+            <Link className="at-btn z-index-1" to="/portfolio">
               View latest projects
             </Link>
-            <Link className="at-btn-circle" to="/portfolio-1">
+            <Link className="at-btn-circle" to="/portfolio">
               {ARROW_ICON}
             </Link>
           </div>

@@ -45,7 +45,7 @@ const DEFAULT_PLANS: PricingPlan[] = [
     badge: "",
     is_popular: false,
     button_text: "Get Started",
-    button_link: "/contact-1",
+    button_link: "/contact",
     features: [
       "Digital strategy setup",
       "Digital audit & Insights",
@@ -66,7 +66,7 @@ const DEFAULT_PLANS: PricingPlan[] = [
     badge: "MOST POPULAR",
     is_popular: true,
     button_text: "Choose Growth",
-    button_link: "/contact-1",
+    button_link: "/contact",
     features: [
       "Growth strategy",
       "Conversion optimization",
@@ -87,7 +87,7 @@ const DEFAULT_PLANS: PricingPlan[] = [
     badge: "",
     is_popular: false,
     button_text: "Scale Your Business",
-    button_link: "/contact-1",
+    button_link: "/contact",
     features: [
       "Full strategy & execution",
       "Dedicated success manager",
@@ -179,7 +179,7 @@ export default function Section12Pricing({
                   </p>
                   <Link
                     className="at-btn px-5"
-                    to={plan.button_link || "/contact-1"}
+                    to={plan.button_link || "/contact"}
                   >
                     <span>
                       <span className="text-1 text-capitalize">

@@ -2082,6 +2082,11 @@ input[type=color] {
 ---------------------------------*/
 #smooth-content {
   pointer-events: none;
+  /* Establish a BFC so a descendant's margin-top (e.g. `.mt-50` on a page's first
+     section) cannot collapse out of this element. ScrollSmoother sizes the document
+     from this element's offsetHeight, so an escaped margin leaves the bottom of the
+     page (the footer's copyright bar) clipped and unreachable. */
+  display: flow-root;
 }
 #smooth-content > * {
   pointer-events: auto;

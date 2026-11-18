@@ -114,7 +114,7 @@ export default function Footer12() {
               <p className="footer-12__col-title">STUDIO</p>
               <ul className="footer-12__col-links">
                 <li>
-                  <Link to="/about-3">About</Link>
+                  <Link to="/about-me">About</Link>
                 </li>
                 <li>
                   <Link to="/pricing">Process</Link>
@@ -123,7 +123,7 @@ export default function Footer12() {
                   <a href="#">Careers</a>
                 </li>
                 <li>
-                  <Link to="/contact-1">Contact</Link>
+                  <Link to="/contact">Contact</Link>
                 </li>
               </ul>
             </div>
@@ -132,7 +132,7 @@ export default function Footer12() {
               <p className="footer-12__col-title">WORK</p>
               <ul className="footer-12__col-links">
                 <li>
-                  <Link to="/portfolio-1">Selected projects</Link>
+                  <Link to="/portfolio">Selected projects</Link>
                 </li>
                 <li>
                   <Link to="/portfolio-details-1">Case studies</Link>
@@ -156,7 +156,7 @@ export default function Footer12() {
                   <Link to="/pricing">FAQ</Link>
                 </li>
                 <li>
-                  <Link to="/archive-3">Blog</Link>
+                  <Link to="/blog">Blog</Link>
                 </li>
                 <li>
                   <a href="#">Templates</a>

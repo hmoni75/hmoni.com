@@ -33,9 +33,9 @@ const SOCIAL_LINKS = [
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about-1" },
-  { label: "Works", href: "/portfolio-1" },
+  { label: "Works", href: "/portfolio" },
   { label: "Blog", href: "/archive-1" },
-  { label: "Contact", href: "/contact-1" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 const SHOP_LINKS = [

@@ -24,7 +24,7 @@ export default function MainMenu() {
 
       <li>
         <NavLink
-          to="/about-3"
+          to="/about-me"
           className={({ isActive }) => (isActive ? "active" : undefined)}
         >
           <LinkSwap label="About me" />
@@ -33,7 +33,7 @@ export default function MainMenu() {
 
       <li>
         <NavLink
-          to="/portfolio-1"
+          to="/portfolio"
           className={({ isActive }) => (isActive ? "active" : undefined)}
         >
           <LinkSwap label="Works" />
@@ -51,7 +51,7 @@ export default function MainMenu() {
 
       <li>
         <NavLink
-          to="/archive-3"
+          to="/blog"
           className={({ isActive }) => (isActive ? "active" : undefined)}
         >
           <LinkSwap label="Blog" />
@@ -60,7 +60,7 @@ export default function MainMenu() {
 
       <li>
         <NavLink
-          to="/contact-1"
+          to="/contact"
           className={({ isActive }) => (isActive ? "active" : undefined)}
         >
           <LinkSwap label="Contact" />
