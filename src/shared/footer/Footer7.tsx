@@ -6,7 +6,7 @@ import { getSocials as fetchSocialsApi, SocialLink } from "@/services/api";
 // Footer 7 (Home 7) - Big nav with arrow SVGs, socials, decorative SVGs, contact, newsletter, "ELEVATE STARTUPS" word
 
 const NAV_LINKS = [
-  { label: "Home", href: "/index-7", delay: "0.1" },
+  { label: "Home", href: "/", delay: "0.1" },
   { label: "About", href: "/about-3", delay: "0.2" },
   { label: "Works", href: "/portfolio-1", delay: "0.3" },
   { label: "Blog", href: "/archive-3", delay: "0.4" },
