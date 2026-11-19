@@ -36,7 +36,7 @@ const PROCESS_ITEMS = [
         title: "02. Architectural Strategy",
         metaText: "3-4 Weeks",
         metaLabel: "Defining the AI logic",
-        desc: "Together, we develop a comprehensive technical roadmap. I design the neural architecture and data flow, establishing clear performance benchmarks—such as latency thresholds and accuracy targets—required for success.",
+        desc: "I develop a comprehensive technical roadmap with you — designing the neural architecture and data flow, and establishing clear performance benchmarks—such as latency thresholds and accuracy targets—required for success.",
     },
     {
         img: "/assets/imgs/pages/img-140.webp",
@@ -52,7 +52,7 @@ const PROCESS_ITEMS = [
         title: "04. MLOps & Evolution",
         metaText: "Ongoing",
         metaLabel: "Continuous optimization",
-        desc: "Post-deployment, I implement continuous monitoring and MLOps pipelines to prevent model drift. We constantly measure and refine the system, ensuring the AI remains accurate and scalable as your data demands evolve.",
+        desc: "Post-deployment, I implement continuous monitoring and MLOps pipelines to prevent model drift. I constantly measure and refine the system, ensuring the AI remains accurate and scalable as your data demands evolve.",
     },
 ];
 

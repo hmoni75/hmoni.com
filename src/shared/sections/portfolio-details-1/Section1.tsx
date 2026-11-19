@@ -121,7 +121,7 @@ export default function Section1() {
                             digital fashion touchpoints.
                         </p>
                         <p className="fz-font-xl neutral-900 mt-40">
-                            We had to ensure that Nebula didn&apos;t feel like &quot;just another luxury
+                            I had to ensure that Nebula didn&apos;t feel like &quot;just another luxury
                             label&quot;—it needed to resonate with a sense of mystery and power without losing the
                             accessibility required for contemporary commercial success.
                         </p>

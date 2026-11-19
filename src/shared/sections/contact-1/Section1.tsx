@@ -278,8 +278,8 @@ export default function Section1() {
             <div className="at-about-title-wrap mb-30">
               <span className="at-btn common-black bg-transparent mb-10 rounded-0 p-0">
                 <span className="text-uppercase">
-                  <span className="text-1">cONTACT US</span>
-                  <span className="text-2">cONTACT US</span>
+                  <span className="text-1">cONTACT ME</span>
+                  <span className="text-2">cONTACT ME</span>
                 </span>
                 <i>
                   {ARROW_SVG}
@@ -356,13 +356,13 @@ export default function Section1() {
             </div>
             <h6 className="mb-4 fz-font-lg">
               Start the conversation by sharing your vision. <br />
-              Our team will respond within 1–2 business days.
+              I&rsquo;ll respond within 1–2 business days.
             </h6>
           </div>
         </div>
         <div className="row g-5 pt-120 align-items-end">
           <div className="col-xxl-6 col-lg-7">
-            <h4>Drop us a line</h4>
+            <h4>Drop me a line</h4>
             <form className="sec-4-about-form" onSubmit={handleSubmit}>
               <div className="sec-4-about-form__field">
                 <input
@@ -433,7 +433,7 @@ export default function Section1() {
                 </button>
               </div>
               <p className="sec-4-about-form__disclaimer">
-                By submitting, you agree to our{" "}
+                By submitting, you agree to the{" "}
                 <Link to="#" className="sec-4-about-form__link">
                   Terms
                 </Link>{" "}
@@ -446,7 +446,7 @@ export default function Section1() {
             </form>
           </div>
           <div className="col-xxl-4 col-lg-5 ms-auto pb-40">
-            <h6 className="fw-600 mb-3">Follow Us</h6>
+            <h6 className="fw-600 mb-3">Follow Me</h6>
             <div className="alt-footer-social-item white-mode w-50">
               <ul>
                 {SOCIAL_ITEMS.map((item, i) => (

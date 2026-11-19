@@ -33,7 +33,7 @@ export default function Section3() {
   }, []);
 
   return (
-    <section className="sec-3-home-12" aria-label="Our Services">
+    <section className="sec-3-home-12" aria-label="Services">
       <div className="container">
         <header className="sec-3-home-12__header">
           <div className="sec-3-home-12__header-left">
@@ -42,10 +42,10 @@ export default function Section3() {
               data-fade-from="bottom"
               data-delay=".05"
             >
-              OUR SERVICES
+              SERVICES
             </p>
             <h2 className="sec-3-home-12__title reveal-text mb-0">
-              <RevealText>What we do, with intention.</RevealText>
+              <RevealText>What I do, with intention.</RevealText>
             </h2>
           </div>
           <p

@@ -109,7 +109,7 @@ export default function Section3() {
             <h2 className="sec-3-home-13__title mb-0 reveal-text">
               <RevealText>Recent works that define </RevealText>
               <span className="sec-3-home-13__title-italic">
-                <RevealText>our architectural vision.</RevealText>
+                <RevealText>my architectural vision.</RevealText>
               </span>
             </h2>
           </div>

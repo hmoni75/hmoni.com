@@ -187,8 +187,8 @@ export default function SideBar({
           <div className="at-offcanvas-content d-none d-xl-block">
             <h3 className="at-offcanvas-title">Howdy!</h3>
             <p className="fz-font-lg">
-              We blend strategy, creativity, and technology to help brands grow,
-              connect, and stand out in an ever-evolving digital world.
+              I blend strategy, creativity, and technology to help your ideas
+              grow, connect, and stand out in an ever-evolving digital world.
             </p>
           </div>
 
@@ -242,7 +242,7 @@ export default function SideBar({
           </div>
 
           <div className="at-offcanvas-social">
-            <h3 className="at-offcanvas-title sm">Follow Us</h3>
+            <h3 className="at-offcanvas-title sm">Follow Me</h3>
             <SocialGrid />
           </div>
         </div>

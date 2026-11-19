@@ -16,7 +16,7 @@ const FAQ_ITEMS = [
         id: "collapseOne",
         num: "1",
         question: "How does your design process work?",
-        answer: "Our process includes discovery, strategy, design, feedback, and delivery — ensuring clarity, collaboration, and results at every stage.",
+        answer: "My process includes discovery, strategy, design, feedback, and delivery — ensuring clarity, collaboration, and results at every stage.",
         open: true,
     },
     {
@@ -30,14 +30,14 @@ const FAQ_ITEMS = [
         id: "collapseThree",
         num: "3",
         question: "Do you work with startups or only established brands?",
-        answer: "We work with both startups and established brands — tailoring our approach to fit each stage of growth.",
+        answer: "I work with both startups and established brands — tailoring my approach to fit each stage of growth.",
         open: false,
     },
     {
         id: "collapseFour",
         num: "4",
         question: "Can you handle custom or complex requests?",
-        answer: "Yes — we specialize in custom and complex projects, creating flexible solutions to meet unique needs.",
+        answer: "Yes — I specialize in custom and complex projects, creating flexible solutions to meet unique needs.",
         open: false,
     },
 ];
@@ -64,7 +64,7 @@ export default function Section7({ classList = "" }: { classList?: string }) {
                             </RevealText>
                         </h3>
                         <h6 className="fz-font-lg fw-500">
-                            Your questions about our process, services, <br className="d-none d-xxl-block" />and workflow—answered.
+                            Your questions about my process, services, <br className="d-none d-xxl-block" />and workflow—answered.
                         </h6>
                     </div>
                     <div className="col-lg-7 ms-lg-auto">

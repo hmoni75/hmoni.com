@@ -214,7 +214,7 @@ export default function Footer7() {
                 >
                   Sign up for
                   <br />
-                  our monthly newsletter
+                  my monthly newsletter
                 </p>
                 <form
                   className="footer-7__form at_fade_anim"

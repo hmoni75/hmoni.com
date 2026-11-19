@@ -95,8 +95,8 @@ export default function Section12({ className = "", showNoise = true }: Section1
                                                 <div>
                                                     <h6 className="fw-600">Need custom pricing?</h6>
                                                     <p className="fz-font-lg neutral-700">
-                                                        Tell us about your goals, challenges, and timeline.
-                                                        We&apos;ll craft a tailored digital solution that fits
+                                                        Tell me about your goals, challenges, and timeline.
+                                                        I&apos;ll craft a tailored solution that fits
                                                         your needs and budget.
                                                     </p>
                                                 </div>
@@ -110,7 +110,7 @@ export default function Section12({ className = "", showNoise = true }: Section1
 
                         <div className="col-xxl-2 text-end d-flex flex-column gap-2">
                             <Link to="/contact" className="text-decoration-underline">
-                                Contact Us
+                                Get in touch
                             </Link>
                             <h6 className="fw-600">
                                 <a href="mailto:hello@hmoni.com">hello@hmoni.com</a>

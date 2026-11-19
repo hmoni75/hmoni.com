@@ -62,10 +62,10 @@ export default function Section7() {
                             <span className="sec-7-home-13__label-text">TESTIMONIAL</span>
                         </div>
                         <h2 className="sec-7-home-13__title mb-0 reveal-text">
-                            <RevealText>Proven results from the partners we&rsquo;ve empowered</RevealText>
+                            <RevealText>Kind words from the people I&rsquo;ve worked with</RevealText>
                         </h2>
                         <p className="sec-7-home-13__lede mb-0 at_fade_anim">
-                            Discover how we scale brands using strategic insight, daring design, and high-impact campaigns that captivate audiences and deliver enduring success.
+                            See how I&rsquo;ve shaped brands through strategic insight, daring design, and high-impact work that resonates with audiences and delivers lasting results.
                         </p>
                     </div>
 

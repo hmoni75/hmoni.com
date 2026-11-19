@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
-// About 1 Section 4 - Contact Us / Get in touch
+// About 1 Section 4 - Contact / Get in touch
 
 const ARROW_SVG = (
     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -141,8 +141,8 @@ export default function Section4({ classList = "" }: { classList?: string }) {
                     <div className="col-lg-6">
                         <span className="at-btn common-black bg-transparent mb-10 rounded-0 p-0">
                             <span className="text-uppercase">
-                                <span className="text-1">cONTACT US</span>
-                                <span className="text-2">cONTACT US</span>
+                                <span className="text-1">cONTACT ME</span>
+                                <span className="text-2">cONTACT ME</span>
                             </span>
                             <i>
                                 {ARROW_SVG}
@@ -157,7 +157,7 @@ export default function Section4({ classList = "" }: { classList?: string }) {
                         <div className="scroll-rotate d-lg-inline-block d-none">{SCROLL_ROTATE_SVG}</div>
                         <p className="fz-font-lg pt-lg-4 mb-0">
                             Start the conversation by sharing your vision. <br />
-                            Our team will respond within 1–2 business days.
+                            I&rsquo;ll respond within 1–2 business days.
                         </p>
                     </div>
                 </div>
@@ -268,7 +268,7 @@ export default function Section4({ classList = "" }: { classList?: string }) {
                                 </button>
                             </div>
                             <p className="sec-4-about-form__disclaimer">
-                                By submitting, you agree to our{" "}
+                                By submitting, you agree to the{" "}
                                 <Link to="#" className="sec-4-about-form__link">
                                     Terms
                                 </Link>{" "}

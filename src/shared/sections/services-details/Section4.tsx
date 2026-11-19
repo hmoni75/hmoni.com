@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import RevealText from "@/shared/effects/RevealText";
 
-// Services details Section 4 - Our approach (4 step cards)
+// Services details Section 4 - My approach (4 step cards)
 
 const ARROW_SVG = (
     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,8 +62,8 @@ export default function Section4() {
                     <div className="col-lg-6">
                         <span className="at-btn common-black bg-transparent mb-10 rounded-0 p-0">
                             <span className="text-uppercase">
-                                <span className="text-1">OUR APPROACH</span>
-                                <span className="text-2">OUR APPROACH</span>
+                                <span className="text-1">MY APPROACH</span>
+                                <span className="text-2">MY APPROACH</span>
                             </span>
                             <i>
                                 {ARROW_SVG}
@@ -71,10 +71,10 @@ export default function Section4() {
                             </i>
                         </span>
                         <h3 className="reveal-text mb-20">
-                            <RevealText>How we approach strategy </RevealText>
+                            <RevealText>How I approach strategy </RevealText>
                         </h3>
                         <h6 className="fw-500 mb-0">
-                            We combine research, analysis, and strategic thinking into a clear, decision-making framework.
+                            I combine research, analysis, and strategic thinking into a clear, decision-making framework.
                         </h6>
                     </div>
                     <div className="col-lg-4 col-md-8 ms-auto text-end">

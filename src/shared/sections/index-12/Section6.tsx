@@ -47,7 +47,7 @@ export default function Section6() {
         <span className="sec-6-home-12__topline" aria-hidden="true"></span>
         <div className="container-fluid px-3 px-lg-5">
           <div className="sec-6-home-12__topbar-row">
-            <span className="sec-6-home-12__topbar-label">[ About Us ]</span>
+            <span className="sec-6-home-12__topbar-label">[ About Me ]</span>
             <span className="sec-6-home-12__topbar-label">
               &copy; <span className="text-scramble">2012</span> H Moni
             </span>

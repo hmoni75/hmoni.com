@@ -51,7 +51,7 @@ export default function Section12() {
                             </span>
                             <h2>Stay ahead</h2>
                             <p className="fz-font-xl mb-0">
-                                Get practical insights, trends, and strategies we use <br />to help brands grow—delivered
+                                Get practical insights, trends, and strategies I use <br />to help projects grow—delivered
                                 monthly, no spam.
                             </p>
                         </div>
@@ -67,7 +67,7 @@ export default function Section12() {
                                 </button>
                             </div>
                             <p className="mb-0 pt-20">
-                                By clicking the button, you are <br /> agreeing with our{" "}
+                                By clicking the button, you are <br /> agreeing to the{" "}
                                 <Link to="#" className="neutral-900">
                                     Term & Conditions
                                 </Link>

@@ -49,7 +49,7 @@ export default function Footer12() {
               data-fade-from="bottom"
               data-delay=".15"
             >
-              Drop a line. We&rsquo;ll get back within a day.
+              Drop a line. I&rsquo;ll get back within a day.
             </p>
             <form
               className="footer-12__cta-form at_fade_anim"
