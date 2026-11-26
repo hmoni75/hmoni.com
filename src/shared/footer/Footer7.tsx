@@ -162,7 +162,7 @@ export default function Footer7() {
               <div className="row p-relative pt-4">
                 <div className="pt-4">
                   <div className="col-4 ms-auto pt-4">
-                    <div className="at-about-svg-wrap">
+                    <div className="at-about-svg-wrap footer-7__cube">
                       {DECO_SVG_1}
                       {DECO_SVG_2}
                       {DECO_SVG_3}

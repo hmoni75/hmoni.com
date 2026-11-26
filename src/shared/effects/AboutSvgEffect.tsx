@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 
-const SELECTOR = ".at-about-svg-wrap";
+// Footer7 uses the same three-face SVG markup as page illustrations, but its
+// cube should remain assembled instead of following page scroll progress.
+const SELECTOR = ".at-about-svg-wrap:not(.footer-7__cube)";
 
 type ScrollTriggerInstance = { kill?: () => void };
 
